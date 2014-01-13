@@ -1,0 +1,77 @@
+/*! SassyJSON - v0.0.1 - 2014-01-13 */
+// Proof quote a value
+// @param $value: value to be quoted
+// @return [string]
+@function _proof-quote($value) {
+  @return '"' + $value + '"';
+}
+
+// JSON.stringify a bool
+// @param $bool: bool to be stringified
+// @return [bool]
+@function _json-encode--bool($boolean) {
+  @return $boolean;
+}
+
+// JSON.stringify a color
+// @param $color: color to be stringified
+// @return [color]
+@function _json-encode--color($color) {
+  @return _proof-quote($color);
+}
+
+// JSON.stringify a list
+// @param $list: list to be stringified
+// @return [list]
+@function _json-encode--list($list) {
+  $str: "";
+  @each $item in $list {
+    $str: $str + ', ' + json-encode($item);
+  }
+  @return '[' + str-slice($str, 3) + ']';
+}
+
+// JSON.stringify a map
+// @param $map: map to be stringified
+// @return [map]
+@function _json-encode--map($map) {
+  $str: "";
+  @each $key, $value in $map {
+    $str: $str + ', ' + _proof-quote($key) + ': ' + json-encode($value);
+  }
+  @return '{' + str-slice($str, 3) + '}';
+}
+
+// JSON.stringify a number
+// @param $number: number to be stringified
+// @return [number]
+@function _json-encode--number($number) {
+  @return $number;
+}
+
+// JSON.stringify a string
+// @param $string: string to be stringified
+// @return [string]
+@function _json-encode--string($string) {
+  @return _proof-quote($string);
+}
+
+// JSON.stringify a value
+// @param $value: value to be stringified
+// @return [string |  false]
+@function json-encode($value) {
+  $types: list, map, number, string, bool, color;
+  @if index($types, type-of($value)) {
+    @return call('_json-encode--#{type-of($value)}', $value);
+  }
+  @warn "Unknown type for #{$value}.";
+  @return false;
+}
+
+// JSON.stringify a value and pass it as a font-family of head element
+// @param $value: value to be stringified
+@mixin json-encode($value) {
+  head {
+    font-family: json-encode($value);
+  }
+}
