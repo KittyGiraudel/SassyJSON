@@ -1,0 +1,7 @@
+// JSON.stringify a value and pass it as a font-family of head element
+// @param $value: value to be stringified
+@mixin json-encode($value) {
+  head {
+    font-family: json-encode($value);
+  }
+}

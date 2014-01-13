@@ -1,0 +1,6 @@
+@include describe("The json-encode--map function") {
+  @include it("should properly encode a map to JSON") {
+    @include should(expect(_json-encode--map((1: a, 2: b, 3: c))), to(equal('{"1": "a", "2": "b", "3": "c"}')));
+    @include should(expect(_json-encode--map((a: 1, b: 2, c: 3))), to(equal('{"a": 1, "b": 2, "c": 3}')));
+  }
+}

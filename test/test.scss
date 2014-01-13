@@ -3,6 +3,11 @@
 
 @include runner-start;
 
-// TODO: Add tests
+@import "types/string";
+@import "types/number";
+@import "types/color";
+@import "types/bool";
+@import "types/list";
+@import "types/map";
 
 @include runner-end;

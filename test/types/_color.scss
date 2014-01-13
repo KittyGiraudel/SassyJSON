@@ -1,0 +1,6 @@
+@include describe("The json-encode--color function") {
+  @include it("should properly encode a hexadecimal color to JSON") {
+    @include should(expect(_json-encode--color(#444444)), to(equal('"#444444"')));
+    @include should(expect(_json-encode--color(#444)), to(equal('"#444444"')));
+  }
+}
