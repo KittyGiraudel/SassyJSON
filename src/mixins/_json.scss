@@ -2,6 +2,6 @@
 // @param $value: value to be stringified
 @mixin to-json($value) {
   head {
-    font-family: to-json($value);
+    font-family: json-encode($value);
   }
 }
