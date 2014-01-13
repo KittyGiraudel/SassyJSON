@@ -22,4 +22,8 @@
     $map-all: (a: (1 (a: (1 2 ( b : (1 2 3 4) )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string)) ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 (a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string)) 4 string));
     @include should(expect(json-encode($map-all)), to(equal('{"a": [1, {"a": [1, 2, {"b": [1, 2, 3, 4]}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, {"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}, 4, "string"]}')));
   }
+  @include it("should handle null correctly"){
+    $map-with-null: (a: null);
+    @include should(expect(json-encode($map-with-null)), to(equal('{"a": null}')));
+  }
 }
