@@ -1,6 +1,6 @@
 // JSON.stringify a bool
 // @param $bool: bool to be stringified
 // @return [bool]
-@function _to-json-bool($boolean) {
+@function _json-encode--bool($boolean) {
   @return $boolean;
 }

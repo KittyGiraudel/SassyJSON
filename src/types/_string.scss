@@ -1,6 +1,6 @@
 // JSON.stringify a string
 // @param $string: string to be stringified
 // @return [string]
-@function _to-json-string($string) {
+@function _json-encode--string($string) {
   @return _proof-quote($string);
 }
