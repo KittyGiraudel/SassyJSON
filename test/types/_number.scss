@@ -1,0 +1,6 @@
+@include describe("The _json-encode--number function") {
+  @include it("should return a number") {
+    @include should(expect(_json-encode--number(1)), to(equal(1)));
+    @include should(expect(_json-encode--number(2)), to(equal(2)));
+  }
+}

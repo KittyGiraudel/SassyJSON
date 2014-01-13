@@ -1,0 +1,12 @@
+@include describe("The _json-encode--list function") {
+  @include it("should return a JSON like array string") {
+    @include should(expect(_json-encode--list((1 2 3))), to(equal("[1, 2, 3]")));
+    @include should(expect(_json-encode--list(("a" "b" "c"))), to(equal('["a", "b", "c"]')));
+  }
+  @include it("should encode sass datatypes to strings"){
+    @include should(expect(_json-encode--list((#000 green blue))), to(equal('["black", "green", "blue"]')));
+  }
+  @include it("should work for nested lists"){
+    @include should(expect(_json-encode--list((1 (2 3 4) 5 6 7))), to(equal('[1, [2, 3, 4], 5, 6, 7]')));
+  }
+}
