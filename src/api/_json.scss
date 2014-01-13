@@ -1,13 +1,3 @@
-// JSON.stringify
-// Type specific functions
-@import "helpers/quote";
-@import "types/bool";
-@import "types/color";
-@import "types/list";
-@import "types/map";
-@import "types/number";
-@import "types/string";
-
 // JSON.stringify a value
 // @param $value: value to be stringified
 // @return [string |  false]
@@ -19,6 +9,3 @@
   @warn "Unknown type for #{$value}.";
   @return false;
 }
-
-// Mixin to pass the string to the DOM
-@import "mixins/json";
