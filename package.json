@@ -1,5 +1,5 @@
 {
-  "name": "SassyJSON",
+  "name": "sassyjson",
   "version": "0.0.1",
   "description": "A Sass API for JSON.",
   "scripts": {
