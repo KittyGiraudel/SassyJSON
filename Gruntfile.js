@@ -23,6 +23,7 @@ module.exports = function(grunt) {
           'src/types/_map.scss',
           'src/types/_number.scss',
           'src/types/_string.scss',
+          'src/types/_null.scss',
           'src/api/_json.scss',
           'src/mixins/_json.scss'
         ],
