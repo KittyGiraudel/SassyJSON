@@ -1,0 +1,10 @@
+// JSON.stringify a map
+// @param $map: map to be stringified
+// @return [map]
+@function _to-json-map($map) {
+  $str: "";
+  @each $key, $value in $map {
+    $str: $str + ', ' + _proof-quote($key) + ': ' + to-json($value);
+  }
+  @return '{' + str-slice($str, 3) + '}';
+}

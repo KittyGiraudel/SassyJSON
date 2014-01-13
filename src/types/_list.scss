@@ -1,0 +1,10 @@
+// JSON.stringify a list
+// @param $list: list to be stringified
+// @return [list]
+@function _to-json-list($list) {
+  $str: "";
+  @each $item in $list {
+    $str: $str + ', ' + to-json($item);
+  }
+  @return '[' + str-slice($str, 3) + ']';
+}

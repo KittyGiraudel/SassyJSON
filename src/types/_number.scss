@@ -1,0 +1,6 @@
+// JSON.stringify a number
+// @param $number: number to be stringified
+// @return [number]
+@function _to-json-number($number) {
+  @return $number;
+}
