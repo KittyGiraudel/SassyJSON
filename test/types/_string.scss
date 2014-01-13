@@ -1,9 +1,9 @@
-@include describe("The json-encode--string function") {
-  @include it("should properly encode a quoted string to JSON") {
-    @include should(expect(_json-encode--string("test")), to(equal('"test"')));
-  }
-
-  @include it("should properly encode an unquoted string to JSON") {
-    @include should(expect(_json-encode--string(test)), to(equal('"test"')));
+@include describe("The _json-encode--string function") {
+  @include it("should return a quoted string") {
+    @include should(expect(_json-encode--string("test")), to(equal('"' + 'test' + '"')));
+    @include should(expect(_json-encode--string(test)), to(equal('"' + 'test' + '"')));
+    @include should(expect(_json-encode--string("1")), to(equal('"' + '1' + '"')));
+    @include should(expect(_json-encode--string("true")), to(equal('"' + 'true' + '"')));
+    @include should(expect(_json-encode--string("false")), to(equal('"' + 'false' + '"')));
   }
 }

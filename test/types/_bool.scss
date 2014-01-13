@@ -1,5 +1,5 @@
-@include describe("The json-encode--bool function") {
-  @include it("should properly encode a boolean to JSON") {
+@include describe("The _json-encode--bool function") {
+  @include it("should return the unchanged boolean") {
     @include should(expect(_json-encode--bool(true)), to(equal(true)));
     @include should(expect(_json-encode--bool(false)), to(equal(false)));
   }

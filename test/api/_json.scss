@@ -1,11 +1,25 @@
-// JSON.stringify a value
-// @param $value: value to be stringified
-// @return [string |  false]
-@function json-encode($value) {
-  $types: list, map, number, string, bool, color;
-  @if index($types, type-of($value)) {
-    @return call('_json-encode--#{type-of($value)}', $value);
+@include describe("The json-encode function") {
+  @include it("should return the same as json-encode--bool for a boolean") {
+    @include should(expect(json-encode(true)), to(equal(_json-encode--bool(true))));
   }
-  @warn "Unknown type for #{$value}.";
-  @return false;
+  @include it("should return the same as json-encode--string for a string") {
+    @include should(expect(json-encode("test")), to(equal(_json-encode--string("test"))));
+  }
+  @include it("should return the same as json-encode--color for a color") {
+    @include should(expect(json-encode(#000)), to(equal(_json-encode--color("black"))));
+  }
+  @include it("should return the same as json-encode--number for a number") {
+    @include should(expect(json-encode(1)), to(equal(_json-encode--number(1))));
+  }
+  @include it("should return the same as json-encode--list for a list") {
+    @include should(expect(json-encode((1 2 3))), to(equal(_json-encode--list((1 2 3)))));
+  }
+  @include it("should return the same as json-encode--map for a map") {
+    @include should(expect(json-encode((a: 1, b: 2, c: 3))), to(equal(_json-encode--map((a: 1, b: 2, c: 3)))));
+  }
+
+  @include it("should handle some complicated map"){
+    $map-all: (a: (1 (a: (1 2 ( b : (1 2 3 4) )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string)) ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 (a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string)) 4 string));
+    @include should(expect(json-encode($map-all)), to(equal('{"a": [1, {"a": [1, 2, {"b": [1, 2, 3, 4]}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, {"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}, 4, "string"]}')));
+  }
 }
