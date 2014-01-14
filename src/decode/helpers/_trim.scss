@@ -1,0 +1,16 @@
+@function _trim($characters, $position) {
+  $length: length($characters);
+  @while $position <= $length {
+    $char: nth($characters, $position);
+
+    @if $char == ' ' {
+      $position: $position + 1;
+    }
+
+    @else {
+      @return $position;
+    }
+  }
+
+  @return $position;
+}

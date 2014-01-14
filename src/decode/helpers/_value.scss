@@ -1,0 +1,36 @@
+@function json-decode--value($characters, $position, $source) {
+  $length: length($characters);
+  $position: _trim($characters, $position);
+  
+  @while $position <= $length {
+    $char: nth($characters, $position);
+    $position: $position + 1;
+    
+    @if $char == '{' {
+      @return json-decode--map($characters, $position, $source);
+    }
+    @else if $char == '[' {
+      @return json-decode--list($characters, $position, $source);
+    }
+    @else if $char == 't' {
+      @return json-decode--true($characters, $position);
+    }
+    @else if $char == 'f' {
+      @return json-decode--false($characters, $position);
+    }
+    @else if $char == '"' {
+      @return json-decode--string($characters, $position, $source);
+    }
+    @else if $char == 'n' {
+      @return json-decode--null($characters, $position);
+    }
+    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
+      @return json-decode--number($characters, $position);
+    }
+    @else {
+      @return _throw("Unexpected token `" + $char + "`.", $position);
+    }
+  }
+  
+  @return _throw("Empty JSON string.", $position);
+}

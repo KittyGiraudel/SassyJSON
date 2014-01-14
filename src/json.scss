@@ -1,16 +1,2 @@
-// JSON.stringify
-// Type specific functions
-@import "helpers/quote";
-@import "types/bool";
-@import "types/color";
-@import "types/list";
-@import "types/map";
-@import "types/number";
-@import "types/string";
-@import "types/null";
-
-// Public API
-@import "api/json";
-
-// Mixin to pass the string to the DOM
-@import "mixins/json";
+@import "decode/decode";
+@import "encode/encode";

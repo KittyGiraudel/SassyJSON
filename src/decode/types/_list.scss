@@ -1,0 +1,44 @@
+@function json-decode--list($characters, $position, $source) {
+  $length: length($characters);
+  $position: _trim($characters, $position);
+  $list: ();
+  $needs-comma: false;
+  
+  @if $position <= $length and nth($characters, $position) == "]" {
+    @return ($position, $list);
+  }
+
+  @while $position <= $length {
+    $char: nth($characters, $position);
+
+    @if $char == "]" {
+      @if not $needs-comma {
+        @return _throw("Unexpected comma in array literal.", $position);
+      }
+      $position: $position + 1;
+      @return ($position, $list);
+    }
+    
+    @else if $char == "," {
+      @if not $needs-comma {
+        @return _throw("Unexpected comma in array literal.", $position);
+      }
+      $needs-comma: false;
+      $position: $position + 1;
+    }
+    
+    @else {
+      @if $needs-comma {
+        @return _throw("Missing comma in array literal.", $position);
+      }
+      $read: json-decode--value($characters, $position, $source);
+      $position: nth($read, 1);
+      $list: append($list, nth($read, 2));
+      $needs-comma: true;
+    }
+    
+    $position: _trim($characters, $position);
+  }
+  
+  @return _throw("Unterminated array literal.", $position);
+}

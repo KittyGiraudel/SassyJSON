@@ -1,0 +1,24 @@
+@function json-decode--true($characters, $position) {
+  $length: length($characters);
+  @if $length - $position < 2 
+  or nth($characters, $position) != 'r' 
+  or nth($characters, $position + 1) != 'u'
+  or nth($characters, $position + 2) != 'e' {
+    @return _throw("Unexpected token: `t`.", $position);
+  }
+  $position: $position + 3;
+  @return ($position, true);
+}
+
+@function json-decode--false($characters, $position) {
+  $length: length($characters);
+  @if $length - $position < 3 
+  or nth($characters, $position) != 'a' 
+  or nth($characters, $position + 1) != 'l'
+  or nth($characters, $position + 2) != 's'
+  or nth($characters, $position + 3) != 'e' {
+    @return _throw("Unexpected token: `f`.", $position);
+  }
+  $position: $position + 4;
+  @return ($position, false);
+}

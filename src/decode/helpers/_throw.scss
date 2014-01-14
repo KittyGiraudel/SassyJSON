@@ -1,0 +1,4 @@
+@function _throw($string, $position) {
+  @warn "ERROR::#{$position}::#{$string}";
+  @return ($position, false);
+}

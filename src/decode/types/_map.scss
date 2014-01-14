@@ -1,0 +1,49 @@
+@function json-decode--map($characters, $position, $source) {
+  $length: length($characters);
+  $position: _trim($characters, $position);
+  $map: ();
+  $needs-comma: false;
+  
+  @if $position <= $length and nth($characters, $position) == "}" {
+    @return ($position, $map);
+  }
+  
+  @while $position <= $length {
+    $char: nth($characters, $position);
+    $position: $position + 1;
+    
+    @if $char == "}" {
+      @if not $needs-comma {
+        @return _throw("Unexpected comma in object literal.", $position);
+      }
+      @return ($position, $map);
+    }
+    @else if $char == "," {
+      @if not $needs-comma {
+        @return _throw("Unexpected comma in object literal.", $position);
+      }
+      $needs-comma: false;
+    }
+    @else if $char == '"' {
+      @if $needs-comma {
+        @return _throw("Missing comma in object literal.", $position);
+      }
+      
+      $read-key: json-decode--string($characters, $position, $source);
+      $position: nth($read-key, 1);
+      $key: nth($read-key, 2);
+      $position: _consume($characters, $position, ':');
+      $read-value: json-decode--value($characters, $position, $source);
+      $position: nth($read-value, 1);
+      $value: nth($read-value, 2);
+
+      $map: map-merge($map, ($key: $value));
+      $needs-comma: true;
+    }
+    @else {
+      @return _throw("Unexpected token in object literal.", $position);
+    }
+    $position: _trim($characters, $position);
+  }
+  @return _throw("Unterminated object literal.", $position);
+}

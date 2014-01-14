@@ -1,0 +1,19 @@
+@function _consume($characters, $position, $token) {
+  $length: length($characters);
+  $position: _trim($characters, $position);
+
+  @if $position > $length {
+    @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
+  }
+
+  $char: nth($characters, $position);
+  $position: $position + 1;
+
+  @if $char == $token {
+    @return $position;
+  }
+
+  @else {
+    @return _throw("Expected `" + $token + "` found `" + $char + "`.", $position);
+  }
+}

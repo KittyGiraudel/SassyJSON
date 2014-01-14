@@ -1,0 +1,39 @@
+@function json-decode--number($characters, $position) {
+  $length: length($characters);
+  $position: $position - 1;
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers:  0   1   2   3   4   5   6   7   8   9;
+
+  $result: 0;
+  $divider: 0;
+  $minus: false;
+
+  @while $position <= $length {
+    $char: nth($characters, $position);
+    $index: index($strings, $char);
+    $position: $position + 1;
+
+    @if $char == '-' { $minus: true }
+    @else if $char == '.' { $divider: 1 }
+    @else {
+      $number: nth($numbers, $index);
+    
+      @if $divider == 0 { 
+        $result: $result * 10; 
+      }
+      @else {
+        $divider: $divider * 10;
+        $number: $number / $divider;
+      }
+      
+      $result: $result + $number;
+      
+      @if $position <= $length and not index($strings, nth($characters, $position)) {
+        @return ($position, if($minus, $result * -1, $result));
+      }
+    } 
+    
+  } 
+  
+  @return ($position, if($minus, $result * -1, $result));
+}

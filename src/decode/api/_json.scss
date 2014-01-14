@@ -1,0 +1,23 @@
+@function json-decode($json) {
+  $characters: ();
+  $position: 1;
+  
+  @if $json == null {
+    @return _throw("Input string may not be null", $position);
+  }
+  
+  @for $i from 1 through str-length($json) {
+    $characters: append($characters, str-slice($json, $i, $i));
+  }
+
+  $position: _trim($characters, $position);
+  $value: null;
+ 
+  @while $position <= str-length($json) and $value != false {
+    $read: json-decode--value($characters, $position, $json);
+    $position: nth($read, 1);
+    $value: nth($read, 2);
+  }
+
+  @return $value;
+}
