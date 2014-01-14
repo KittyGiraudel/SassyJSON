@@ -3,19 +3,37 @@
 
 @include runner-start;
 
+// Helpers
+@import "encode/helpers/quote";
+
+// Types
+@import "encode/types/string";
+@import "encode/types/number";
+@import "encode/types/color";
+@import "encode/types/bool";
+@import "encode/types/list";
+@import "encode/types/map";
+@import "encode/types/null";
+
+// API
+@import "encode/api/json";
+
 //Helper
-@import "helpers/quote";
+@import "decode/helpers/trim";
+@import "decode/helpers/consume";
+@import "decode/helpers/value";
+@import "decode/helpers/throw";
 
 //Types
-@import "types/string";
-@import "types/number";
-@import "types/color";
-@import "types/bool";
-@import "types/list";
-@import "types/map";
-@import "types/null";
+@import "decode/types/string";
+@import "decode/types/number";
+@import "decode/types/color";
+@import "decode/types/bool";
+@import "decode/types/list";
+@import "decode/types/map";
+@import "decode/types/null";
 
 //API
-@import "api/json";
+@import "decode/api/json";
 
 @include runner-end;
