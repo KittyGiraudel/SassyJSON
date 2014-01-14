@@ -3,37 +3,40 @@
 
 @include runner-start;
 
-// Helpers
-@import "encode/helpers/quote";
+// Encoder
 
-// Types
-@import "encode/types/string";
-@import "encode/types/number";
-@import "encode/types/color";
-@import "encode/types/bool";
-@import "encode/types/list";
-@import "encode/types/map";
-@import "encode/types/null";
+  // Helpers
+  @import "encode/helpers/quote";
 
-// API
-@import "encode/api/json";
+  // Types
+  @import "encode/types/string";
+  @import "encode/types/number";
+  @import "encode/types/color";
+  @import "encode/types/bool";
+  @import "encode/types/list";
+  @import "encode/types/map";
+  @import "encode/types/null";
 
-//Helper
-@import "decode/helpers/trim";
-@import "decode/helpers/consume";
-@import "decode/helpers/value";
-@import "decode/helpers/throw";
+  // API
+  @import "encode/api/json";
 
-//Types
-@import "decode/types/string";
-@import "decode/types/number";
-@import "decode/types/color";
-@import "decode/types/bool";
-@import "decode/types/list";
-@import "decode/types/map";
-@import "decode/types/null";
+// Decoder
 
-//API
-@import "decode/api/json";
+  //Helper
+  @import "decode/helpers/trim";
+  @import "decode/helpers/consume";
+  @import "decode/helpers/value";
+  @import "decode/helpers/throw";
+
+  //Types
+  @import "decode/types/string";
+  @import "decode/types/number";
+  @import "decode/types/bool";
+  @import "decode/types/list";
+  @import "decode/types/map";
+  @import "decode/types/null";
+
+  //API
+  @import "decode/api/json";
 
 @include runner-end;
