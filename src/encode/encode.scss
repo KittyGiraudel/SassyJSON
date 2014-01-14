@@ -1,12 +1,14 @@
 // JSON.stringify
 // Type specific functions
 @import "helpers/quote";
+
 @import "types/bool";
 @import "types/color";
 @import "types/list";
 @import "types/map";
 @import "types/number";
 @import "types/string";
+@import "types/null";
 
 // Public API
 @import "api/json";
