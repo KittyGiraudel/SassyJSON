@@ -1,7 +1,0 @@
-@include describe("The _json-encode--color function") {
-  @include it("should return a sass interpreted color wrapped in quotes") {
-    @include should(expect(_json-encode--color(#000)), to(equal('"' + 'black' + '"')));
-    @include should(expect(_json-encode--color(rgba(255,255,225,1))), to(equal('"' + '#ffffe1' + '"')));
-    @include should(expect(_json-encode--color(rgba(255,255,225,.5))), to(equal('"' + 'rgba(255, 255, 225, 0.5)' + '"')));
-  }
-}

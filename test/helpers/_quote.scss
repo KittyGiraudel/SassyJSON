@@ -1,6 +1,0 @@
-@include describe("The _proof-quote function") {
-  @include it("should return a quoted string") {
-    @include should(expect(_proof-quote('test')), to(equal('"' + 'test' + '"')));
-    @include should(expect(_proof-quote(1)), to(equal('"' + '1' + '"')));
-  }
-}
