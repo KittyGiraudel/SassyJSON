@@ -3,8 +3,9 @@
 // @return [string |  false]
 @function json-encode($value) {
   $types: list, map, number, string, bool, color;
-  @if index($types, type-of($value)) {
-    @return call('_json-encode--#{type-of($value)}', $value);
+  $value-type: type-of($value);
+  @if $value-type != null or index($types, $value-type) {
+    @return call('_json-encode--#{$value-type}', $value);
   }
   @warn "Unknown type for #{$value}.";
   @return false;
