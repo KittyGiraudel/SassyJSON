@@ -28,7 +28,9 @@
       
       $result: $result + $number;
       
-      @if $position <= $length and not index($strings, nth($characters, $position)) {
+      @if $position <= $length 
+      and not index($strings, nth($characters, $position)) 
+      and nth($characters, $position) != '.' {
         @return ($position, if($minus, $result * -1, $result));
       }
     } 

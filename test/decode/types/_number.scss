@@ -1,3 +1,25 @@
 @include describe("The json-decode--number function") {
-  
+  @include it("should properly decode numbers to number type") {
+    @include should(expect(json-decode('0')), to(equal(0)));
+    @include should(expect(json-decode('10')), to(equal(10)));
+    @include should(expect(json-decode('-0')), to(equal(0)));
+    @include should(expect(json-decode('1.5')), to(equal(1.5)));
+    @include should(expect(json-decode('-10')), to(equal(-10)));
+    @include should(expect(json-decode('-1.5')), to(equal(-1.5)));
+    @include should(expect(json-decode('-1.50')), to(equal(-1.5)));
+    @include should(expect(json-decode('-1.337')), to(equal(-1.337)));
+
+    @include should(expect(type-of(json-decode('0'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('10'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('-0'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('-10'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('1.5'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('-1.5'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('-1.50'))), to(equal(number)));
+    @include should(expect(type-of(json-decode('-1.337'))), to(equal(number)));
+  }
+
+  @include it("should return false whenever the value is not valid JSON") {
+    @include should(expect(type-of(json-decode(' 1 '))), to(equal(bool)));
+  }
 }

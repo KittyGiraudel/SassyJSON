@@ -1,3 +1,11 @@
 @include describe("The json-decode--string function") {
-  
+  @include it("should properly decode strings to string type") {
+    @include should(expect(json-decode('"test"')), to(equal("test")));
+    @include should(expect(json-decode('"test with inner spaces"')), to(equal("test with inner spaces")));
+    @include should(expect(json-decode('"   test with outer spaces   "')), to(equal("   test with outer spaces   ")));
+
+    @include should(expect(type-of(json-decode('"test"'))), to(equal(string)));
+    @include should(expect(type-of(json-decode('"test with inner spaces"'))), to(equal(string)));
+    @include should(expect(type-of(json-decode('"   test with outer spaces   "'))), to(equal(string)));
+  }
 }

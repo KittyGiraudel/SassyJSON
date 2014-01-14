@@ -1,3 +1,9 @@
 @include describe("The json-decode--bool function") {
-  
+  @include it("should properly decode booleans to bool type") {
+    @include should(expect(json-decode('true')), to(equal(true)));
+    @include should(expect(json-decode('false')), to(equal(false)));
+
+    @include should(expect(type-of(json-decode('true'))), to(equal(bool)));
+    @include should(expect(type-of(json-decode('false'))), to(equal(bool)));
+  }
 }
