@@ -16,16 +16,30 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
-          'src/helpers/_quote.scss',
-          'src/types/_bool.scss',
-          'src/types/_color.scss',
-          'src/types/_list.scss',
-          'src/types/_map.scss',
-          'src/types/_number.scss',
-          'src/types/_string.scss',
-          'src/types/_null.scss',
-          'src/api/_json.scss',
-          'src/mixins/_json.scss'
+          // Decoder
+          'src/decode/helpers/_throw.scss',
+          'src/decode/helpers/_comsume.scss',
+          'src/decode/helpers/_trim.scss',
+          'src/decode/helpers/_value.scss',
+          'src/decode/types/_bool.scss',
+          'src/decode/types/_null.scss',
+          'src/decode/types/_list.scss',
+          'src/decode/types/_map.scss',
+          'src/decode/types/_number.scss',
+          'src/decode/types/_string.scss',
+          'src/decode/api/_json.scss',
+
+          // Encoder
+          'src/encode/helpers/_quote.scss',
+          'src/encode/types/_bool.scss',
+          'src/encode/types/_color.scss',
+          'src/encode/types/_list.scss',
+          'src/encode/types/_map.scss',
+          'src/encode/types/_number.scss',
+          'src/encode/types/_string.scss',
+          'src/encode/types/_null.scss',
+          'src/encode/mixins/_json.scss',
+          'src/encode/api/_json.scss'
         ],
         dest: 'dist/_<%= pkg.name %>.scss',
       },
