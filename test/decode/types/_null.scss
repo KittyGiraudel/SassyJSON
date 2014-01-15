@@ -2,6 +2,6 @@
   @include it("should properly decode null to null") {
     @include should(expect(json-decode('null')), to(equal(null)));
 
-    @include should(expect(type-of(json-decode('null'))), to(equal(null)));
+    @include should(expect(type-of(json-decode('null'))), to(equal('null')));
   }
 }

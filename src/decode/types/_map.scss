@@ -1,10 +1,11 @@
 // JSON.parse an object to a map
 @function _json-decode--map($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position);
+  $position: _trim($source, $position); // Remove spaces before key
   $map: ();
   $needs-comma: false;
 
+  // Deal with empty map
   @if $position <= $length and str-slice($source, $position, $position) == "}" {
     @return ($position + 1, $map);
   }
@@ -32,16 +33,21 @@
         @return _throw("Missing comma in object literal.", $position);
       }
 
+      // Read key
       $read-key:  _json-decode--string($source, $position);
       $position: nth($read-key, 1);
       $key:      nth($read-key, 2);
 
+      // Remove colon
       $position: _consume($source, $position, ':');
+      @if not $position { @return $position; }
 
+      // Read value
       $read-value: _json-decode--value($source, $position);
       $position: nth($read-value, 1);
       $value:    nth($read-value, 2);
 
+      // Add pair to map
       $map: map-merge($map, ($key: $value));
       $needs-comma: true;
     }
@@ -50,7 +56,7 @@
       @return _throw("Unexpected token in object literal.", $position);
     }
 
-    $position: _trim($source, $position);
+    $position: _trim($source, $position); // Remove spaces for next round
   }
 
   @return _throw("Unterminated object literal.", $position);

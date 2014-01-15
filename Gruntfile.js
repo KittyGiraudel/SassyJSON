@@ -20,13 +20,13 @@ module.exports = function(grunt) {
           'src/decode/helpers/_throw.scss',
           'src/decode/helpers/_comsume.scss',
           'src/decode/helpers/_trim.scss',
-          'src/decode/helpers/_value.scss',
+          'src/decode/types/_string.scss',
           'src/decode/types/_bool.scss',
           'src/decode/types/_null.scss',
+          'src/decode/types/_number.scss',
+          'src/decode/helpers/_value.scss',
           'src/decode/types/_list.scss',
           'src/decode/types/_map.scss',
-          'src/decode/types/_number.scss',
-          'src/decode/types/_string.scss',
           'src/decode/api/_json.scss',
 
           // Encoder

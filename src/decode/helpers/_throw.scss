@@ -3,5 +3,5 @@
 // @param $position: pointer position
 @function _throw($string, $position) {
   @warn "ERROR::#{$position}::#{$string}";
-  @return ($position, false);
+  @return $position, false;
 }

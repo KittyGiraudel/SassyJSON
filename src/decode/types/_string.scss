@@ -1,7 +1,6 @@
 // JSON.parse a string
 @function _json-decode--string($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position);
   $string-start: $position;
 
   @while $position <= $length {
