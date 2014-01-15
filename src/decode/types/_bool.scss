@@ -1,6 +1,7 @@
 // JSON.parse a true bool
 @function _json-decode--true($source, $pointer) {
-  @if str-length($source) - $pointer < 2
+  $length: str-length($source);
+  @if $length - $pointer < 2
   or str-slice($source, $pointer, $pointer) != 'r'
   or str-slice($source, $pointer + 1, $pointer + 1) != 'u'
   or str-slice($source, $pointer + 2, $pointer + 2) != 'e' {
@@ -11,7 +12,8 @@
 
 // JSON.parse a false bool
 @function _json-decode--false($source, $pointer) {
-  @if str-length($source) - $pointer < 3
+  $length: str-length($source);
+  @if $length - $pointer < 3
   or str-slice($source, $pointer, $pointer) != 'a'
   or str-slice($source, $pointer + 1, $pointer + 1) != 'l'
   or str-slice($source, $pointer + 2, $pointer + 2) != 's'

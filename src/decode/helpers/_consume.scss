@@ -1,6 +1,7 @@
 // Move pointer to `$token`
 @function _consume($source, $pointer, $token) { 
-  @while $pointer <= str-length($source) {
+  $length: str-length($source);
+  @while $pointer <= $length {
     $char: str-slice($source, $pointer, $pointer);
     $pointer: $pointer + 1;
   

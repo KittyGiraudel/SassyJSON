@@ -1,8 +1,9 @@
 // JSON.parse a string
 @function _json-decode--string($source, $pointer) {
   $start: $pointer;
+  $length: str-length($source);
 
-  @while $pointer <= str-length($source) {
+  @while $pointer <= $length {
     $char: str-slice($source, $pointer, $pointer);
     $pointer: $pointer + 1;
 
