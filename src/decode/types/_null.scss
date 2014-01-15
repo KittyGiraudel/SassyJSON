@@ -1,11 +1,11 @@
-@function json-decode--null($characters, $position) {
-  $length: length($characters);
-  @if $length - $position < 2 
-  or nth($characters, $position) != 'u' 
-  or nth($characters, $position + 1) != 'l'
-  or nth($characters, $position + 2) != 'l' {
+// JSON.parse a null value
+@function _json-decode--null($source, $position) {
+  $length: str-length($source);
+  @if $length - $position < 2
+  or str-slice($source, $position, $position) != 'u'
+  or str-slice($source, $position + 1, $position + 1) != 'l'
+  or str-slice($source, $position + 2, $position + 2) != 'l' {
     @return _throw("Unexpected token: `n`.", $position);
   }
-  $position: $position + 3;
-  @return ($position, null);
+  @return ($position + 3, null);
 }

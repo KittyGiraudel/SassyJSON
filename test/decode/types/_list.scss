@@ -18,4 +18,8 @@
   @include it("should properly decode arrays with weird spaces to lists") {
     @include should(expect(json-decode('[   0 ,    1    ,    2,3  ]')), to(equal(0 1 2 3)));
   }
+
+  @include it("should properly decode empty arrays") {
+    @include should(expect(json-decode('[]')), to(equal(())));
+  }
 }

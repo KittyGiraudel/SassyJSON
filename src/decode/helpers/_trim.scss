@@ -1,12 +1,12 @@
-@function _trim($characters, $position) {
-  $length: length($characters);
+// Trim all whitespaces until character found
+@function _trim($source, $position) {
+  $length: str-length($source);
   @while $position <= $length {
-    $char: nth($characters, $position);
+    $char: str-slice($source, $position, $position);
 
     @if $char == ' ' {
       $position: $position + 1;
     }
-
     @else {
       @return $position;
     }

@@ -7,4 +7,8 @@
   @include it("should properly decode objects with weird spaces to map type") {
     @include should(expect(json-decode('{ "a"   : 1   ,   "b"  : "string"   ,   "c" :   true   }')), to(equal(("a": 1, "b": "string", "c": true))));
   }
+
+  @include it("should properly decode empty objects") {
+    @include should(expect(json-decode('{}')), to(equal(())));
+  }
 }

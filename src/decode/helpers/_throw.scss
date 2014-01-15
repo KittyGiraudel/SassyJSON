@@ -1,3 +1,6 @@
+// Logs an error at `$position` with `$string` message
+// @param $string: error message
+// @param $position: pointer position
 @function _throw($string, $position) {
   @warn "ERROR::#{$position}::#{$string}";
   @return ($position, false);
