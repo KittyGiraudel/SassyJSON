@@ -1,8 +1,6 @@
 // Move pointer to `$token`
-@function _consume($source, $position, $token) {
-  $length: str-length($source);
-  
-  @while $position <= $length {
+@function _consume($source, $position, $token) { 
+  @while $position <= str-length($source) {
     $char: str-slice($source, $position, $position);
     $position: $position + 1;
   
@@ -11,7 +9,7 @@
     }
     
     @else if $char == " " {
-      // Do nothing
+      // @continue;
     }
     
     @else {

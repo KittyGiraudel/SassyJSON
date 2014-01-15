@@ -2,17 +2,16 @@
 // @param $json: json string to parse
 // @return literal
 @function json-decode($json) {
+  $value: null;
+  $position: 1;
+
   @if $json == null {
     @return _throw("Input string may not be null", $position);
   }
 
-  $value: null;
-  $position: 1;
-
-  @while $position <= str-length($json) and $value != false {
+  @while $value != false // Stop if error
+  and $position <= str-length($json) {
     $read: _json-decode--value($json, $position);
-
-
     $position: nth($read, 1);
     $value: nth($read, 2);
   }

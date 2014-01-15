@@ -1,7 +1,6 @@
 // JSON.parse a null value
 @function _json-decode--null($source, $position) {
-  $length: str-length($source);
-  @if $length - $position < 2
+  @if str-length($source) - $position < 2
   or str-slice($source, $position, $position) != 'u'
   or str-slice($source, $position + 1, $position + 1) != 'l'
   or str-slice($source, $position + 2, $position + 2) != 'l' {

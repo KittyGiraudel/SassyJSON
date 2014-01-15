@@ -1,14 +1,14 @@
 // JSON.parse a string
 @function _json-decode--string($source, $position) {
-  $length: str-length($source);
-  $string-start: $position;
+  $start: $position;
 
-  @while $position <= $length {
+  @while $position <= str-length($source) {
     $char: str-slice($source, $position, $position);
     $position: $position + 1;
 
     @if $char == '"' {
-      @return ($position, str-slice($source, $string-start, $position - 2));
+      $end: $position - 2;
+      @return ($position, str-slice($source, $start, $end));
     }
   }
 

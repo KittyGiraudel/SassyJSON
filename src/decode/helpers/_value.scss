@@ -28,7 +28,7 @@
       @return _json-decode--number($source, $position);
     }
     @else if $char == ' ' {
-      // do nothing
+      // @continue;
     }
     @else {
       @return _throw("Unexpected token `" + $char + "`.", $position);
