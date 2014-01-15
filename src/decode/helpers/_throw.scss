@@ -1,7 +1,7 @@
-// Logs an error at `$position` with `$string` message
+// Logs an error at `$pointer` with `$string` message
 // @param $string: error message
 // @param $position: pointer position
-@function _throw($string, $position) {
-  @warn "ERROR::#{$position}::#{$string}";
-  @return $position, false;
+@function _throw($string, $pointer) {
+  @warn "ERROR::#{$pointer}::#{$string}";
+  @return $pointer, false;
 }

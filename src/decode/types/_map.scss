@@ -1,23 +1,23 @@
 // JSON.parse an object to a map
-@function _json-decode--map($source, $position) {
+@function _json-decode--map($source, $pointer) {
   $length: str-length($source);
   $map: ();
   $needs-comma: false;
 
   // Deal with empty map
-  @if $position <= $length and str-slice($source, $position, $position) == "}" {
-    @return ($position + 1, $map);
+  @if $pointer <= $length and str-slice($source, $pointer, $pointer) == "}" {
+    @return ($pointer + 1, $map);
   }
 
-  @while $position <= $length {
-    $char: str-slice($source, $position, $position);
-    $position: $position + 1;
+  @while $pointer <= $length {
+    $char: str-slice($source, $pointer, $pointer);
+    $pointer: $pointer + 1;
 
     @if $char == "}" {
       @if not $needs-comma {
-        @return _throw("Unexpected comma in object literal.", $position);
+        @return _throw("Unexpected comma in object literal.", $pointer);
       }
-      @return ($position, $map);
+      @return ($pointer, $map);
     }
 
     @else if $char == " " {
@@ -26,30 +26,30 @@
 
     @else if $char == "," {
       @if not $needs-comma {
-        @return _throw("Unexpected comma in object literal.", $position);
+        @return _throw("Unexpected comma in object literal.", $pointer);
       }
       $needs-comma: false;
     }
 
     @else if $char == '"' {
       @if $needs-comma {
-        @return _throw("Missing comma in object literal.", $position);
+        @return _throw("Missing comma in object literal.", $pointer);
       }
 
       // Read key
-      $read-key:  _json-decode--string($source, $position);
-      $position: nth($read-key, 1);
+      $read-key:  _json-decode--string($source, $pointer);
+      $pointer: nth($read-key, 1);
       $key:      nth($read-key, 2);
 
       // Remove colon
-      $position: _consume($source, $position, ":");
-      @if length($position) > 1 { // If consume has failed
+      $pointer: _consume($source, $pointer, ":");
+      @if length($pointer) > 1 { // If consume has failed
         @return _throw("Consuming token `:` failed.", 0); 
       } 
 
       // Read value
-      $read-value: _json-decode--value($source, $position);
-      $position: nth($read-value, 1);
+      $read-value: _json-decode--value($source, $pointer);
+      $pointer: nth($read-value, 1);
       $value:    nth($read-value, 2);
 
       // Add pair to map
@@ -58,11 +58,9 @@
     }
 
     @else {
-      @return _throw("Unexpected token in object literal.", $position);
+      @return _throw("Unexpected token in object literal.", $pointer);
     }
-
-    //$position: _trim($source, $position); // Remove spaces for next round
   }
 
-  @return _throw("Unterminated object literal.", $position);
+  @return _throw("Unterminated object literal.", $pointer);
 }

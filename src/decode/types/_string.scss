@@ -1,16 +1,16 @@
 // JSON.parse a string
-@function _json-decode--string($source, $position) {
-  $start: $position;
+@function _json-decode--string($source, $pointer) {
+  $start: $pointer;
 
-  @while $position <= str-length($source) {
-    $char: str-slice($source, $position, $position);
-    $position: $position + 1;
+  @while $pointer <= str-length($source) {
+    $char: str-slice($source, $pointer, $pointer);
+    $pointer: $pointer + 1;
 
     @if $char == '"' {
-      $end: $position - 2;
-      @return ($position, str-slice($source, $start, $end));
+      $end: $pointer - 2;
+      @return ($pointer, str-slice($source, $start, $end));
     }
   }
 
-  @return _throw("Unterminated string.", $position);
+  @return _throw("Unterminated string.", $pointer);
 }

@@ -1,7 +1,7 @@
 // JSON.parse a number
-@function _json-decode--number($source, $position) {
+@function _json-decode--number($source, $pointer) {
   $length: str-length($source);
-  $position: $position - 1; // Roll back pointer
+  $pointer: $pointer - 1; // Roll back pointer
   $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
   $numbers:  0   1   2   3   4   5   6   7   8   9;
 
@@ -9,10 +9,10 @@
   $divider: 0;
   $minus: false;
 
-  @while $position <= $length {
-    $char: str-slice($source, $position, $position);
+  @while $pointer <= $length {
+    $char: str-slice($source, $pointer, $pointer);
     $index: index($strings, $char);
-    $position: $position + 1;
+    $pointer: $pointer + 1;
 
     @if $char == '-' { 
       $minus: true 
@@ -32,15 +32,15 @@
       }
 
       $result: $result + $number;
-      $next: str-slice($source, $position, $position);
-      @if $position <= $length
+      $next: str-slice($source, $pointer, $pointer);
+      @if $pointer <= $length
       and not index($strings, $next)
       and $next != '.' {
-        @return ($position, if($minus, $result * -1, $result));
+        @return ($pointer, if($minus, $result * -1, $result));
       }
     }
 
   }
 
-  @return ($position, if($minus, $result * -1, $result));
+  @return ($pointer, if($minus, $result * -1, $result));
 }

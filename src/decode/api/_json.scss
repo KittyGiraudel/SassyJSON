@@ -3,16 +3,16 @@
 // @return literal
 @function json-decode($json) {
   $value: null;
-  $position: 1;
+  $pointer: 1;
 
   @if $json == null {
-    @return _throw("Input string may not be null", $position);
+    @return _throw("Input string may not be null", $pointer);
   }
 
   @while $value != false // Stop if error
-  and $position <= str-length($json) {
-    $read: _json-decode--value($json, $position);
-    $position: nth($read, 1);
+  and $pointer <= str-length($json) {
+    $read: _json-decode--value($json, $pointer);
+    $pointer: nth($read, 1);
     $value: nth($read, 2);
   }
 

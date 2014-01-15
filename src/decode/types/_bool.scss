@@ -1,22 +1,22 @@
 // JSON.parse a true bool
-@function _json-decode--true($source, $position) {
-  @if str-length($source) - $position < 2
-  or str-slice($source, $position, $position) != 'r'
-  or str-slice($source, $position + 1, $position + 1) != 'u'
-  or str-slice($source, $position + 2, $position + 2) != 'e' {
-    @return _throw("Unexpected token: `t`.", $position);
+@function _json-decode--true($source, $pointer) {
+  @if str-length($source) - $pointer < 2
+  or str-slice($source, $pointer, $pointer) != 'r'
+  or str-slice($source, $pointer + 1, $pointer + 1) != 'u'
+  or str-slice($source, $pointer + 2, $pointer + 2) != 'e' {
+    @return _throw("Unexpected token: `t`.", $pointer);
   }
-  @return ($position + 3, true);
+  @return ($pointer + 3, true);
 }
 
 // JSON.parse a false bool
-@function _json-decode--false($source, $position) {
-  @if str-length($source) - $position < 3
-  or str-slice($source, $position, $position) != 'a'
-  or str-slice($source, $position + 1, $position + 1) != 'l'
-  or str-slice($source, $position + 2, $position + 2) != 's'
-  or str-slice($source, $position + 3, $position + 3) != 'e' {
-    @return _throw("Unexpected token: `f`.", $position);
+@function _json-decode--false($source, $pointer) {
+  @if str-length($source) - $pointer < 3
+  or str-slice($source, $pointer, $pointer) != 'a'
+  or str-slice($source, $pointer + 1, $pointer + 1) != 'l'
+  or str-slice($source, $pointer + 2, $pointer + 2) != 's'
+  or str-slice($source, $pointer + 3, $pointer + 3) != 'e' {
+    @return _throw("Unexpected token: `f`.", $pointer);
   }
-  @return ($position + 4, false);
+  @return ($pointer + 4, false);
 }
