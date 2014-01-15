@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         src: [
           // Decoder
           'src/decode/helpers/_throw.scss',
-          'src/decode/helpers/_comsume.scss',
+          'src/decode/helpers/_consume.scss',
           'src/decode/helpers/_trim.scss',
           'src/decode/types/_string.scss',
           'src/decode/types/_bool.scss',
