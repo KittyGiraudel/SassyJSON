@@ -11,9 +11,7 @@
 
   @while $position <= str-length($json) and $value != false {
     $read: _json-decode--value($json, $position);
-    @if $read == false {
-      @return false;
-    }
+
 
     $position: nth($read, 1);
     $value: nth($read, 2);

@@ -39,8 +39,11 @@
       $key:      nth($read-key, 2);
 
       // Remove colon
-      $position: _consume($source, $position, ':');
-      @if length($position) > 1 { @return false; } // If consume has failed
+      $token: ":";
+      $position: _consume($source, $position, $token);
+      @if length($position) > 1 { // If consume has failed
+        @return _throw("Consuming token `" + $token + "` failed.", 0); 
+      } 
 
       // Read value
       $read-value: _json-decode--value($source, $position);
