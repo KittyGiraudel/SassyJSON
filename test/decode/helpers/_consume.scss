@@ -1,3 +1,6 @@
 @include describe("The _consume function") {
-  
+  @include it("should return the index of the token + 1") {
+    @include should(expect(_consume("  : whatever", 1, ":")), to(equal(4)));
+    @include should(expect(_consume("     / test", 1, "/")), to(equal(7)));
+  }
 }

@@ -1,3 +1,6 @@
 @include describe("The _trim function") {
-
+  @include it("should return the index of the first non-space character") {
+    @include should(expect(_trim("  test", 1)), to(equal(3)));
+    @include should(expect(_trim("test", 1)), to(equal(1)));
+  }
 }

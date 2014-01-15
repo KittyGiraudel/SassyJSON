@@ -1,3 +1,5 @@
 @include describe("The _throw function") {
-  
+  @include it("should return false in all circumstancies") {
+    @include should(expect(_throw("Error message", 1)), to(equal(false)));
+  }
 }
