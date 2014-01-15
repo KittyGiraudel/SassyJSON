@@ -12,10 +12,10 @@
     @include should(expect(json-encode(1)), to(equal(_json-encode--number(1))));
   }
   @include it("should return the same as json-encode--list for a list") {
-    @include should(expect(json-encode((1 2 3))), to(equal(_json-encode--list((1 2 3)))));
+    @include should(expect(json-encode(1 2 3)), to(equal(_json-encode--list((1 2 3)))));
   }
   @include it("should return the same as json-encode--map for a map") {
-    @include should(expect(json-encode((a: 1, b: 2, c: 3))), to(equal(_json-encode--map((a: 1, b: 2, c: 3)))));
+    @include should(expect(json-encode( (a: 1, b: 2, c: 3) )), to(equal(_json-encode--map((a: 1, b: 2, c: 3)))));
   }
 
   @include it("should handle some complicated map"){

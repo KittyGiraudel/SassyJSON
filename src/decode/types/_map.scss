@@ -40,7 +40,7 @@
 
       // Remove colon
       $position: _consume($source, $position, ':');
-      @if not $position { @return $position; }
+      @if length($position) > 1 { @return false; } // If consume has failed
 
       // Read value
       $read-value: _json-decode--value($source, $position);
