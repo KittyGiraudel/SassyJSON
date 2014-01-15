@@ -10,7 +10,7 @@
 // Move pointer to `$token`
 @function _consume($source, $position, $token) {
   $length: str-length($source);
-  $position: _trim($source, $position);
+  //$position: _trim($source, $position);
 
   @if $position > $length {
     @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
@@ -145,7 +145,7 @@
 // JSON.parse value
 @function _json-decode--value($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position);
+  //$position: _trim($source, $position);
 
   @while $position <= $length {
     $char: str-slice($source, $position, $position);
@@ -172,6 +172,9 @@
     @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
       @return _json-decode--number($source, $position);
     }
+    @else if $char == ' ' {
+      // do nothing
+    }
     @else {
       @return _throw("Unexpected token `" + $char + "`.", $position);
     }
@@ -183,7 +186,7 @@
 // JSON.parse a an array to a list
 @function _json-decode--list($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position);
+  //$position: _trim($source, $position);
   $list: ();
   $needs-comma: false;
 
@@ -198,7 +201,16 @@
       @if not $needs-comma {
         @return _throw("Unexpected comma in array literal.", $position);
       }
-      @return ($position + 1, $list);
+
+      // Do it the Sass way and destruct a single item
+      // array to an element.
+      // eg. ((true) (false) (false true) true) becomse (true false (false true) true)
+      @if length($list) == 1{
+        @return ($position + 1, nth($list, 1));
+      }
+      @else{
+        @return ($position + 1, $list);
+      }
     }
 
     @else if $char == "," {
@@ -219,7 +231,7 @@
       $needs-comma: true;
     }
 
-    $position: _trim($source, $position);
+    //$position: _trim($source, $position);
   }
 
   @return _throw("Unterminated array literal.", $position);
@@ -228,7 +240,7 @@
 // JSON.parse an object to a map
 @function _json-decode--map($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position); // Remove spaces before key
+  //$position: _trim($source, $position); // Remove spaces before key
   $map: ();
   $needs-comma: false;
 
@@ -266,8 +278,11 @@
       $key:      nth($read-key, 2);
 
       // Remove colon
-      $position: _consume($source, $position, ':');
-      @if not $position { @return $position; }
+      $token: ":";
+      $position: _consume($source, $position, $token);
+      @if length($position) > 1 { // If consume has failed
+        @return _throw("Consuming token `" + $token + "` failed.", 0); 
+      } 
 
       // Read value
       $read-value: _json-decode--value($source, $position);
@@ -283,7 +298,7 @@
       @return _throw("Unexpected token in object literal.", $position);
     }
 
-    $position: _trim($source, $position); // Remove spaces for next round
+    //$position: _trim($source, $position); // Remove spaces for next round
   }
 
   @return _throw("Unterminated object literal.", $position);
@@ -303,9 +318,6 @@
   @while $position <= str-length($json) and $value != false {
     $read: _json-decode--value($json, $position);
 
-    @if length($read) > 2 {
-      @return false;
-    }
 
     $position: nth($read, 1);
     $value: nth($read, 2);

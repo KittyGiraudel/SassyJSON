@@ -1,7 +1,7 @@
 // JSON.parse an object to a map
 @function _json-decode--map($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position); // Remove spaces before key
+  //$position: _trim($source, $position); // Remove spaces before key
   $map: ();
   $needs-comma: false;
 
@@ -19,6 +19,10 @@
         @return _throw("Unexpected comma in object literal.", $position);
       }
       @return ($position, $map);
+    }
+
+    @else if $char == " " {
+      // Do nothing
     }
 
     @else if $char == "," {
@@ -59,7 +63,7 @@
       @return _throw("Unexpected token in object literal.", $position);
     }
 
-    $position: _trim($source, $position); // Remove spaces for next round
+    //$position: _trim($source, $position); // Remove spaces for next round
   }
 
   @return _throw("Unterminated object literal.", $position);

@@ -1,20 +1,23 @@
 // Move pointer to `$token`
 @function _consume($source, $position, $token) {
   $length: str-length($source);
-  $position: _trim($source, $position);
-
-  @if $position > $length {
-    @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
+  
+  @while $position <= $length {
+    $char: str-slice($source, $position, $position);
+    $position: $position + 1;
+  
+    @if $char == $token {
+      @return $position;
+    }
+    
+    @else if $char == " " {
+      // Do nothing
+    }
+    
+    @else {
+      @return _throw("Expected `" + $token + "` found `" + $char + "`.", $position);
+    }
   }
 
-  $char: str-slice($source, $position, $position);
-  $position: $position + 1;
-
-  @if $char == $token {
-    @return $position;
-  }
-
-  @else {
-    @return _throw("Expected `" + $token + "` found `" + $char + "`.", $position);
-  }
+  @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
 }

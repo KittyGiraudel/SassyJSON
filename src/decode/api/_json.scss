@@ -6,8 +6,8 @@
     @return _throw("Input string may not be null", $position);
   }
 
-  $position: _trim($json, 1);
   $value: null;
+  $position: 1;
 
   @while $position <= str-length($json) and $value != false {
     $read: _json-decode--value($json, $position);

@@ -1,7 +1,6 @@
 // JSON.parse value
 @function _json-decode--value($source, $position) {
   $length: str-length($source);
-  $position: _trim($source, $position);
 
   @while $position <= $length {
     $char: str-slice($source, $position, $position);
@@ -27,6 +26,9 @@
     }
     @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
       @return _json-decode--number($source, $position);
+    }
+    @else if $char == ' ' {
+      // do nothing
     }
     @else {
       @return _throw("Unexpected token `" + $char + "`.", $position);
