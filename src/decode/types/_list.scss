@@ -16,7 +16,16 @@
       @if not $needs-comma {
         @return _throw("Unexpected comma in array literal.", $position);
       }
-      @return ($position + 1, $list);
+
+      // Do it the Sass way and destruct a single item
+      // array to an element.
+      // eg. ((true) (false) (false true) true) becomse (true false (false true) true)
+      @if length($list) == 1{
+        @return ($position + 1, nth($list, 1));
+      }
+      @else{
+        @return ($position + 1, $list);
+      }
     }
 
     @else if $char == "," {
