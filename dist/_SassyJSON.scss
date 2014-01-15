@@ -10,41 +10,26 @@
 // Move pointer to `$token`
 @function _consume($source, $position, $token) {
   $length: str-length($source);
-  //$position: _trim($source, $position);
-
-  @if $position > $length {
-    @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
-  }
-
-  $char: str-slice($source, $position, $position);
-  $position: $position + 1;
-
-  @if $char == $token {
-    @return $position;
-  }
-
-  @else {
-    @return _throw("Expected `" + $token + "` found `" + $char + "`.", $position);
-  }
-}
-
-// Trim all whitespaces until character found
-@function _trim($source, $position) {
-  $length: str-length($source);
+  
   @while $position <= $length {
     $char: str-slice($source, $position, $position);
-
-    @if $char == ' ' {
-      $position: $position + 1;
-    }
-    @else {
+    $position: $position + 1;
+  
+    @if $char == $token {
       @return $position;
+    }
+    
+    @else if $char == " " {
+      // Do nothing
+    }
+    
+    @else {
+      @return _throw("Expected `" + $token + "` found `" + $char + "`.", $position);
     }
   }
 
-  @return $position;
+  @return _throw("Expected `" + $token + "` but reached end of stream.", $position);
 }
-
 // JSON.parse a string
 @function _json-decode--string($source, $position) {
   $length: str-length($source);
@@ -145,7 +130,6 @@
 // JSON.parse value
 @function _json-decode--value($source, $position) {
   $length: str-length($source);
-  //$position: _trim($source, $position);
 
   @while $position <= $length {
     $char: str-slice($source, $position, $position);
@@ -186,7 +170,6 @@
 // JSON.parse a an array to a list
 @function _json-decode--list($source, $position) {
   $length: str-length($source);
-  //$position: _trim($source, $position);
   $list: ();
   $needs-comma: false;
 
@@ -213,6 +196,10 @@
       }
     }
 
+    @else if $char == " " {
+      $position: $position + 1;
+    }
+
     @else if $char == "," {
       @if not $needs-comma {
         @return _throw("Unexpected comma in array literal.", $position);
@@ -230,8 +217,6 @@
       $list: append($list, nth($read, 2));
       $needs-comma: true;
     }
-
-    //$position: _trim($source, $position);
   }
 
   @return _throw("Unterminated array literal.", $position);
@@ -258,6 +243,10 @@
         @return _throw("Unexpected comma in object literal.", $position);
       }
       @return ($position, $map);
+    }
+
+    @else if $char == " " {
+      // Do nothing
     }
 
     @else if $char == "," {
@@ -312,8 +301,8 @@
     @return _throw("Input string may not be null", $position);
   }
 
-  $position: _trim($json, 1);
   $value: null;
+  $position: 1;
 
   @while $position <= str-length($json) and $value != false {
     $read: _json-decode--value($json, $position);
