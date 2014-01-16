@@ -2,6 +2,7 @@
 @import "helpers/throw";
 @import "helpers/consume";
 @import "helpers/value";
+@import "helpers/strip-special-char";
 
 // JSON.stringify
 // Type specific functions

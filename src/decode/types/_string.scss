@@ -1,11 +1,17 @@
 // JSON.parse a string
 @function _json-decode--string($source, $pointer) {
+  // Check for the end of the string
   $temp: str-slice($source, $pointer);
-  $index: str-index($temp, '"');
+  $end-string: str-index($temp, '"');
 
-  @if $index and $index > 0 {
-    @return ($pointer + $index, str-slice($temp, 1, $index - 1));
+  // If no end is found
+  @if $end-string == 0 {
+    @return _throw("Unterminated string.", $pointer);
   }
-
-  @return _throw("Unterminated string.", $pointer);
+  
+  $string: str-slice($temp, 1, $end-string - 1); 
+  $string: _strip-special-char($string, "\r");
+  $string: _strip-special-char($string, "\n");
+  
+  @return ($pointer + $end-string, $string);
 }

@@ -1,0 +1,15 @@
+// Strip special carriage return char
+// @param $string: string to parse
+// @param $char: char to strip
+// @return [string]
+@function _strip-special-char($string, $char) {
+  $cr: "
+  "; // Carriage return
+  
+  @while str-index($string, $char) and str-index($string, $char) > 0 {
+    $index: str-index($string, $char);
+    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($char));
+  }
+  
+  @return $string;
+}

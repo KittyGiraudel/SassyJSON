@@ -29,18 +29,35 @@
 
   @return _throw("Expected `" + $token + "` but reached end of stream.", $pointer);
 }
-// JSON.parse a string
-@function _json-decode--string($source, $pointer) {
-  $temp: str-slice($source, $pointer);
-  $index: str-index($temp, '"');
-
-  @if $index and $index > 0 {
-    @return ($pointer + $index, str-slice($temp, 1, $index - 1));
+@function _strip-special-char($string, $char) {
+  $cr: "
+  "; // Carriage return
+  
+  @while str-index($string, $char) and str-index($string, $char) > 0 {
+    $index: str-index($string, $char);
+    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($char));
   }
-
-  @return _throw("Unterminated string.", $pointer);
+  
+  @return $string;
 }
 
+// JSON.parse a string
+@function _json-decode--string($source, $pointer) {
+  // Check for the end of the string
+  $temp: str-slice($source, $pointer);
+  $end-string: str-index($temp, '"');
+
+  // If no end is found
+  @if $end-string == 0 {
+    @return _throw("Unterminated string.", $pointer);
+  }
+  
+  $string: str-slice($temp, 1, $end-string - 1); 
+  $string: _strip-special-char($string, "\r");
+  $string: _strip-special-char($string, "\n");
+  
+  @return ($pointer + $end-string, $string);
+}
 // JSON.parse a true bool
 @function _json-decode--true($source, $pointer) {
   $length: str-length($source);
@@ -226,10 +243,10 @@
     $pointer: $pointer + 1;
 
     @if $char == "}" {
-      @if not $needs-comma {
+      @if not $needs-comma and length($map) != 0 {
         @return _throw("Unexpected comma in object literal.", $pointer);
       }
-      @return ($pointer, $map);
+      @return ($pointer + 1, $map);
     }
 
     @else if $char == " " {
