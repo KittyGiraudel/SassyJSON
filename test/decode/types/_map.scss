@@ -1,6 +1,6 @@
 @include describe("The json-decode--map function") {
   @include it("should properly decode objects to map type") {
-    @include should(expect(json-decode(('{"a": 1}'))), to(equal(("a": 1))));
+    @include should(expect(json-decode('{"a": 1}')), to(equal(("a": 1))));
     @include should(expect(json-decode('{"a": 1, "b": "string", "c": true}')), to(equal(("a": 1, "b": "string", "c": true))));
 
     @include should(expect(type-of(json-decode('{"a": 1}'))), to(equal('map')));
@@ -8,11 +8,21 @@
   }
 
   @include it("should properly decode objects with weird spaces to map type") {
-    @include should(expect(json-decode('{ "a"   : 1   ,   "b"  : "string"   ,   "c" :   true   }')), to(equal(("a": 1, "b": "string", "c": true))));
+    @include should(expect(json-decode(' {"a":1,"b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{ "a":1,"b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a" :1,"b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a": 1,"b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1 ,"b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1, "b":2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1,"b" :2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1,"b": 2}')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1,"b":2 }')), to(equal(("a": 1, "b": 2))));
+    @include should(expect(json-decode('{"a":1,"b":2} ')), to(equal(("a": 1, "b": 2))));
   }
 
   @include it("should properly decode empty objects") {
     @include should(expect(json-decode('{}')), to(equal(())));
+    @include should(expect(json-decode('{ }')), to(equal(())));
   }
 
   @include it("should return false when objects are invalid") {

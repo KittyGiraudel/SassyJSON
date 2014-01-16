@@ -14,10 +14,10 @@
     $pointer: $pointer + 1;
 
     @if $char == "}" {
-      @if not $needs-comma {
+      @if not $needs-comma and length($map) != 0 {
         @return _throw("Unexpected comma in object literal.", $pointer);
       }
-      @return ($pointer, $map);
+      @return ($pointer + 1, $map);
     }
 
     @else if $char == " " {
