@@ -2,9 +2,6 @@
   @include it("should properly decode objects to map type") {
     @include should(expect(json-decode('{"a": 1}')), to(equal(("a": 1))));
     @include should(expect(json-decode('{"a": 1, "b": "string", "c": true}')), to(equal(("a": 1, "b": "string", "c": true))));
-
-    @include should(expect(type-of(json-decode('{"a": 1}'))), to(equal('map')));
-    @include should(expect(type-of(json-decode('{"a": 1, "b": "string", "c": true}'))), to(equal('map')));
   }
 
   @include it("should properly decode objects with weird spaces to map type") {
@@ -33,5 +30,10 @@
     @include should(expect(json-decode('{"a", 0}')), to(equal(false)));
     @include should(expect(json-decode('{"a": 0,}')), to(equal(false)));
     @include should(expect(json-decode('{,"a": 0}')), to(equal(false)));
+  }
+
+  @include it("should decode to map type") {
+    @include should(expect(type-of(json-decode('{"a": 1}'))), to(equal('map')));
+    @include should(expect(type-of(json-decode('{"a": 1, "b": "string", "c": true}'))), to(equal('map')));
   }
 }

@@ -3,11 +3,15 @@
     @include should(expect(_pow(2, 2)), to(equal(4)));
     @include should(expect(_pow(2, 10)), to(equal(1024)));
     @include should(expect(_pow(10, 2)), to(equal(100)));
+    @include should(expect(_pow(10, -2)), to(equal(0.01)));
+    @include should(expect(_pow(-2, 10)), to(equal(1024)));
   }
 
   @include it("should always return a number") {
     @include should(expect(type-of(_pow(2, 2))), to(equal('number')));
     @include should(expect(type-of(_pow(2, 10))), to(equal('number')));
     @include should(expect(type-of(_pow(10, 2))), to(equal('number')));
+    @include should(expect(type-of(_pow(10, -2))), to(equal('number')));
+    @include should(expect(type-of(_pow(-2, 10))), to(equal('number')));
   }
 }

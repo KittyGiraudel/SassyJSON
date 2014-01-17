@@ -1,5 +1,4 @@
 @include describe("The json-decode--bool function") {
-
   @include it("should work for true with _json-decode--true"){
    @include should(expect(_json-decode--true('true', 2)), to(equal((5, true))));
   }
@@ -15,14 +14,15 @@
   @include it("should properly decode booleans to bool type") {
     @include should(expect(json-decode('true')), to(equal(true)));
     @include should(expect(json-decode('false')), to(equal(false)));
-
-    @include should(expect(type-of(json-decode('true'))), to(equal('bool')));
-    @include should(expect(type-of(json-decode('false'))), to(equal('bool')));
   }
 
   @include it("should return false when booleans are mispelled") {
     @include should(expect(json-decode('ture')), to(equal(false)));
     @include should(expect(json-decode('fasle')), to(equal(false)));
+  }
 
+  @include it("should decode to bool type") {
+    @include should(expect(type-of(json-decode('true'))), to(equal('bool')));
+    @include should(expect(type-of(json-decode('false'))), to(equal('bool')));
   }
 }

@@ -3,10 +3,6 @@
     @include should(expect(json-decode('[0, 1, 2, 3]')), to(equal(0 1 2 3)));
     @include should(expect(json-decode('["a", "b", "c", "d"]')), to(equal("a" "b" "c" "d")));
     @include should(expect(json-decode('[true, false, false, true, true]')), to(equal(true false false true true)));
-
-    @include should(expect(type-of(json-decode('[0, 1, 2, 3]'))), to(equal('list')));
-    @include should(expect(type-of(json-decode('["a", "b", "c", "d"]'))), to(equal('list')));
-    @include should(expect(type-of(json-decode('[true, false, false, true, true]'))), to(equal('list')));
   }
 
   @include it("should properly decode multi-dimensional arrays to nested lists") {
@@ -32,5 +28,11 @@
     @include should(expect(json-decode('[0 1,, 2]')), to(equal(false)));
     @include should(expect(json-decode('[0 1, 2,]')), to(equal(false)));
     @include should(expect(json-decode('[,0 1,, 2,]')), to(equal(false)));
+  }
+
+  @include it("should decode to list type") {
+    @include should(expect(type-of(json-decode('[0, 1, 2, 3]'))), to(equal('list')));
+    @include should(expect(type-of(json-decode('["a", "b", "c", "d"]'))), to(equal('list')));
+    @include should(expect(type-of(json-decode('[true, false, false, true, true]'))), to(equal('list')));
   }
 }

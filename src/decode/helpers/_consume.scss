@@ -11,6 +11,7 @@
 
 @function _consume($source, $pointer, $token) {
   $length: str-length($source);
+
   @while $pointer <= $length {
     $char: str-slice($source, $pointer, $pointer);
     $pointer: $pointer + 1;

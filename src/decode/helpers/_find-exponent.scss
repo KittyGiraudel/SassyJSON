@@ -15,16 +15,16 @@
   $minus: false;
 
   @while $pointer <= $length {
-    $char: to-lower-case(str-slice($source, $pointer, $pointer));
-    $index: index($strings, $char);
+    $token: to-lower-case(str-slice($source, $pointer, $pointer));
+    $index: index($strings, $token);
 
-    @if $char == 'e' {
+    @if $token == 'e' {
       // @continue;
     }
-    @else if $char == '-' {
+    @else if $token == '-' {
       $minus: true;
     }
-    @else if $char == '+' {
+    @else if $token == '+' {
       $minus: false;
     }
     @else if $index and $index > 0 {
@@ -32,8 +32,8 @@
       $result: if($result == null, $number, $result * 10 + $number);
     }
     @else {
-      @if not index(" ", ", ", "]", "}", $char) {
-        @return _throw("Unexpected token `" + $char + "`.", $pointer);
+      @if not index(" ", ", ", "]", "}", $token) {
+        @return _throw("Unexpected token `" + $token + "`.", $pointer);
       }
 
       @return $pointer, if($minus and $result != null, $result * -1, $result);

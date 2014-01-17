@@ -20,8 +20,8 @@
 
   @else if $end > 1 {
     $string: str-slice($temp, 1, $end - 1);
-    $string: _strip-special-char($string, "\r");
-    $string: _strip-special-char($string, "\n");
+    $string: _strip-token($string, "\r");
+    $string: _strip-token($string, "\n");
   }
 
   @return ($pointer + $end, $string);

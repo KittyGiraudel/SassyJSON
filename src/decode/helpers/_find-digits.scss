@@ -15,10 +15,10 @@
   $runs: 1;
 
   @while $pointer <= $length {
-    $char: to-lower-case(str-slice($source, $pointer, $pointer));
-    $index: index($strings, $char);
+    $token: to-lower-case(str-slice($source, $pointer, $pointer));
+    $index: index($strings, $token);
 
-    @if $char == '.' {
+    @if $token == '.' {
       // @continue;
     }
     @else if $index and $index > 0 {
@@ -27,10 +27,10 @@
       $result: if($result == null, $number, $result * 10 + $number);
     }
     @else {
-      @if index('e' '.' ',' ']' '}' ' ', $char) {
+      @if index('e' '.' ',' ']' '}' ' ', $token) {
         @return $pointer, if($result != null, $result / $runs, $result);
       }
-      @return _throw("Unexpected token `" + $char + "`.", $pointer);
+      @return _throw("Unexpected token `" + $token + "`.", $pointer);
     }
 
     $pointer: $pointer + 1;

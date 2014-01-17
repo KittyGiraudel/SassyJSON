@@ -13,35 +13,35 @@
   $length: str-length($source);
 
   @while $pointer <= $length {
-    $char: str-slice($source, $pointer, $pointer);
+    $token: str-slice($source, $pointer, $pointer);
     $pointer: $pointer + 1;
 
-    @if $char == '{' {
+    @if $token == '{' {
       @return _json-decode--map($source, $pointer);
     }
-    @else if $char == '[' {
+    @else if $token == '[' {
       @return _json-decode--list($source, $pointer);
     }
-    @else if $char == 't' {
+    @else if $token == 't' {
       @return _json-decode--true($source, $pointer);
     }
-    @else if $char == 'f' {
+    @else if $token == 'f' {
       @return _json-decode--false($source, $pointer);
     }
-    @else if $char == '"' {
+    @else if $token == '"' {
       @return _json-decode--string($source, $pointer);
     }
-    @else if $char == 'n' {
+    @else if $token == 'n' {
       @return _json-decode--null($source, $pointer);
     }
-    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
+    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $token) {
       @return _json-decode--number($source, $pointer);
     }
-    @else if $char == ' ' {
+    @else if $token == ' ' {
       // @continue;
     }
     @else {
-      @return _throw("Unexpected token `" + $char + "`.", $pointer);
+      @return _throw("Unexpected token `" + $token + "`.", $pointer);
     }
   }
 
