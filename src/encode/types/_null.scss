@@ -1,6 +1,9 @@
-// JSON.stringify a null
-// @param $null: a sass null to be stringified
-// @return [string] with content null
+// Encode `null` to JSON
+// --------------------------------------------------------------------------------
+// @param $null: `null`
+// --------------------------------------------------------------------------------
+// @return [string] `null`
+
 @function _json-encode--null($null) {
   @return "null";
 }

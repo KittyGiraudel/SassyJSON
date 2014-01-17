@@ -1,12 +1,18 @@
-// JSON.stringify a value
+// Delay the encoding of ta literal to JSON
+// to a type-specific method
+// --------------------------------------------------------------------------------
 // @param $value: value to be stringified
-// @return [string |  false]
+// --------------------------------------------------------------------------------
+// @throw "Unknown type for $value ({x})."
+// --------------------------------------------------------------------------------
+// @return [string|false] JSON encoded string
+
 @function json-encode($value) {
   $types: list, map, number, string, bool, color;
   $value-type: type-of($value);
   @if $value-type != null or index($types, $value-type) {
     @return call('_json-encode--#{$value-type}', $value);
   }
-  @warn "Unknown type for #{$value}.";
+  @warn "Unknown type for #{$value} (#{type-of($value)}).";
   @return false;
 }

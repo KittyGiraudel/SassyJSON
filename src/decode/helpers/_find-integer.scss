@@ -1,3 +1,12 @@
+// Parses a JSON encoded number to find the integer part
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token $token."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, parsed number)
+
 @function _find-integer($source, $pointer) {
   $length: str-length($source);
   $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
@@ -19,7 +28,7 @@
       @if index('e' '.' ',' ']' '}' ' ', $char) {
         @return $pointer, $result;
       }
-      @return _throw("Unexpected character `" + $char + "`.", $pointer);
+      @return _throw("Unexpected token `" + $char + "`.", $pointer);
     }
 
     $pointer: $pointer + 1;

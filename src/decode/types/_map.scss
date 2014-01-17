@@ -1,4 +1,16 @@
-// JSON.parse an object to a map
+// Parses a JSON encoded object
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected comma in object literal."
+// @throw "Unexpected token $token in object literal."
+// @throw "Missing comma in object literal."
+// @throw "Unterminated object literal."
+// @throw "Consuming token `:` failed."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, map)
+
 @function _json-decode--map($source, $pointer) {
   $length: str-length($source);
   $map: ();
@@ -44,8 +56,8 @@
       // Remove colon
       $pointer: _consume($source, $pointer, ":");
       @if length($pointer) > 1 { // If consume has failed
-        @return _throw("Consuming token `:` failed.", 0); 
-      } 
+        @return _throw("Consuming token `:` failed.", 0);
+      }
 
       // Read value
       $read-value: _json-decode--value($source, $pointer);
@@ -58,7 +70,7 @@
     }
 
     @else {
-      @return _throw("Unexpected token in object literal.", $pointer);
+      @return _throw("Unexpected token `" + $char + "` in object literal.", $pointer);
     }
   }
 

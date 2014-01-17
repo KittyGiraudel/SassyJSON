@@ -1,20 +1,30 @@
-// Move pointer to `$token`
-@function _consume($source, $pointer, $token) { 
+// Move pointer to position of token
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// @param [string] $token: token to reach
+// --------------------------------------------------------------------------------
+// @throw "Expected $token; found {x}."
+// @throw "Expected $token but reached end of stream."
+// --------------------------------------------------------------------------------
+// @return [number|false] new pointer
+
+@function _consume($source, $pointer, $token) {
   $length: str-length($source);
   @while $pointer <= $length {
     $char: str-slice($source, $pointer, $pointer);
     $pointer: $pointer + 1;
-  
+
     @if $char == $token {
       @return $pointer;
     }
-    
+
     @else if $char == " " {
       // @continue;
     }
-    
+
     @else {
-      @return _throw("Expected `" + $token + "` found `" + $char + "`.", $pointer);
+      @return _throw("Expected `" + $token + "; ` found `" + $char + "`.", $pointer);
     }
   }
 

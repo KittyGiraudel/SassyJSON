@@ -1,4 +1,14 @@
-// JSON.parse a an array to a list
+// Parses a JSON encoded array
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected comma in array literal."
+// @throw "Missing comma in array literal."
+// @throw "Unterminated array literal."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, parsed list)
+
 @function _json-decode--list($source, $pointer) {
   $length: str-length($source);
   $list: ();
@@ -12,7 +22,7 @@
     $char: str-slice($source, $pointer, $pointer);
 
     @if $char == "]" {
-      @if not $needs-comma {
+      @if not $needs-comma and length($list) != 0 {
         @return _throw("Unexpected comma in array literal.", $pointer);
       }
 

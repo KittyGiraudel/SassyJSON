@@ -1,4 +1,14 @@
-// JSON.parse value
+// Delay parsing to type-specific function
+// according to found character
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token $token."
+// @throw "Empty JSON string."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, parsed value)
+
 @function _json-decode--value($source, $pointer) {
   $length: str-length($source);
 

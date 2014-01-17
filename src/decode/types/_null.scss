@@ -1,4 +1,12 @@
-// JSON.parse a null value
+// Parses a JSON encoded `null`
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token `n`."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, null)
+
 @function _json-decode--null($source, $pointer) {
   $length: str-length($source);
   @if $length - $pointer < 2

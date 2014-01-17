@@ -22,6 +22,7 @@
 
   @include it("should properly decode empty arrays") {
     @include should(expect(json-decode('[]')), to(equal(())));
+    @include should(expect(json-decode('[ ]')), to(equal(())));
   }
 
   @include it("should return false when arrays are invalid") {

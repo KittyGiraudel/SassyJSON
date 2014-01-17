@@ -1,6 +1,9 @@
-// JSON.stringify a list
-// @param $list: list to be stringified
-// @return [list]
+// Encode a list to JSON
+// --------------------------------------------------------------------------------
+// @param $list: list to be encoded
+// --------------------------------------------------------------------------------
+// @return [string] encoded list
+
 @function _json-encode--list($list) {
   $str: "";
   @each $item in $list {

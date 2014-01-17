@@ -29,6 +29,177 @@
 
   @return _throw("Expected `" + $token + "` but reached end of stream.", $pointer);
 }
+// JSON.parse value
+@function _json-decode--value($source, $pointer) {
+  $length: str-length($source);
+
+  @while $pointer <= $length {
+    $char: str-slice($source, $pointer, $pointer);
+    $pointer: $pointer + 1;
+
+    @if $char == '{' {
+      @return _json-decode--map($source, $pointer);
+    }
+    @else if $char == '[' {
+      @return _json-decode--list($source, $pointer);
+    }
+    @else if $char == 't' {
+      @return _json-decode--true($source, $pointer);
+    }
+    @else if $char == 'f' {
+      @return _json-decode--false($source, $pointer);
+    }
+    @else if $char == '"' {
+      @return _json-decode--string($source, $pointer);
+    }
+    @else if $char == 'n' {
+      @return _json-decode--null($source, $pointer);
+    }
+    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
+      @return _json-decode--number($source, $pointer);
+    }
+    @else if $char == ' ' {
+      // @continue;
+    }
+    @else {
+      @return _throw("Unexpected token `" + $char + "`.", $pointer);
+    }
+  }
+
+  @return _throw("Empty JSON string.", $pointer);
+}
+
+@function _pow($x, $n) {
+  $ret: 1;
+
+  @if $n >= 0 {
+    @for $i from 1 through $n {
+      $ret: $ret * $x;
+    }
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret / $x;
+    }
+  }
+
+  @return $ret;
+}
+
+// Strip special carriage return char
+// @param $string: string to parse
+// @param $char: char to strip
+// @return [string]
+@function _strip-special-char($string, $char) {
+  $cr: "
+  "; // Carriage return
+  
+  @while str-index($string, $char) and str-index($string, $char) > 0 {
+    $index: str-index($string, $char);
+    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($char));
+  }
+  
+  @return $string;
+}
+@function _find-integer($source, $pointer) {
+  $length: str-length($source);
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers:  0   1   2   3   4   5   6   7   8   9;
+  $result: 0;
+
+  @while $pointer <= $length {
+    $char: to-lower-case(str-slice($source, $pointer, $pointer));
+    $index: index($strings, $char);
+
+    @if $char == '-' {
+      // do nothing
+    }
+    @else if $index {
+      $number: nth($numbers, $index);
+      $result: $result * 10 + $number;
+    }
+    @else {
+      @if index('e' '.' ',' ']' '}' ' ', $char) {
+        @return $pointer, $result;
+      }
+      @return _throw("Unexpected character `" + $char + "`.", $pointer);
+    }
+
+    $pointer: $pointer + 1;
+  }
+
+  @return $pointer, $result;
+}
+
+@function _find-digits($source, $pointer) {
+  $length: str-length($source);
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers:  0   1   2   3   4   5   6   7   8   9;
+  $result: null;
+  $runs: 1;
+
+  @while $pointer <= $length {
+    $char: to-lower-case(str-slice($source, $pointer, $pointer));
+    $index: index($strings, $char);
+
+    @if $char == '.' {
+      // @continue;
+    }
+    @else if $index and $index > 0 {
+      $number: nth($numbers, $index);
+      $runs: $runs * 10;
+      $result: if($result == null, $number, $result * 10 + $number);
+    }
+    @else {
+      @if index('e' '.' ',' ']' '}' ' ', $char) {
+        @return $pointer, if($result != null, $result / $runs, $result);
+      }
+      @return _throw("Unexpected character `" + $char + "`.", $pointer);
+    }
+
+    $pointer: $pointer + 1;
+  }
+
+  @return $pointer, if($result != null, $result / $runs, $result);
+}
+
+@function _find-exponent($source, $pointer) {
+  $length: str-length($source);
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers:  0   1   2   3   4   5   6   7   8   9;
+  $result: null;
+  $minus: false;
+
+  @while $pointer <= $length {
+    $char: to-lower-case(str-slice($source, $pointer, $pointer));
+    $index: index($strings, $char);
+
+    @if $char == 'e' {
+      // @continue;
+    }
+    @else if $char == '-' {
+      $minus: true;
+    }
+    @else if $char == '+' {
+      $minus: false;
+    }
+    @else if $index and $index > 0 {
+      $number: nth($numbers, $index);
+      $result: if($result == null, $number, $result * 10 + $number);
+    }
+    @else {
+      @if not index(" ", ", ", "]", "}", $char) {
+        @return _throw("Unexpected character `" + $char + "`.", $pointer);
+      }
+
+      @return $pointer, if($minus and $result != null, $result * -1, $result);
+    }
+
+    $pointer: $pointer + 1;
+  }
+
+  @return $pointer, if($minus and $result != null, $result * -1, $result);
+}
+
 // JSON.parse a string
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
@@ -86,11 +257,7 @@
   @return ($pointer + 3, null);
 }
 
-// ----
-// Sass (v3.3.0.rc.2)
-// Compass (v1.0.0.alpha.17)
-// ----
-
+// JSON.parse a number
 @function _json-decode--number($source, $pointer) {
   $pointer: $pointer - 1; // Move back pointer to begininng of number
   $allowed: '-' '0' '1' '2' '3' '4' '5' '6' '7' '8' '9'; // Allowed characted to start with
@@ -143,46 +310,6 @@
   }
 
   @return ($pointer, if($minus, $result * -1, $result));
-}
-
-// JSON.parse value
-@function _json-decode--value($source, $pointer) {
-  $length: str-length($source);
-
-  @while $pointer <= $length {
-    $char: str-slice($source, $pointer, $pointer);
-    $pointer: $pointer + 1;
-
-    @if $char == '{' {
-      @return _json-decode--map($source, $pointer);
-    }
-    @else if $char == '[' {
-      @return _json-decode--list($source, $pointer);
-    }
-    @else if $char == 't' {
-      @return _json-decode--true($source, $pointer);
-    }
-    @else if $char == 'f' {
-      @return _json-decode--false($source, $pointer);
-    }
-    @else if $char == '"' {
-      @return _json-decode--string($source, $pointer);
-    }
-    @else if $char == 'n' {
-      @return _json-decode--null($source, $pointer);
-    }
-    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $char) {
-      @return _json-decode--number($source, $pointer);
-    }
-    @else if $char == ' ' {
-      // @continue;
-    }
-    @else {
-      @return _throw("Unexpected token `" + $char + "`.", $pointer);
-    }
-  }
-
-  @return _throw("Empty JSON string.", $pointer);
 }
 
 // JSON.parse a an array to a list

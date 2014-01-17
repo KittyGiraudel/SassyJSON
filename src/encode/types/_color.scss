@@ -1,6 +1,9 @@
-// JSON.stringify a color
-// @param $color: color to be stringified
-// @return [color]
+// Encode a color to JSON
+// --------------------------------------------------------------------------------
+// @param $color: color to be encoded
+// --------------------------------------------------------------------------------
+// @return [string] encoded color
+
 @function _json-encode--color($color) {
   @return _proof-quote($color);
 }

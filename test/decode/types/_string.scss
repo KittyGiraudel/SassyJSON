@@ -10,4 +10,8 @@
     @include should(expect(type-of(json-decode('"test with inner spaces"'))), to(equal('string')));
     @include should(expect(type-of(json-decode('"   test with outer spaces   "'))), to(equal('string')));
   }
+
+  @include it("should return false if no end of string is found") {
+    @include should(expect(json-decode('"test')), to(equal(false)));
+  }
 }

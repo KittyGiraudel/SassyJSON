@@ -1,6 +1,11 @@
-// JSON.parse a string
-// @param $json: json string to parse
-// @return literal
+// Parse a JSON string
+// --------------------------------------------------------------------------------
+// @param $json: JSON string to parse
+// --------------------------------------------------------------------------------
+// @throw "Input string may not be null"
+// --------------------------------------------------------------------------------
+// @return [literal]
+
 @function json-decode($json) {
   $value: null;
   $pointer: 1;

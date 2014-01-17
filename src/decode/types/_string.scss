@@ -1,4 +1,12 @@
-// JSON.parse a string
+// Parses a JSON encoded string
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unterminated string."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, parsed string)
+
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
   $temp: str-slice($source, $pointer);
@@ -9,9 +17,9 @@
   @if $end == 0 {
     @return _throw("Unterminated string.", $pointer);
   }
-  
+
   @else if $end > 1 {
-    $string: str-slice($temp, 1, $end - 1); 
+    $string: str-slice($temp, 1, $end - 1);
     $string: _strip-special-char($string, "\r");
     $string: _strip-special-char($string, "\n");
   }

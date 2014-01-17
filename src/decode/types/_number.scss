@@ -1,7 +1,12 @@
-// ----
-// Sass (v3.3.0.rc.2)
-// Compass (v1.0.0.alpha.17)
-// ----
+// Parses a JSON encoded number
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token $token."
+// @throw "Unexpected end of stream."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, parsed number)
 
 @function _json-decode--number($source, $pointer) {
   $pointer: $pointer - 1; // Move back pointer to begininng of number
@@ -29,7 +34,7 @@
     $digits:  nth($find-digits, 2);
 
     @if $digits == null { // Empty digits, throw error
-      @return _throw("Unexpected end of input.", $pointer);
+      @return _throw("Unexpected end of stream.", $pointer);
     }
     @else if $digits == false { // Error occured, return it
       @return $find-digits;
@@ -45,7 +50,7 @@
     $exponent: nth($find-exponent, 2);
 
     @if $exponent == null { // Empty exponent, throw error
-      @return _throw("Unexpected end of input.", $pointer);
+      @return _throw("Unexpected end of stream.", $pointer);
     }
     @else if $exponent == false { // Error occured, return it
       @return $find-exponent;

@@ -1,6 +1,9 @@
 // Proof quote a value
+// --------------------------------------------------------------------------------
 // @param $value: value to be quoted
-// @return [string]
+// --------------------------------------------------------------------------------
+// @return [string] quoted value
+
 @function _proof-quote($value) {
   @return '"' + $value + '"';
 }

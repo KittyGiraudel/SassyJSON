@@ -1,4 +1,12 @@
-// JSON.parse a true bool
+// Parses a JSON encoded `true`
+// --------------------------------------------------------------------------------
+// @param [string] $source: JSON complete source
+// @param [number] $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token `t`."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, true)
+
 @function _json-decode--true($source, $pointer) {
   $length: str-length($source);
   @if $length - $pointer < 2
@@ -10,7 +18,15 @@
   @return ($pointer + 3, true);
 }
 
-// JSON.parse a false bool
+// Parses a JSON encoded `false`
+// --------------------------------------------------------------------------------
+// @param $source: JSON complete source
+// @param $pointer: current pointer
+// --------------------------------------------------------------------------------
+// @throw "Unexpected token `f`."
+// --------------------------------------------------------------------------------
+// @return [list|false] (new pointer, false)
+
 @function _json-decode--false($source, $pointer) {
   $length: str-length($source);
   @if $length - $pointer < 3
