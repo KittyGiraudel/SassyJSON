@@ -4,31 +4,55 @@
 // ----
 
 @function _json-decode--number($source, $pointer) {
-  $pointer: $pointer - 1;
-  $minus: str-slice($source, $pointer, $pointer) == '-';
+  $pointer: $pointer - 1; // Move back pointer to begininng of number
+  $allowed: '-' '0' '1' '2' '3' '4' '5' '6' '7' '8' '9'; // Allowed characted to start with
+  $first: str-slice($source, $pointer, $pointer); // First character of the number
+  $minus: $first == '-'; // Is it negative?
+
+  // Early check for errors
+  @if not index($allowed, $first) {
+    @return _throw("Unexpected token `" + $first + "`.", $pointer);
+  }
 
   // Find the integer part
-  $_: _find-integer($source, $pointer);
-  $pointer: nth($_, 1);
-  $result: nth($_, 2);
-  @if not $result { @return $_; }
+  $find-integer: _find-integer($source, $pointer);
+  $pointer: nth($find-integer, 1);
+  $result:  nth($find-integer, 2);
+  @if not $result { // Error occured
+    @return $find-integer;
+  }
 
   // Find digits
-  @if str-slice($source, $pointer, $pointer) == '.' {
-    $_: _find-digits($source, $pointer);
-    $pointer: nth($_, 1);
-    $result: $result + nth($_, 2);
-    @if not $result { @return $_; }
+  @if to-lower-case(str-slice($source, $pointer, $pointer)) == '.' {
+    $find-digits: _find-digits($source, $pointer);
+    $pointer: nth($find-digits, 1);
+    $digits:  nth($find-digits, 2);
+
+    @if $digits == null { // Empty digits, throw error
+      @return _throw("Unexpected end of input.", $pointer);
+    }
+    @else if $digits == false { // Error occured, return it
+      @return $find-digits;
+    }
+
+    $result: $result + $digits;
   }
 
   // Find exponent
   @if to-lower-case(str-slice($source, $pointer, $pointer)) == 'e' {
-    $_: _find-exponent($source, $pointer);
-    @if not $_ { @return false; }
-    $pointer: nth($_, 1);
-    $result: $result * _pow(10, nth($_, 2));
-    @if not $result { @return $_; }
+    $find-exponent: _find-exponent($source, $pointer);
+    $pointer:  nth($find-exponent, 1);
+    $exponent: nth($find-exponent, 2);
+
+    @if $exponent == null { // Empty exponent, throw error
+      @return _throw("Unexpected end of input.", $pointer);
+    }
+    @else if $exponent == false { // Error occured, return it
+      @return $find-exponent;
+    }
+
+    $result: $result * _pow(10, $exponent);
   }
 
-  @return $pointer, if($minus, $result * -1, $result);
+  @return ($pointer, if($minus, $result * -1, $result));
 }

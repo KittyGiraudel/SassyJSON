@@ -2,7 +2,7 @@
   $length: str-length($source);
   $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
   $numbers:  0   1   2   3   4   5   6   7   8   9;
-  $result: 0;
+  $result: null;
   $minus: false;
 
   @while $pointer <= $length {
@@ -20,17 +20,18 @@
     }
     @else if $index and $index > 0 {
       $number: nth($numbers, $index);
-      $result: $result * 10 + $number;
+      $result: if($result == null, $number, $result * 10 + $number);
     }
     @else {
       @if not index(" ", ", ", "]", "}", $char) {
         @return _throw("Unexpected character `" + $char + "`.", $pointer);
       }
-      @return $pointer, if($minus, $result * -1, $result);
+
+      @return $pointer, if($minus and $result != null, $result * -1, $result);
     }
 
     $pointer: $pointer + 1;
   }
 
-  @return $pointer, if($minus, $result * -1, $result);
+  @return $pointer, if($minus and $result != null, $result * -1, $result);
 }
