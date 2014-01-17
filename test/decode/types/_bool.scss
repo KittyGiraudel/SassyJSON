@@ -1,7 +1,7 @@
 @include describe("The json-decode--bool function") {
 
   @include it("should work for true with _json-decode--true"){
-   @include should(expect(_json-decode--true('rue', 1)), to(equal((4, true))));
+   @include should(expect(_json-decode--true('true', 2)), to(equal((5, true))));
   }
 
   @include it("should give an error if something is wrong"){
@@ -9,7 +9,7 @@
   }
 
   @include it("should work for false with _json-decode--false"){
-   @include should(expect(_json-decode--false('alse', 1)), to(equal((5, false))));
+   @include should(expect(_json-decode--false('false', 2)), to(equal((6, false))));
   }
 
   @include it("should properly decode booleans to bool type") {

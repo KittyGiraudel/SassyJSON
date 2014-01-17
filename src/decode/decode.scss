@@ -1,8 +1,12 @@
 // Helpers
-@import "helpers/throw";
-@import "helpers/consume";
-@import "helpers/value";
-@import "helpers/strip-special-char";
+@import "helpers/throw"; // All
+@import "helpers/consume"; // Map
+@import "helpers/pow"; // Number
+@import "helpers/find-digits"; // Number
+@import "helpers/find-integer"; // Number
+@import "helpers/find-exponent"; // Number
+@import "helpers/value"; // All
+@import "helpers/strip-special-char"; // String
 
 // JSON.stringify
 // Type specific functions

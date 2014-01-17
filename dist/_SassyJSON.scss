@@ -1,4 +1,4 @@
-/*! sassyjson - v0.0.2 - 2014-01-16 */
+/*! sassyjson - v0.0.2 - 2014-01-17 */
 // Logs an error at `$pointer` with `$string` message
 // @param $string: error message
 // @param $position: pointer position
@@ -29,34 +29,25 @@
 
   @return _throw("Expected `" + $token + "` but reached end of stream.", $pointer);
 }
-@function _strip-special-char($string, $char) {
-  $cr: "
-  "; // Carriage return
-  
-  @while str-index($string, $char) and str-index($string, $char) > 0 {
-    $index: str-index($string, $char);
-    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($char));
-  }
-  
-  @return $string;
-}
-
 // JSON.parse a string
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
   $temp: str-slice($source, $pointer);
-  $end-string: str-index($temp, '"');
+  $end: str-index($temp, '"');
+  $string: "";
 
   // If no end is found
-  @if $end-string == 0 {
+  @if $end == 0 {
     @return _throw("Unterminated string.", $pointer);
   }
   
-  $string: str-slice($temp, 1, $end-string - 1); 
-  $string: _strip-special-char($string, "\r");
-  $string: _strip-special-char($string, "\n");
-  
-  @return ($pointer + $end-string, $string);
+  @else if $end > 1 {
+    $string: str-slice($temp, 1, $end - 1); 
+    $string: _strip-special-char($string, "\r");
+    $string: _strip-special-char($string, "\n");
+  }
+
+  @return ($pointer + $end, $string);
 }
 // JSON.parse a true bool
 @function _json-decode--true($source, $pointer) {
@@ -95,51 +86,39 @@
   @return ($pointer + 3, null);
 }
 
-// JSON.parse a number
+// ----
+// Sass (v3.3.0.rc.2)
+// Compass (v1.0.0.alpha.17)
+// ----
+
 @function _json-decode--number($source, $pointer) {
-  $length: str-length($source);
-  $pointer: $pointer - 1; // Roll back pointer
-  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
-  $numbers:  0   1   2   3   4   5   6   7   8   9;
+  $pointer: $pointer - 1;
+  $minus: str-slice($source, $pointer, $pointer) == '-';
 
-  $result: 0;
-  $divider: 0;
-  $minus: false;
+  // Find the integer part
+  $_: _find-integer($source, $pointer);
+  $pointer: nth($_, 1);
+  $result: nth($_, 2);
+  @if not $result { @return $_; }
 
-  @while $pointer <= $length {
-    $char: str-slice($source, $pointer, $pointer);
-    $index: index($strings, $char);
-    $pointer: $pointer + 1;
-
-    @if $char == '-' { 
-      $minus: true 
-    }
-    @else if $char == '.' { 
-      $divider: 1 
-    }
-    @else {
-      $number: nth($numbers, $index);
-
-      @if $divider == 0 {
-        $result: $result * 10;
-      }
-      @else {
-        $divider: $divider * 10;
-        $number: $number / $divider;
-      }
-
-      $result: $result + $number;
-      $next: str-slice($source, $pointer, $pointer);
-      @if $pointer <= $length
-      and not index($strings, $next)
-      and $next != '.' {
-        @return ($pointer, if($minus, $result * -1, $result));
-      }
-    }
-
+  // Find digits
+  @if str-slice($source, $pointer, $pointer) == '.' {
+    $_: _find-digits($source, $pointer);
+    $pointer: nth($_, 1);
+    $result: $result + nth($_, 2);
+    @if not $result { @return $_; }
   }
 
-  @return ($pointer, if($minus, $result * -1, $result));
+  // Find exponent
+  @if to-lower-case(str-slice($source, $pointer, $pointer)) == 'e' {
+    $_: _find-exponent($source, $pointer);
+    @if not $_ { @return false; }
+    $pointer: nth($_, 1);
+    $result: $result * _pow(10, nth($_, 2));
+    @if not $result { @return $_; }
+  }
+
+  @return $pointer, if($minus, $result * -1, $result);
 }
 
 // JSON.parse value
