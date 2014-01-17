@@ -5,5 +5,5 @@
 // @return [string] encoded number
 
 @function _json-encode--number($number) {
-  @return $number;
+  @return if(unitless($number), $number, _proof-quote($number));
 }
