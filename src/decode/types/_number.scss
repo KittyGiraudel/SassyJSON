@@ -23,7 +23,7 @@
   }
 
   // Find digits
-  @if to-lower-case(str-slice($source, $pointer, $pointer)) == '.' {
+  @if str-slice($source, $pointer, $pointer) == '.' {
     $find-digits: _find-digits($source, $pointer);
     $pointer: nth($find-digits, 1);
     $digits:  nth($find-digits, 2);

@@ -1,9 +1,40 @@
-@include describe("The json-decode--number function") {
-  @include it("should properly decode integers") {
-    $test-1: json-decode('0');
-    $test-2: json-decode('10');
-    $test-3: json-decode('123456789');
+@include describe("The _json-decode--number function") {
+    $test-1:  json-decode('0');
+    $test-2:  json-decode('10');
+    $test-3:  json-decode('123456789');
+    $test-4:  json-decode('-0');
+    $test-5:  json-decode('-10');
+    $test-6:  json-decode('-123456789');
+    $test-7:  json-decode('0.001');
+    $test-8:  json-decode('-0.001');
+    $test-9:  json-decode('1.5');
+    $test-10: json-decode('-1.5');
+    $test-11: json-decode('1e0');
+    $test-12: json-decode('1e1');
+    $test-13: json-decode('1e2');
+    $test-14: json-decode('1e+0');
+    $test-15: json-decode('1e+1');
+    $test-16: json-decode('1e+2');
+    $test-17: json-decode('1E0');
+    $test-18: json-decode('1E1');
+    $test-19: json-decode('1E2');
+    $test-20: json-decode('1E+0');
+    $test-21: json-decode('1E+1');
+    $test-22: json-decode('1E+2');
+    $test-23: json-decode('1e-0');
+    $test-24: json-decode('1e-1');
+    $test-25: json-decode('1e-2');
+    $test-26: json-decode('1E-0');
+    $test-27: json-decode('1E-1');
+    $test-28: json-decode('1E-2');
+    $test-29: json-decode('  1  ');
+    $test-30: json-decode('1e');
+    $test-31: json-decode('1e+');
+    $test-32: json-decode('1e-');
+    $test-33: json-decode('.1');
+    $test-34: json-decode('1.');
 
+  @include it("should properly decode integers") {
     @include should(expect($test-1), to(equal(0)));
     @include should(expect($test-2), to(equal(10)));
     @include should(expect($test-3), to(equal(123456789)));
@@ -14,106 +45,77 @@
   }
 
   @include it("should properly decode negative numbers") {
-    $test-1: json-decode('-0');
-    $test-2: json-decode('-10');
-    $test-3: json-decode('-123456789');
+    @include should(expect($test-4), to(equal(0)));
+    @include should(expect($test-5), to(equal(-10)));
+    @include should(expect($test-6), to(equal(-123456789)));
 
-    @include should(expect($test-1), to(equal(0)));
-    @include should(expect($test-2), to(equal(-10)));
-    @include should(expect($test-3), to(equal(-123456789)));
-
-    @include should(expect(type-of($test-1)), to(equal('number')));
-    @include should(expect(type-of($test-2)), to(equal('number')));
-    @include should(expect(type-of($test-3)), to(equal('number')));
-  }
-
-  @include it("should properly decode numbers with digits") {
-    $test-1: json-decode('0.001');
-    $test-2: json-decode('-0.001');
-    $test-3: json-decode('1.5');
-    $test-4: json-decode('-1.5');
-
-    @include should(expect($test-1), to(equal(0.001)));
-    @include should(expect($test-2), to(equal(-0.001)));
-    @include should(expect($test-3), to(equal(1.5)));
-    @include should(expect($test-4), to(equal(-1.5)));
-
-    @include should(expect(type-of($test-1)), to(equal('number')));
-    @include should(expect(type-of($test-2)), to(equal('number')));
-    @include should(expect(type-of($test-3)), to(equal('number')));
-    @include should(expect(type-of($test-4)), to(equal('number')));
-  }
-
-  @include it("should properly decode numbers with exponents") {
-    $test-1:  json-decode('1e0');
-    $test-2:  json-decode('1e1');
-    $test-3:  json-decode('1e2');
-    $test-4:  json-decode('1e+0');
-    $test-5:  json-decode('1e+1');
-    $test-6:  json-decode('1e+2');
-    $test-7:  json-decode('1E0');
-    $test-8:  json-decode('1E1');
-    $test-9:  json-decode('1E2');
-    $test-10: json-decode('1E+0');
-    $test-11: json-decode('1E+1');
-    $test-12: json-decode('1E+2');
-
-    @include should(expect($test-1), to(equal(1)));
-    @include should(expect($test-2), to(equal(10)));
-    @include should(expect($test-3), to(equal(100)));
-    @include should(expect($test-4), to(equal(1)));
-    @include should(expect($test-5), to(equal(10)));
-    @include should(expect($test-6), to(equal(100)));
-    @include should(expect($test-7), to(equal(1)));
-    @include should(expect($test-8), to(equal(10)));
-    @include should(expect($test-9), to(equal(100)));
-    @include should(expect($test-10), to(equal(1)));
-    @include should(expect($test-11), to(equal(10)));
-    @include should(expect($test-12), to(equal(100)));
-
-    @include should(expect(type-of($test-1)), to(equal('number')));
-    @include should(expect(type-of($test-2)), to(equal('number')));
-    @include should(expect(type-of($test-3)), to(equal('number')));
     @include should(expect(type-of($test-4)), to(equal('number')));
     @include should(expect(type-of($test-5)), to(equal('number')));
     @include should(expect(type-of($test-6)), to(equal('number')));
+  }
+
+  @include it("should properly decode numbers with digits") {
+    @include should(expect($test-7), to(equal(0.001)));
+    @include should(expect($test-8), to(equal(-0.001)));
+    @include should(expect($test-9), to(equal(1.5)));
+    @include should(expect($test-10), to(equal(-1.5)));
+
     @include should(expect(type-of($test-7)), to(equal('number')));
     @include should(expect(type-of($test-8)), to(equal('number')));
     @include should(expect(type-of($test-9)), to(equal('number')));
     @include should(expect(type-of($test-10)), to(equal('number')));
+  }
+
+  @include it("should properly decode numbers with exponents") {
+    @include should(expect($test-11), to(equal(1)));
+    @include should(expect($test-12), to(equal(10)));
+    @include should(expect($test-13), to(equal(100)));
+    @include should(expect($test-14), to(equal(1)));
+    @include should(expect($test-15), to(equal(10)));
+    @include should(expect($test-16), to(equal(100)));
+    @include should(expect($test-17), to(equal(1)));
+    @include should(expect($test-18), to(equal(10)));
+    @include should(expect($test-19), to(equal(100)));
+    @include should(expect($test-20), to(equal(1)));
+    @include should(expect($test-21), to(equal(10)));
+    @include should(expect($test-22), to(equal(100)));
+
     @include should(expect(type-of($test-11)), to(equal('number')));
     @include should(expect(type-of($test-12)), to(equal('number')));
+    @include should(expect(type-of($test-13)), to(equal('number')));
+    @include should(expect(type-of($test-14)), to(equal('number')));
+    @include should(expect(type-of($test-15)), to(equal('number')));
+    @include should(expect(type-of($test-16)), to(equal('number')));
+    @include should(expect(type-of($test-17)), to(equal('number')));
+    @include should(expect(type-of($test-18)), to(equal('number')));
+    @include should(expect(type-of($test-19)), to(equal('number')));
+    @include should(expect(type-of($test-20)), to(equal('number')));
+    @include should(expect(type-of($test-21)), to(equal('number')));
+    @include should(expect(type-of($test-22)), to(equal('number')));
   }
 
   @include it("should properly decode numbers with negative exponents") {
-    $test-1: json-decode('1e-0');
-    $test-2: json-decode('1e-1');
-    $test-3: json-decode('1e-2');
-    $test-4: json-decode('1E-0');
-    $test-5: json-decode('1E-1');
-    $test-6: json-decode('1E-2');
+    @include should(expect($test-23), to(equal(1)));
+    @include should(expect($test-24), to(equal(.1)));
+    @include should(expect($test-25), to(equal(.01)));
+    @include should(expect($test-26), to(equal(1)));
+    @include should(expect($test-27), to(equal(.1)));
+    @include should(expect($test-28), to(equal(.01)));
 
-    @include should(expect($test-1), to(equal(1)));
-    @include should(expect($test-2), to(equal(.1)));
-    @include should(expect($test-3), to(equal(.01)));
-    @include should(expect($test-4), to(equal(1)));
-    @include should(expect($test-5), to(equal(.1)));
-    @include should(expect($test-6), to(equal(.01)));
-
-    @include should(expect(type-of($test-1)), to(equal('number')));
-    @include should(expect(type-of($test-2)), to(equal('number')));
-    @include should(expect(type-of($test-3)), to(equal('number')));
-    @include should(expect(type-of($test-4)), to(equal('number')));
-    @include should(expect(type-of($test-5)), to(equal('number')));
-    @include should(expect(type-of($test-6)), to(equal('number')));
+    @include should(expect(type-of($test-23)), to(equal('number')));
+    @include should(expect(type-of($test-24)), to(equal('number')));
+    @include should(expect(type-of($test-25)), to(equal('number')));
+    @include should(expect(type-of($test-26)), to(equal('number')));
+    @include should(expect(type-of($test-27)), to(equal('number')));
+    @include should(expect(type-of($test-28)), to(equal('number')));
   }
 
   @include it("should return false whenever the value is not valid JSON") {
-    @include should(expect(json-decode(' 1 ')), to(equal(false)));
-    @include should(expect(json-decode('1e')), to(equal(false)));
-    @include should(expect(json-decode('1e+')), to(equal(false)));
-    @include should(expect(json-decode('1e-')), to(equal(false)));
-    @include should(expect(json-decode('10.')), to(equal(false)));
-    @include should(expect(json-decode('.10')), to(equal(false)));
+    @include should(expect($test-29), to(equal(false)));
+    @include should(expect($test-30), to(equal(false)));
+    @include should(expect($test-31), to(equal(false)));
+    @include should(expect($test-32), to(equal(false)));
+    @include should(expect($test-33), to(equal(false)));
+    @include should(expect($test-34), to(equal(false)));
   }
 }
