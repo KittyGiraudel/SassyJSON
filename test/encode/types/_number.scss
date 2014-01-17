@@ -2,21 +2,27 @@
   @include it("should return a number if input is unitless") {
     @include should(expect(_json-encode--number(42)), to(equal(42)));
     @include should(expect(_json-encode--number(13.37)), to(equal(13.37)));
+    @include should(expect(_json-encode--number(-42)), to(equal(-42)));
+    @include should(expect(_json-encode--number(-13.37)), to(equal(-13.37)));
+  }
 
+  @include it("should return encode a number to number type") {
     @include should(expect(type-of(_json-encode--number(42))), to(equal('number')));
-    @include should(expect(type-of(_json-encode--number(13.37))), to(equal('number')));
+    @include should(expect(type-of(_json-encode--number(13.37))), to(equal('number')));    
+    @include should(expect(type-of(_json-encode--number(-42))), to(equal('number')));
+    @include should(expect(type-of(_json-encode--number(-13.37))), to(equal('number')));
   }
 
   @include it("should return a string if input has a unit") {
-    $test-1: _json-encode--number(1%);
-    $test-2: _json-encode--number(1in);
-    $test-3: _json-encode--number(1px);
-    $test-4: _json-encode--number(1em);
-    $test-5: _json-encode--number(1mm);
-    $test-6: _json-encode--number(1cm);
-    $test-7: _json-encode--number(1pt);
-    $test-8: _json-encode--number(1pc);
-    $test-9: _json-encode--number(1ex);
+    $test-1:  _json-encode--number(1%);
+    $test-2:  _json-encode--number(1in);
+    $test-3:  _json-encode--number(1px);
+    $test-4:  _json-encode--number(1em);
+    $test-5:  _json-encode--number(1mm);
+    $test-6:  _json-encode--number(1cm);
+    $test-7:  _json-encode--number(1pt);
+    $test-8:  _json-encode--number(1pc);
+    $test-9:  _json-encode--number(1ex);
     $test-10: _json-encode--number(1ch);
     $test-11: _json-encode--number(1vh);
     $test-12: _json-encode--number(1vw);
@@ -25,15 +31,15 @@
     $test-15: _json-encode--number(1vmax);
     $test-16: _json-encode--number(1pica);
 
-    @include should(expect($test-1), to(equal('"1%"')));
-    @include should(expect($test-2), to(equal('"1in"')));
-    @include should(expect($test-3), to(equal('"1px"')));
-    @include should(expect($test-4), to(equal('"1em"')));
-    @include should(expect($test-5), to(equal('"1mm"')));
-    @include should(expect($test-6), to(equal('"1cm"')));
-    @include should(expect($test-7), to(equal('"1pt"')));
-    @include should(expect($test-8), to(equal('"1pc"')));
-    @include should(expect($test-9), to(equal('"1ex"')));
+    @include should(expect($test-1 ), to(equal('"1%"')));
+    @include should(expect($test-2 ), to(equal('"1in"')));
+    @include should(expect($test-3 ), to(equal('"1px"')));
+    @include should(expect($test-4 ), to(equal('"1em"')));
+    @include should(expect($test-5 ), to(equal('"1mm"')));
+    @include should(expect($test-6 ), to(equal('"1cm"')));
+    @include should(expect($test-7 ), to(equal('"1pt"')));
+    @include should(expect($test-8 ), to(equal('"1pc"')));
+    @include should(expect($test-9 ), to(equal('"1ex"')));
     @include should(expect($test-10), to(equal('"1ch"')));
     @include should(expect($test-11), to(equal('"1vh"')));
     @include should(expect($test-12), to(equal('"1vw"')));
@@ -42,15 +48,15 @@
     @include should(expect($test-15), to(equal('"1vmax"')));
     @include should(expect($test-16), to(equal('"1pica"')));
 
-    @include should(expect(type-of($test-1)), to(equal("string")));
-    @include should(expect(type-of($test-2)), to(equal("string")));
-    @include should(expect(type-of($test-3)), to(equal("string")));
-    @include should(expect(type-of($test-4)), to(equal("string")));
-    @include should(expect(type-of($test-5)), to(equal("string")));
-    @include should(expect(type-of($test-6)), to(equal("string")));
-    @include should(expect(type-of($test-7)), to(equal("string")));
-    @include should(expect(type-of($test-8)), to(equal("string")));
-    @include should(expect(type-of($test-9)), to(equal("string")));
+    @include should(expect(type-of($test-1 )), to(equal("string")));
+    @include should(expect(type-of($test-2 )), to(equal("string")));
+    @include should(expect(type-of($test-3 )), to(equal("string")));
+    @include should(expect(type-of($test-4 )), to(equal("string")));
+    @include should(expect(type-of($test-5 )), to(equal("string")));
+    @include should(expect(type-of($test-6 )), to(equal("string")));
+    @include should(expect(type-of($test-7 )), to(equal("string")));
+    @include should(expect(type-of($test-8 )), to(equal("string")));
+    @include should(expect(type-of($test-9 )), to(equal("string")));
     @include should(expect(type-of($test-10)), to(equal("string")));
     @include should(expect(type-of($test-11)), to(equal("string")));
     @include should(expect(type-of($test-12)), to(equal("string")));
