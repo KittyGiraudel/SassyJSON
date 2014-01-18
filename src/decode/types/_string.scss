@@ -14,7 +14,7 @@
   $string: "";
 
   // If no end is found
-  @if $end == 0 {
+  @if not $end or $end == 0 {
     @return _throw("Unterminated string.", $pointer);
   }
 

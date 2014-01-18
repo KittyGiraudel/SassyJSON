@@ -5,32 +5,32 @@
 // @return [number] position of the last non escaped quote
 
 @function _find-ending-quote($string){
-  $backslash: str-slice("\\", 1, 1);
-  $search-str: $string;
+  $backslash: str-slice("\\", 1, 1); // Dirty hack to have a single backslash
+  $search: $string;
 
   $end-quote-found: false;
-  $not-found: true;
-  $real-position: 0;
+  $position: 0;
 
 
   @while not $end-quote-found {
-    $index: str-index($search-str, '"');
+    $index: str-index($search, '"');
 
-    @if $index == 0 {
-      @return 0;
-    }
-    @else{
-      $real-position: $real-position + $index;
+    @if not $index or $index == 0 { // No end of string found
+      @return $index;
     }
 
-    $char-before-quote: str-slice($search-str, $index - 1, $index - 1);
+    @else {
+      $position: $position + $index;
+    }
 
-    @if $char-before-quote != $backslash{
+    $char-before-quote: str-slice($search, $index - 1, $index - 1);
+
+    @if $char-before-quote != $backslash {
       $end-quote-found: true;
     }
 
-    $search-str: str-slice( $search-str, $index + 1);
+    $search: str-slice($search, $index + 1);
   }
 
-  @return $real-position;
+  @return $position;
 }
