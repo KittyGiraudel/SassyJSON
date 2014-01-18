@@ -23,10 +23,14 @@
 // Decoder
 
   //Helper
-  @import "decode/helpers/consume";
-  @import "decode/helpers/value";
-  @import "decode/helpers/throw";
-  @import "decode/helpers/pow";
+  @import "decode/helpers/map/consume";
+  @import "decode/helpers/all/value";
+  @import "decode/helpers/all/throw";
+  @import "decode/helpers/number/pow";
+  @import "decode/helpers/color/hex-to-dec";
+  @import "decode/helpers/color/hex";
+  @import "decode/helpers/color/rgb";
+  @import "decode/helpers/color/hsl";
 
   //Types
   @import "decode/types/string";

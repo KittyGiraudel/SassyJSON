@@ -19,6 +19,7 @@
       $frags: append($frags, "");
     }
     @else if $token == ')' {
+      @if length($frags) != if($is-alpha, 4, 3) { @return $string; } // Parsing error
       $red: _get-color-value(nth($frags, 1));
       $green: _get-color-value(nth($frags, 2));
       $blue: _get-color-value(nth($frags, 3));
@@ -28,10 +29,9 @@
       }
 
       @if $is-alpha {
+        @if length($frags) != 4 { @return $string; } // No alpha channel found
         $alpha: _get-color-value(nth($frags, 4));
-        @if not $alpha {
-          @return $string;
-        }
+        @if not $alpha { @return $string; } // Error parsing alpha channel
         @return rgba($red, $green, $blue, $alpha);
       }
 
@@ -41,4 +41,6 @@
       $frags: set-nth($frags, length($frags), nth($frags, length($frags)) + $token);
     }
   } 
+
+  @return $string;
 }
