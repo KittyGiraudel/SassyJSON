@@ -30,7 +30,7 @@ All you need is a clean version of Sass 3.3. Otherwise it's just pure Sass madne
 
   * [NodeJS](http://nodejs.org)
   * [Ruby](https://www.ruby-lang.org/)
-  * Sass 3.3 via `gem instal sass --pre`
+  * Sass 3.3 via `gem instals sass --pre`
   * `grunt-cli` via `npm install -g grunt-cli`
 
 ### How to
