@@ -29,7 +29,7 @@
   }
   
   $number: nth(_json-decode--number($number, 2), 2);
-  $index: index($strings, $unit);
+  $index: index($strings, to-lower-case($unit));
 
   @if $index and $index > 0 {
     @return $number * nth($units, $index);

@@ -245,4 +245,15 @@
     @include should(expect(type-of(json-decode('"yellow"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"yellowgreen"'))), to(equal('color')));
   }
+
+  @include it("should decode properly when caps are used") {   
+    @include should(expect(type-of(json-decode('"BLACK"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"RGB(100, 100, 100)"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"42PX"'))), to(equal('number')));
+  }
+
+  @include it("should decode properly when weird spaces are used") {   
+    @include should(expect(type-of(json-decode('"rgb( 100 , 100 , 100 )"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"hsl( 100 , 100 , 100 )"'))), to(equal('color')));
+  }
 }
