@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color] rgb(a) color
+// @return [color|string] string or rgb(a) color depending on the match
 
 @function _from-rgb($string) {
   $frags: ();
