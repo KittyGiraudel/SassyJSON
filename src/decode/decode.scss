@@ -15,8 +15,7 @@
 @import "helpers/string/length";
 @import "helpers/string/strip-token";
 
-// JSON.stringify
-// Type specific functions
+// Type specific decoding functions
 @import "types/bool";
 @import "types/null";
 @import "types/list";
