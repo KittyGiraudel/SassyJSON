@@ -58,41 +58,91 @@ module.exports = function(grunt) {
 
     // Sass
     sass: {
-      test: {
-        options: {
-          style: 'expanded',
-          quiet: 'true',
-          loadPath: './node_modules/bootcamp/dist' // or './bower_components/bootcamp/dist'
-        },
+      options: {
+        style: 'expanded',
+        quiet: 'true',
+        loadPath: './node_modules/bootcamp/dist' // or './bower_components/bootcamp/dist'
+      },
+      all: {
         files: {
-          './tmp/results.css': './test/test.scss'
+          './tmp/all.css': './test/test.scss'
+        }
+      },
+      decoder: {
+        files: {
+          './tmp/decode.css': './test/decode/test.scss'
+        }
+      },
+      encoder: {
+        files: {
+          './tmp/encode.css': './test/encode/test.scss'
         }
       }
     },
 
     // Bootcamp
     bootcamp: {
-      test: {
+      all: {
         files: {
-          src: ['./tmp/results.css']
+          src: ['./tmp/all.css']
+        }
+      },
+      decoder:{
+        files: {
+          src: ['./tmp/decode.css']
+        }
+      },
+      encoder:{
+        files: {
+          src: ['./tmp/encode.css']
         }
       }
     },
 
     // Watch
     watch: {
-      dist: {
+      all: {
         files: [
                 './test/**/*.scss',
                 './src/**/*.scss'
                 ],
         tasks: ['test']
+      },
+      decoder: {
+        files: [
+                './test/decode/**/*.scss',
+                './src/**/*.scss'
+                ],
+        tasks: ['test:decoder']
+      },
+      encoder: {
+        files: [
+                './test/encode/**/*.scss',
+                './src/**/*.scss'
+                ],
+        tasks: ['test:encode']
       }
     }
   });
 
   // Tasks
-  grunt.registerTask('test', ['sass', 'bootcamp']);
-  grunt.registerTask('dev', ['test', 'watch']);
-  grunt.registerTask('build', ['test', 'concat']);
+  grunt.registerTask('test', function (arg){
+    arg = arg || "all";
+
+    var tasks = ['sass', 'bootcamp'].map(function (item){
+      return item + ":" + arg;
+    });
+
+    grunt.task.run(tasks);
+  });
+  grunt.registerTask('dev', function (arg ){
+    arg = arg || "all";
+
+    var tasks = ['test', 'watch'].map(function (item){
+      return item + ":" + arg;
+    });
+
+    grunt.task.run(tasks);
+  });
+  grunt.registerTask('build', ['test:all', 'concat']);
 };
