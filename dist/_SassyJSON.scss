@@ -218,7 +218,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color] hsl(a) color
+// @return [color|string] string or hsl(a) color, depending on the match
 
 @function _from-hsl($string) {
   $frags: ();
@@ -262,7 +262,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color] rgb(a) color
+// @return [color|string] string or rgb(a) color depending on the match
 
 @function _from-rgb($string) {
   $frags: ();
@@ -306,7 +306,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color|string] hex color
+// @return [color|string] string or hex color depending on the match
 
 @function _from-hex($string) {
   $r: "";  $g: ""; $b: "";
@@ -341,6 +341,12 @@
   
   @return rgb(_hex-to-dec($r), _hex-to-dec($g), _hex-to-dec($b));
 }
+// Convert an hexadecimal number to a decimal number
+// --------------------------------------------------------------------------------
+// @param [string] $string: hexadecimal value
+// --------------------------------------------------------------------------------
+// @return [number] decimal number
+
 @function _hex-to-dec($string){
   $hex: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "A" "B" "C" "D" "E" "F";
   $string: to-upper-case($string);
@@ -348,14 +354,9 @@
   
   $dec: 0;
   @for $i from 1 through $length {
-    $token: str-slice($string, $i, $i);
     $factor: 1 + ( 15 * ( $length - $i ));
-    $index: index($hex, $token);
-    @if not $index {
-      @return _throw("Not allowed token `" + $token + "`.");
-    } @else {
-      $dec: $dec + $factor * ($index - 1);
-    }
+    $index: index($hex, str-slice($string, $i, $i));
+    $dec: $dec + $factor * ($index - 1);
   }
   
   @return $dec;
@@ -530,18 +531,19 @@
     @return _throw("Unterminated string.", $pointer);
   }
 
+  // If string is not empty
   @else if $end > 1 {
     $string: str-slice($temp, 1, $end - 1);
     $string: _strip-token($string, "\r");
     $string: _strip-token($string, "\n");
-  }
 
-  // Test whether the string could be a CSS length
-  $string: _length($string);
+    // Test whether the string could be a CSS length
+    $string: _length($string);
 
-  // Test whether the string could be a CSS color
-  @if type-of($string) == string {
-    $string: _color($string);
+    // Test whether the string could be a CSS color
+    @if type-of($string) == string {
+      $string: _color($string);
+    }
   }
 
   @return ($pointer + $end, $string);
