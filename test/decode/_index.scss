@@ -1,8 +1,14 @@
 //Helper
-@import "helpers/consume";
-@import "helpers/value";
-@import "helpers/throw";
-@import "helpers/pow";
+@import "helpers/map/consume";
+@import "helpers/all/value";
+@import "helpers/all/throw";
+@import "helpers/number/pow";
+@import "helpers/string/length";
+@import "helpers/color/color";
+@import "helpers/color/hex";
+@import "helpers/color/rgb";
+@import "helpers/color/hsl";
+@import "helpers/color/hex-to-dec";
 
 //Types
 @import "types/string";
