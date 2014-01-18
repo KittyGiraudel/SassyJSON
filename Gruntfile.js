@@ -26,6 +26,8 @@ module.exports = function(grunt) {
           'src/decode/helpers/color/_get-color-value.scss',
           'src/decode/helpers/color/_hsl.scss',
           'src/decode/helpers/color/_rgb.scss',
+          'src/decode/helpers/color/_hex.scss',
+          'src/decode/helpers/color/_hex-to-dec.scss',
           'src/decode/helpers/number/_pow.scss',
           'src/decode/helpers/number/_find-integer.scss',
           'src/decode/helpers/number/_find-digits.scss',

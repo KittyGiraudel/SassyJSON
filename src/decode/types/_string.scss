@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------
 // @throw "Unterminated string."
 // --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, parsed string)
+// @return [list|false] (new pointer, parsed string / color / length)
 
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
@@ -24,7 +24,10 @@
     $string: _strip-token($string, "\n");
   }
 
+  // Test whether the string could be a CSS length
   $string: _length($string);
+
+  // Test whether the string could be a CSS color
   @if type-of($string) == string {
     $string: _color($string);
   }

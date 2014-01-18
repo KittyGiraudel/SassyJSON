@@ -72,7 +72,11 @@
     @include should(expect(type-of($test-16)), to(equal('number')));
   }
 
-  @include it("should decode CSS lengths to number type") {   
+  @include it("should decode CSS colors to color type") {   
+    @include should(expect(type-of(json-decode('"#ff0"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"#000000"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"#ffffff"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"#1a1a1a"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgb(100, 100, 100)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgb(100%, 100%, 100%)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgba(100, 100, 100, 0.5)"'))), to(equal('color')));
@@ -248,6 +252,7 @@
 
   @include it("should decode properly when caps are used") {   
     @include should(expect(type-of(json-decode('"BLACK"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"#FFFFFF"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"RGB(100, 100, 100)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"42PX"'))), to(equal('number')));
   }
