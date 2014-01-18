@@ -29,7 +29,7 @@
       @if not $needs-comma and length($map) != 0 {
         @return _throw("Unexpected comma in object literal.", $pointer);
       }
-      @return ($pointer + 1, $map);
+      @return ($pointer, $map);
     }
 
     @else if $token == " " {

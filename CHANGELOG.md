@@ -1,5 +1,6 @@
 # Changelog
 
+* `1.0.4`: fixed an error in map parsing
 * `1.0.3`: slightly edited the mixin to dump JSON to CSS
 * `1.0.2`: fixed an issue with string parsing
 * `1.0.1`: fixed an issue with alpha color parsing

@@ -1,4 +1,4 @@
-/*! sassyjson - v0.0.2 - 2014-01-18 */
+/*! sassyjson - v1.0.3 - 2014-01-18 */
 // Logs an error at `$pointer` with `$string` message
 // --------------------------------------------------------------------------------
 // @param [string] $string: error message
@@ -95,6 +95,43 @@
   @return _throw("Expected `" + $token + "` but reached end of stream.", $pointer);
 }
 
+// Will find the first non escaped quote in a JSON String
+// --------------------------------------------------------------------------------
+// @param [string] $string: to search in
+// --------------------------------------------------------------------------------
+// @return [number] position of the last non escaped quote
+
+@function _find-ending-quote($string){
+  $backslash: str-slice("\\", 1, 1); // Dirty hack to have a single backslash
+  $search: $string;
+
+  $end-quote-found: false;
+  $position: 0;
+
+
+  @while not $end-quote-found {
+    $index: str-index($search, '"');
+
+    @if not $index or $index == 0 { // No end of string found
+      @return $index;
+    }
+
+    @else {
+      $position: $position + $index;
+    }
+
+    $char-before-quote: str-slice($search, $index - 1, $index - 1);
+
+    @if $char-before-quote != $backslash {
+      $end-quote-found: true;
+    }
+
+    $search: str-slice($search, $index + 1);
+  }
+
+  @return $position;
+}
+
 // Strip special carriage return characters
 // --------------------------------------------------------------------------------
 // @param [string] $string: string to parse
@@ -102,13 +139,11 @@
 // --------------------------------------------------------------------------------
 // @return [string] new string
 
-@function _strip-token($string, $token) {
-  $cr: "
-  "; // Carriage return
+@function _strip-token($string, $token, $replace) {
 
   @while str-index($string, $token) and str-index($string, $token) > 0 {
     $index: str-index($string, $token);
-    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($token));
+    $string: str-slice($string, 1, $index - 1) + $replace + str-slice($string, $index + str-length($token));
   }
 
   @return $string;
@@ -531,19 +566,23 @@
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
   $temp: str-slice($source, $pointer);
-  $end: str-index($temp, '"');
+  $end: _find-ending-quote($temp);
   $string: "";
 
   // If no end is found
-  @if $end == 0 {
+  @if not $end or $end == 0 {
     @return _throw("Unterminated string.", $pointer);
   }
 
   // If string is not empty
   @else if $end > 1 {
     $string: str-slice($temp, 1, $end - 1);
-    $string: _strip-token($string, "\r");
-    $string: _strip-token($string, "\n");
+
+    $cr: "
+    ";
+    $string: _strip-token($string, "\r", $cr);
+    $string: _strip-token($string, "\n", $cr);
+    $string: _strip-token($string, '\\\"', '"');
 
     // Test whether the string could be a CSS length
     $string: _length($string);
@@ -768,7 +807,7 @@
       @if not $needs-comma and length($map) != 0 {
         @return _throw("Unexpected comma in object literal.", $pointer);
       }
-      @return ($pointer + 1, $map);
+      @return ($pointer, $map);
     }
 
     @else if $token == " " {
@@ -936,9 +975,16 @@
 // @param $value: value to be stringified
 
 @mixin json-encode($value) {
+  // All browsers except IE8- 
+  body::before {
+    content: json-encode($value);
+  }
+
+  // All browsers except Opera (Presto based)
   head {
     font-family: json-encode($value);
   }
+
 }
 
 // Delay the encoding of ta literal to JSON
@@ -951,11 +997,10 @@
 // @return [string|false] JSON encoded string
 
 @function json-encode($value) {
-  $types: list, map, number, string, bool, color;
-  $value-type: type-of($value);
-  @if $value-type != null or index($types, $value-type) {
-    @return call('_json-encode--#{$value-type}', $value);
-  }
-  @warn "Unknown type for #{$value} (#{type-of($value)}).";
+  $type: type-of($value);
+  @if function_exists('_json-encode--#{$type}') {
+    @return call('_json-encode--#{$type}', $value);
+  } 
+  @warn "Unknown type for #{$value} (#{$type}).";
   @return false;
 }
