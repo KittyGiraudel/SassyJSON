@@ -15,12 +15,12 @@ $map: ((a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 
 ### CSS
 
 ``` css
-// All browsers except IE8-
+/* All browsers except IE8- */
 body::before {
   content: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}';
 }
 
-// All browsers except Opera (Presto based)
+/* All browsers except Opera (Presto based) */
 head {
   font-family: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}';
 }
