@@ -1,3 +1,9 @@
+// Convert an hexadecimal number to a decimal number
+// --------------------------------------------------------------------------------
+// @param [string] $string: hexadecimal value
+// --------------------------------------------------------------------------------
+// @return [number] decimal number
+
 @function _hex-to-dec($string){
   $hex: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "A" "B" "C" "D" "E" "F";
   $string: to-upper-case($string);
@@ -5,14 +11,9 @@
   
   $dec: 0;
   @for $i from 1 through $length {
-    $token: str-slice($string, $i, $i);
     $factor: 1 + ( 15 * ( $length - $i ));
-    $index: index($hex, $token);
-    @if not $index {
-      @return _throw("Not allowed token `" + $token + "`.");
-    } @else {
-      $dec: $dec + $factor * ($index - 1);
-    }
+    $index: index($hex, str-slice($string, $i, $i));
+    $dec: $dec + $factor * ($index - 1);
   }
   
   @return $dec;

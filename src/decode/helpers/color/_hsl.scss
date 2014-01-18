@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color] hsl(a) color
+// @return [color|string] string or hsl(a) color, depending on the match
 
 @function _from-hsl($string) {
   $frags: ();

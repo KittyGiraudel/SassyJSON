@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
 // --------------------------------------------------------------------------------
-// @return [color|string] hex color
+// @return [color|string] string or hex color depending on the match
 
 @function _from-hex($string) {
   $r: "";  $g: ""; $b: "";

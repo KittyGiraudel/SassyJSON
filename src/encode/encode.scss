@@ -1,7 +1,7 @@
-// JSON.stringify
-// Type specific functions
+// Helpers
 @import "helpers/quote";
 
+// Type specific encoding functions
 @import "types/bool";
 @import "types/color";
 @import "types/list";
