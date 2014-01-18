@@ -1,23 +1,26 @@
 # SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson)
 
-A Sass API for JSON.
+SassyJSON is a Sass-powered API for JSON. It provides you the classic `json-encode` and `json-decode` directly from your Sass files. We'll leave you the only judges of the point of this.
 
 ## Install
 
-SassyJSON is currently available in [npm](https://npmjs.org/)
+SassyJSON is currently available in [npm](https://npmjs.org/).
 
-#### Git
+### Git
 
-```
+``` git
 git clone https://github.com/HugoGiraudel/SassyJSON.git && cd SassyJSON
 ```
 
-#### npm
+### npm
 
-```
+``` bash
 npm install sassyjson --save-dev
 ```
 
+### Sass
+
+If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/HugoGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/HugoGiraudel/SassyJSON/tree/master/dist) folder. You can copy its content directly into [Sassmeister](http://sassmeister.com/) to play with the code.
 
 ## Example
 
@@ -75,4 +78,5 @@ All you need is a clean version of Sass 3.3. Otherwise it's just pure Sass madne
 
 ## Credits
 
-Thanks to [Fabrice Weinberg](http://github.com/fweinb).
+* [Fabrice Weinberg](http://twitter.com/fweinb)
+* [Hugo Giraudel](http://twitter.com/hugogiraudel)
