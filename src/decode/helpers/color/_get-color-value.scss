@@ -5,6 +5,10 @@
 // @return [number] unitless number or percentage
 
 @function _get-color-value($string) {
+  $first: str-slice($string, 1, 1);
+  @if $first == '.' {
+    $string: '0' + $string;
+  }
   $last: str-slice($string, -1, -1);
   @return if(
     $last == '%', 

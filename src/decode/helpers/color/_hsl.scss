@@ -23,8 +23,15 @@
       $saturation: _get-color-value(nth($frags, 2));
       $lightness: _get-color-value(nth($frags, 3));
 
+      @if not $hue or not $saturation or not $lightness {
+        @return $string;
+      }
+
       @if $is-alpha {
-        $alpha: nth(_json-decode--number(nth($frags, 4), 2), 2);
+        $alpha: _get-color-value(nth($frags, 4));
+        @if not $alpha {
+          @return $string;
+        }
         @return hsla($hue, $saturation, $lightness, $alpha);
       }
 

@@ -23,8 +23,15 @@
       $green: _get-color-value(nth($frags, 2));
       $blue: _get-color-value(nth($frags, 3));
 
+      @if not $red or not $green or not $blue {
+        @return $string;
+      }
+
       @if $is-alpha {
-        $alpha: nth(_json-decode--number(nth($frags, 4), 2), 2);
+        $alpha: _get-color-value(nth($frags, 4));
+        @if not $alpha {
+          @return $string;
+        }
         @return rgba($red, $green, $blue, $alpha);
       }
 
