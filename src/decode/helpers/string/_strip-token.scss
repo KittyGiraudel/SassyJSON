@@ -5,13 +5,11 @@
 // --------------------------------------------------------------------------------
 // @return [string] new string
 
-@function _strip-token($string, $token) {
-  $cr: "
-  "; // Carriage return
+@function _strip-token($string, $token, $replace) {
 
   @while str-index($string, $token) and str-index($string, $token) > 0 {
     $index: str-index($string, $token);
-    $string: str-slice($string, 1, $index - 1) + $cr + str-slice($string, $index + str-length($token));
+    $string: str-slice($string, 1, $index - 1) + $replace + str-slice($string, $index + str-length($token));
   }
 
   @return $string;
