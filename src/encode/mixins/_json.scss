@@ -3,7 +3,14 @@
 // @param $value: value to be stringified
 
 @mixin json-encode($value) {
+  // All browsers except IE8- 
+  body::before {
+    content: json-encode($value);
+  }
+
+  // All browsers except Opera (Presto based)
   head {
     font-family: json-encode($value);
   }
+
 }
