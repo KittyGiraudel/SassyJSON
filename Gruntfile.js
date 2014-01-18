@@ -21,7 +21,7 @@ module.exports = function(grunt) {
           'src/decode/helpers/_consume.scss',
           'src/decode/helpers/_value.scss',
           'src/decode/helpers/_pow.scss',
-          'src/decode/helpers/_strip-special-char.scss',
+          'src/decode/helpers/_strip-token.scss',
           'src/decode/helpers/_find-integer.scss',
           'src/decode/helpers/_find-digits.scss',
           'src/decode/helpers/_find-exponent.scss',

@@ -24,5 +24,5 @@
     $string: _strip-token($string, "\n");
   }
 
-  @return ($pointer + $end, $string);
+  @return ($pointer + $end, _length($string));
 }
