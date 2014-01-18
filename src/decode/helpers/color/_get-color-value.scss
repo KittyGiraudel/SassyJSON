@@ -1,0 +1,14 @@
+// Cast a stringified number / stringified percentage into number type
+// --------------------------------------------------------------------------------
+// @param [string] $string: JSON string
+// --------------------------------------------------------------------------------
+// @return [number] unitless number or percentage
+
+@function _get-color-value($string) {
+  $last: str-slice($string, -1, -1);
+  @return if(
+    $last == '%', 
+    nth(_json-decode--number(str-slice($string, 1, -2), 2), 2) * 1%, 
+    nth(_json-decode--number($string, 2), 2)
+  );
+}

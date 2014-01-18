@@ -1,13 +1,17 @@
 // Helpers
-@import "helpers/throw"; // All
-@import "helpers/consume"; // Map
-@import "helpers/pow"; // Number
-@import "helpers/find-digits"; // Number
-@import "helpers/find-integer"; // Number
-@import "helpers/find-exponent"; // Number
-@import "helpers/value"; // All
-@import "helpers/length"; // String
-@import "helpers/strip-token"; // String
+@import "helpers/all/throw";
+@import "helpers/all/value";
+@import "helpers/map/consume";
+@import "helpers/number/pow";
+@import "helpers/number/find-digits";
+@import "helpers/number/find-integer";
+@import "helpers/number/find-exponent";
+@import "helpers/color/color";
+@import "helpers/color/get-color-value";
+@import "helpers/color/rgb";
+@import "helpers/color/hsl";
+@import "helpers/string/length";
+@import "helpers/string/strip-token";
 
 // JSON.stringify
 // Type specific functions

@@ -1,0 +1,37 @@
+// Cast a JSON encoded string into a hsl(a) color
+// --------------------------------------------------------------------------------
+// @param [string] $string: JSON string
+// --------------------------------------------------------------------------------
+// @return [color] hsl(a) color
+
+@function _from-hsl($string) {
+  $frags: ();
+  $is-alpha: str-slice($string, 4, 4) == 'a';
+  $start: str-index($string, "(");
+  $length: str-length($string);
+
+  @for $i from $start through $length {
+    $token: str-slice($string, $i, $i);
+    @if $token == ' ' {
+      // @continue;
+    }
+    @else if $token == '(' or $token == ',' {
+      $frags: append($frags, "");
+    }
+    @else if $token == ')' {
+      $hue: _get-color-value(nth($frags, 1));
+      $saturation: _get-color-value(nth($frags, 2));
+      $lightness: _get-color-value(nth($frags, 3));
+
+      @if $is-alpha {
+        $alpha: nth(_json-decode--number(nth($frags, 4), 2), 2);
+        @return hsla($hue, $saturation, $lightness, $alpha);
+      }
+
+      @return hsl($hue, $saturation, $lightness);
+    }
+    @else {
+      $frags: set-nth($frags, length($frags), nth($frags, length($frags)) + $token);
+    }
+  } 
+}

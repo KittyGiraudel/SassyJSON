@@ -24,5 +24,10 @@
     $string: _strip-token($string, "\n");
   }
 
-  @return ($pointer + $end, _length($string));
+  $string: _length($string);
+  @if type-of($string) == string {
+    $string: _color($string);
+  }
+
+  @return ($pointer + $end, $string);
 }
