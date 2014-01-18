@@ -8,11 +8,10 @@
 // @return [string|false] JSON encoded string
 
 @function json-encode($value) {
-  $types: list, map, number, string, bool, color;
-  $value-type: type-of($value);
-  @if $value-type != null or index($types, $value-type) {
-    @return call('_json-encode--#{$value-type}', $value);
-  }
+  $type: type-of($value);
+  @if function_exists('_json-encode--#{$type}') {
+    @return call('_json-encode--#{$type}', $value);
+  } 
   @warn "Unknown type for #{$value} (#{type-of($value)}).";
   @return false;
 }
