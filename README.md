@@ -1,6 +1,23 @@
-# SassyJSON
+# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson)
 
 A Sass API for JSON.
+
+## Install
+
+SassyJSON is currently available in [npm](https://npmjs.org/)
+
+#### Git
+
+```
+git clone https://github.com/HugoGiraudel/SassyJSON.git && cd SassyJSON
+```
+
+#### npm
+
+```
+npm install sassyjson --save-dev
+```
+
 
 ## Example
 
