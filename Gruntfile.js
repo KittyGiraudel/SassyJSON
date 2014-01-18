@@ -20,6 +20,7 @@ module.exports = function(grunt) {
           'src/decode/helpers/all/_throw.scss',
           'src/decode/helpers/all/_value.scss',
           'src/decode/helpers/map/_consume.scss',
+          'src/decode/helpers/string/_find-ending-quote.scss',
           'src/decode/helpers/string/_strip-token.scss',
           'src/decode/helpers/string/_length.scss',
           'src/decode/helpers/color/_color.scss',
