@@ -18,4 +18,8 @@
     @include should(expect(type-of(nth(_json-decode--string('"test with inner spaces"', 2), 2))), to(equal('string')));
     @include should(expect(type-of(nth(_json-decode--string('"   test with outer spaces   "', 2), 2))), to(equal('string')));
   }
+
+  @include it("should work with escapes quotes in string"){
+    @include should(expect(nth(_json-decode--string('"test\\\"test"', 2), 2)), to(equal("test\"test")));
+  }
 }

@@ -10,7 +10,7 @@
 @function _json-decode--string($source, $pointer) {
   // Check for the end of the string
   $temp: str-slice($source, $pointer);
-  $end: str-index($temp, '"');
+  $end: _find-ending-quote($temp);
   $string: "";
 
   // If no end is found
@@ -21,8 +21,12 @@
   // If string is not empty
   @else if $end > 1 {
     $string: str-slice($temp, 1, $end - 1);
-    $string: _strip-token($string, "\r");
-    $string: _strip-token($string, "\n");
+
+    $cr: "
+    ";
+    $string: _strip-token($string, "\r", $cr);
+    $string: _strip-token($string, "\n", $cr);
+    $string: _strip-token($string, '\\\"', '"');
 
     // Test whether the string could be a CSS length
     $string: _length($string);

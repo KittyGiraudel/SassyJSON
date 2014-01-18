@@ -1,0 +1,36 @@
+// Will find the first non escaped quote in a JSON String
+// --------------------------------------------------------------------------------
+// @param [string] $string: to search in
+// --------------------------------------------------------------------------------
+// @return [number] position of the last non escaped quote
+
+@function _find-ending-quote($string){
+  $backslash: str-slice("\\", 1, 1);
+  $search-str: $string;
+
+  $end-quote-found: false;
+  $not-found: true;
+  $real-position: 0;
+
+
+  @while not $end-quote-found {
+    $index: str-index($search-str, '"');
+
+    @if $index == 0 {
+      @return 0;
+    }
+    @else{
+      $real-position: $real-position + $index;
+    }
+
+    $char-before-quote: str-slice($search-str, $index - 1, $index - 1);
+
+    @if $char-before-quote != $backslash{
+      $end-quote-found: true;
+    }
+
+    $search-str: str-slice( $search-str, $index + 1);
+  }
+
+  @return $real-position;
+}

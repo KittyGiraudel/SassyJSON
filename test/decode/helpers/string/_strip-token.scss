@@ -3,9 +3,9 @@
   "; // Carriage return
 
   @include it("should work") {
-    @include should(expect(_strip-token(' test \r test ', '\r')), to(equal(' test ' + $cr + ' test ')));
-    @include should(expect(_strip-token(' test \n test ', '\n')), to(equal(' test ' + $cr + ' test ')));
-    @include should(expect(_strip-token(' test \ n test ', '\n')), to(equal(' test \ n test ')));
-    @include should(expect(_strip-token(_strip-token(' test \r\n test ', '\r'), '\n')), to(equal(' test ' + $cr +  $cr + ' test ')));
+    @include should(expect(_strip-token(' test \r test ', '\r', $cr)), to(equal(' test ' + $cr + ' test ')));
+    @include should(expect(_strip-token(' test \n test ', '\n', $cr)), to(equal(' test ' + $cr + ' test ')));
+    @include should(expect(_strip-token(' test \ n test ', '\n', $cr)), to(equal(' test \ n test ')));
+    @include should(expect(_strip-token(_strip-token(' test \r\n test ', '\r', $cr), '\n', $cr)), to(equal(' test ' + $cr +  $cr + ' test ')));
   }
 }
