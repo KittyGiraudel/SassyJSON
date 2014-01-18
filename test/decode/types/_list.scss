@@ -3,6 +3,7 @@
     @include should(expect(nth(_json-decode--list('[0, 1, 2, 3]', 2), 2)), to(equal(0 1 2 3)));
     @include should(expect(nth(_json-decode--list('["a", "b", "c", "d"]', 2), 2)), to(equal("a" "b" "c" "d")));
     @include should(expect(nth(_json-decode--list('[true, false, false, true, true]', 2), 2)), to(equal(true false false true true)));
+    @include should(expect(nth(_json-decode--list('["red", "#405060", "rgb(0, 0, 0)"]', 2), 2)), to(equal(red #405060 black)));
   }
 
   @include it("should properly decode multi-dimensional arrays to nested lists") {
