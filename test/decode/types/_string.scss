@@ -1,11 +1,8 @@
 @include describe("The json-decode--string function") {
-  @include it("should properly decode strings to string type") {
+  @include it("should properly decode strings") {
     @include should(expect(json-decode('""')), to(equal("")));
     @include should(expect(json-decode('"1 px"')), to(equal("1 px")));
     @include should(expect(json-decode('"test"')), to(equal("test")));
-    @include should(expect(json-decode('"#hashtag"')), to(equal("#hashtag")));
-    @include should(expect(json-decode('"#hashta"')), to(equal("#hashta")));
-    @include should(expect(json-decode('"#has"')), to(equal("#has")));
     @include should(expect(json-decode('"test with inner spaces"')), to(equal("test with inner spaces")));
     @include should(expect(json-decode('"   test with outer spaces   "')), to(equal("   test with outer spaces   ")));
   }
@@ -83,6 +80,7 @@
     @include should(expect(type-of(json-decode('"rgb(100, 100, 100)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgb(100%, 100%, 100%)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgba(100, 100, 100, 0.5)"'))), to(equal('color')));
+    @include should(expect(type-of(json-decode('"rgba(100, 100, 100, .5)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"rgba(100%, 100%, 100%, 0.5)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"hsl(100, 100, 100)"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"hsl(100, 100%, 100%)"'))), to(equal('color')));
@@ -95,7 +93,7 @@
     }
   }
 
-  @include it("should decode properly when caps are used") {   
+  @include it("should decode CSS lengths and colors properly when caps are used") {   
     @include should(expect(type-of(json-decode('"BLACK"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"#FFFFFF"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"RGB(100, 100, 100)"'))), to(equal('color')));
@@ -105,5 +103,25 @@
   @include it("should decode properly when weird spaces are used") {   
     @include should(expect(type-of(json-decode('"rgb( 100 , 100 , 100 )"'))), to(equal('color')));
     @include should(expect(type-of(json-decode('"hsl( 100 , 100 , 100 )"'))), to(equal('color')));
+  }
+
+  @include it("should return string type if mistyped color") {
+    @include should(expect(type-of(json-decode('"rgb(100, 100, c)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rgb(100, c, 100)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rgb(c, 100, 100)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rgba(100, 100, 100, c)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rgba(100, c, 100, 0.5)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rgba(c, 100, 100, 0.5)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsl(100, 100, c)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsl(100, c, 100)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsl(c, 100, 100)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsla(100, 100, 100, c)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsla(100, c, 100, 0.5)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"hsla(c, 100, 100, 0.5)"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"#has"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"#hashta"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"bule"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"rde"'))), to(equal('string')));
+    @include should(expect(type-of(json-decode('"yelowgren"'))), to(equal('string')));
   }
 }
