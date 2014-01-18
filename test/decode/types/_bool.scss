@@ -4,25 +4,16 @@
   }
 
   @include it("should give an error if something is wrong"){
-   @include should(expect(_json-decode--true('adsf', 1)), to(equal((1, false))));
+   @include should(expect(_json-decode--true('ture', 2)), to(equal((2, false))));
+   @include should(expect(_json-decode--true('fasle', 2)), to(equal((2, false))));
   }
 
   @include it("should work for false with _json-decode--false"){
    @include should(expect(_json-decode--false('false', 2)), to(equal((6, false))));
   }
 
-  @include it("should properly decode booleans to bool type") {
-    @include should(expect(json-decode('true')), to(equal(true)));
-    @include should(expect(json-decode('false')), to(equal(false)));
-  }
-
-  @include it("should return false when booleans are mispelled") {
-    @include should(expect(json-decode('ture')), to(equal(false)));
-    @include should(expect(json-decode('fasle')), to(equal(false)));
-  }
-
   @include it("should decode to bool type") {
-    @include should(expect(type-of(json-decode('true'))), to(equal('bool')));
-    @include should(expect(type-of(json-decode('false'))), to(equal('bool')));
+    @include should(expect(type-of(nth(_json-decode--true('true', 2), 2))), to(equal('bool')));
+    @include should(expect(type-of(nth(_json-decode--true('true', 2), 2))), to(equal('bool')));
   }
 }
