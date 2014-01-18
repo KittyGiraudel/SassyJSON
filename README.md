@@ -1,4 +1,4 @@
-# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson)
+# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson) [![Build Status](https://travis-ci.org/HugoGiraudel/SassyJSON.png?branch=master)](https://travis-ci.org/HugoGiraudel/SassyJSON)
 
 A Sass API for JSON.
 
