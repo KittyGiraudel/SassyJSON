@@ -1,127 +1,21 @@
 @include describe("The json-decode--string function") {
   @include it("should properly decode strings") {
-    @include should(expect(json-decode('""')), to(equal("")));
-    @include should(expect(json-decode('"1 px"')), to(equal("1 px")));
-    @include should(expect(json-decode('"test"')), to(equal("test")));
-    @include should(expect(json-decode('"test with inner spaces"')), to(equal("test with inner spaces")));
-    @include should(expect(json-decode('"   test with outer spaces   "')), to(equal("   test with outer spaces   ")));
+    @include should(expect(nth(_json-decode--string('""', 2), 2)), to(equal("")));
+    @include should(expect(nth(_json-decode--string('"1 px"', 2), 2)), to(equal("1 px")));
+    @include should(expect(nth(_json-decode--string('"test"', 2), 2)), to(equal("test")));
+    @include should(expect(nth(_json-decode--string('"test with inner spaces"', 2), 2)), to(equal("test with inner spaces")));
+    @include should(expect(nth(_json-decode--string('"   test with outer spaces   "', 2), 2)), to(equal("   test with outer spaces   ")));
   }
 
   @include it("should return false if no end of string is found") {
-    @include should(expect(json-decode('"test')), to(equal(false)));
+    @include should(expect(nth(_json-decode--string('"test', 2), 2)), to(equal(false)));
   }
 
   @include it("should decode to string type") {
-    @include should(expect(type-of(json-decode('""'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"1 px"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"test"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"test with inner spaces"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"   test with outer spaces   "'))), to(equal('string')));
-  }
-
-  @include it("should decode CSS lengths to number type") {
-    $test-1:  json-decode('"-1%"');
-    $test-2:  json-decode('"1.5in"');
-    $test-3:  json-decode('"-1px"');
-    $test-4:  json-decode('"1.5em"');
-    $test-5:  json-decode('"-1mm"');
-    $test-6:  json-decode('"1.5cm"');
-    $test-7:  json-decode('"-1pt"');
-    $test-8:  json-decode('"1.5pc"');
-    $test-9:  json-decode('"-1ex"');
-    $test-10: json-decode('"1.5ch"');
-    $test-11: json-decode('"-1vh"');
-    $test-12: json-decode('"1.5vw"');
-    $test-13: json-decode('"-1rem"');
-    $test-14: json-decode('"1.5vmin"');
-    $test-15: json-decode('"-1vmax"');
-    $test-16: json-decode('"1.5pica"');
-
-    @include should(expect($test-1 ), to(equal(-1%)));
-    @include should(expect($test-2 ), to(equal(1.5in)));
-    @include should(expect($test-3 ), to(equal(-1px)));
-    @include should(expect($test-4 ), to(equal(1.5em)));
-    @include should(expect($test-5 ), to(equal(-1mm)));
-    @include should(expect($test-6 ), to(equal(1.5cm)));
-    @include should(expect($test-7 ), to(equal(-1pt)));
-    @include should(expect($test-8 ), to(equal(1.5pc)));
-    @include should(expect($test-9 ), to(equal(-1ex)));
-    @include should(expect($test-10), to(equal(1.5ch)));
-    @include should(expect($test-11), to(equal(-1vh)));
-    @include should(expect($test-12), to(equal(1.5vw)));
-    @include should(expect($test-13), to(equal(-1rem)));
-    @include should(expect($test-14), to(equal(1.5vmin)));
-    @include should(expect($test-15), to(equal(-1vmax)));
-    @include should(expect($test-16), to(equal(1.5pica)));
-
-    @include should(expect(type-of($test-1 )), to(equal('number')));
-    @include should(expect(type-of($test-2 )), to(equal('number')));
-    @include should(expect(type-of($test-3 )), to(equal('number')));
-    @include should(expect(type-of($test-4 )), to(equal('number')));
-    @include should(expect(type-of($test-5 )), to(equal('number')));
-    @include should(expect(type-of($test-6 )), to(equal('number')));
-    @include should(expect(type-of($test-7 )), to(equal('number')));
-    @include should(expect(type-of($test-8 )), to(equal('number')));
-    @include should(expect(type-of($test-9 )), to(equal('number')));
-    @include should(expect(type-of($test-10)), to(equal('number')));
-    @include should(expect(type-of($test-11)), to(equal('number')));
-    @include should(expect(type-of($test-12)), to(equal('number')));
-    @include should(expect(type-of($test-13)), to(equal('number')));
-    @include should(expect(type-of($test-14)), to(equal('number')));
-    @include should(expect(type-of($test-15)), to(equal('number')));
-    @include should(expect(type-of($test-16)), to(equal('number')));
-  }
-
-  @include it("should decode CSS colors to color type") {   
-    @include should(expect(type-of(json-decode('"#ff0"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"#000000"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"#ffffff"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"#1a1a1a"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"rgb(100, 100, 100)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"rgb(100%, 100%, 100%)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"rgba(100, 100, 100, 0.5)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"rgba(100, 100, 100, .5)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"rgba(100%, 100%, 100%, 0.5)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"hsl(100, 100, 100)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"hsl(100, 100%, 100%)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"hsla(100, 100, 100, 0.5)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"hsla(100, 100%, 100%, 0.5)"'))), to(equal('color')));
-
-    $keywords: transparent black silver gray white maroon red purple fuchsia green lime olive yellow navy blue teal aqua aliceblue antiquewhite aqua aquamarine azure beige bisque black blanchedalmond blue blueviolet brown burlywood cadetblue chartreuse chocolate coral cornflowerblue cornsilk crimson cyan darkblue darkcyan darkgoldenrod darkgray darkgreen darkgrey darkkhaki darkmagenta darkolivegreen darkorange darkorchid darkred darksalmon darkseagreen darkslateblue darkslategray darkslategrey darkturquoise darkviolet deeppink deepskyblue dimgray dimgrey dodgerblue firebrick floralwhite forestgreen fuchsia gainsboro ghostwhite gold goldenrod gray green greenyellow grey honeydew hotpink indianred indigo ivory khaki lavender lavenderblush lawngreen lemonchiffon lightblue lightcoral lightcyan lightgoldenrodyellow lightgray lightgreen lightgrey lightpink lightsalmon lightseagreen lightskyblue lightslategray lightslategrey lightsteelblue lightyellow lime limegreen linen magenta maroon mediumaquamarine mediumblue mediumorchid mediumpurple mediumseagreen mediumslateblue mediumspringgreen mediumturquoise mediumvioletred midnightblue mintcream mistyrose moccasin navajowhite navy oldlace olive olivedrab orange orangered orchid palegoldenrod palegreen paleturquoise palevioletred papayawhip peachpuff peru pink plum powderblue purple red rosybrown royalblue saddlebrown salmon sandybrown seagreen seashell sienna silver skyblue slateblue slategray slategrey snow springgreen steelblue tan teal thistle tomato turquoise violet wheat white whitesmoke yellow yellowgreen;
-    @each $color in $keywords {
-        @include should(expect(type-of(json-decode('"' + $color + '"'))), to(equal('color')));
-    }
-  }
-
-  @include it("should decode CSS lengths and colors properly when caps are used") {   
-    @include should(expect(type-of(json-decode('"BLACK"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"#FFFFFF"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"RGB(100, 100, 100)"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"42PX"'))), to(equal('number')));
-  }
-
-  @include it("should decode properly when weird spaces are used") {   
-    @include should(expect(type-of(json-decode('"rgb( 100 , 100 , 100 )"'))), to(equal('color')));
-    @include should(expect(type-of(json-decode('"hsl( 100 , 100 , 100 )"'))), to(equal('color')));
-  }
-
-  @include it("should return string type if mistyped color") {
-    @include should(expect(type-of(json-decode('"rgb(100, 100, c)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rgb(100, c, 100)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rgb(c, 100, 100)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rgba(100, 100, 100, c)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rgba(100, c, 100, 0.5)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rgba(c, 100, 100, 0.5)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsl(100, 100, c)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsl(100, c, 100)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsl(c, 100, 100)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsla(100, 100, 100, c)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsla(100, c, 100, 0.5)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"hsla(c, 100, 100, 0.5)"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"#has"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"#hashta"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"bule"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"rde"'))), to(equal('string')));
-    @include should(expect(type-of(json-decode('"yelowgren"'))), to(equal('string')));
+    @include should(expect(type-of(nth(_json-decode--string('""', 2), 2))), to(equal('string')));
+    @include should(expect(type-of(nth(_json-decode--string('"1 px"', 2), 2))), to(equal('string')));
+    @include should(expect(type-of(nth(_json-decode--string('"test"', 2), 2))), to(equal('string')));
+    @include should(expect(type-of(nth(_json-decode--string('"test with inner spaces"', 2), 2))), to(equal('string')));
+    @include should(expect(type-of(nth(_json-decode--string('"   test with outer spaces   "', 2), 2))), to(equal('string')));
   }
 }

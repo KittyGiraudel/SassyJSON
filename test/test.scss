@@ -4,43 +4,9 @@
 @include runner-start;
 
 // Encoder
-
-  // Helpers
-  @import "encode/helpers/quote";
-
-  // Types
-  @import "encode/types/string";
-  @import "encode/types/number";
-  @import "encode/types/color";
-  @import "encode/types/bool";
-  @import "encode/types/list";
-  @import "encode/types/map";
-  @import "encode/types/null";
-
-  // API
-  @import "encode/api/json";
+@import "encode/_index";
 
 // Decoder
-
-  //Helper
-  @import "decode/helpers/map/consume";
-  @import "decode/helpers/all/value";
-  @import "decode/helpers/all/throw";
-  @import "decode/helpers/number/pow";
-  @import "decode/helpers/color/hex-to-dec";
-  @import "decode/helpers/color/hex";
-  @import "decode/helpers/color/rgb";
-  @import "decode/helpers/color/hsl";
-
-  //Types
-  @import "decode/types/string";
-  @import "decode/types/number";
-  @import "decode/types/bool";
-  @import "decode/types/list";
-  @import "decode/types/map";
-  @import "decode/types/null";
-
-  //API
-  @import "decode/api/json";
+@import "decode/_index";
 
 @include runner-end;
