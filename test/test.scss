@@ -4,24 +4,12 @@
 @include runner-start;
 
 // Encoder
-
-  // Helpers
-  @import "encode/helpers/quote";
-
-  // Types
-  @import "encode/types/string";
-  @import "encode/types/number";
-  @import "encode/types/color";
-  @import "encode/types/bool";
-  @import "encode/types/list";
-  @import "encode/types/map";
-  @import "encode/types/null";
-
-  // API
-  @import "encode/api/json";
+  @import "encode/_index";
 
 // Decoder
+  @import "decode/_index";
 
+<<<<<<< HEAD
   //Helper
   @import "decode/helpers/map/consume";
   @import "decode/helpers/all/value";
@@ -44,5 +32,7 @@
 
   //API
   @import "decode/api/json";
+=======
+>>>>>>> 57e0429665bc97a7409e7faa5310a4afd8345305
 
 @include runner-end;
