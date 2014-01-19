@@ -1,6 +1,7 @@
 # Changelog
 
-* `1.0.6`: released a Ruby gem
+* `1.0.7`: minor fixes and stable Ruby Gem
+* `1.0.6`: released a Ruby Gem
 * `1.0.5`: improved the encoding mixin
 * `1.0.4`: fixed an error in map parsing
 * `1.0.3`: slightly edited the mixin to dump JSON to CSS
