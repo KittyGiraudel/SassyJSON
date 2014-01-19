@@ -1,4 +1,4 @@
-/*! sassyjson - v1.0.4 - 2014-01-19 */
+/*! sassyjson - v1.0.5 - 2014-01-19 */
 // Logs an error at `$pointer` with `$string` message
 // --------------------------------------------------------------------------------
 // @param [string] $string: error message
@@ -986,6 +986,7 @@
   @if $flag == regular or $flag == all {
     // All browsers except IE8- 
     body::before {
+      display: none !important;
       content: json-encode($value);
     }
 
