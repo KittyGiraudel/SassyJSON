@@ -37,16 +37,24 @@ $map: ((a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 
 #### CSS
 
 ``` css
-/* All browsers except IE8- */
+/*! json-encode: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}' */
+
 body::before {
   content: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}';
 }
 
-/* All browsers except Opera (Presto based) */
 head {
   font-family: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}';
 }
+
+@media -json-encode {
+  json {
+    json: '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}';
+  }
+}
 ```
+
+If you want to restrict the output to only one of the three drivers (comment, media query or regular output) you can pass a flag as the second parameter with one of the four following keywords: `all`, `comment`, `media` or `regular`. Default is `all`.
 
 ### Decoding JSON to Sass
 
