@@ -29,7 +29,7 @@ If you only want to play around the code without cloning the repo or using npm, 
 #### Sass
 
 ``` scss
-$map: ((a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string));
+$map: ((a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string)));
 
 @include json-encode($map);
 ```
