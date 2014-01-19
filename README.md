@@ -1,4 +1,4 @@
-# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson) [![Gem Version](https://badge.fury.io/rb/SassyJSON.png)](http://badge.fury.io/rb/SassyJSON) [![Build Status](https://travis-ci.org/HugoGiraudel/SassyJSON.png?branch=master)](https://travis-ci.org/HugoGiraudel/SassyJSON) [![Gem Version](https://badge.fury.io/rb/SassyJSON.png)](http://badge.fury.io/rb/SassyJSON)
+# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson) [![Gem Version](https://badge.fury.io/rb/SassyJSON.png)](http://badge.fury.io/rb/SassyJSON) [![Build Status](https://travis-ci.org/HugoGiraudel/SassyJSON.png?branch=master)](https://travis-ci.org/HugoGiraudel/SassyJSON)
 
 SassyJSON is a Sass-powered API for JSON. It provides you the classic `json-encode` and `json-decode` directly from your Sass files. We'll leave you the only judges of the point of this.
 
