@@ -1,4 +1,4 @@
-/*! sassyjson - v1.0.3 - 2014-01-18 */
+/*! sassyjson - v1.0.4 - 2014-01-19 */
 // Logs an error at `$pointer` with `$string` message
 // --------------------------------------------------------------------------------
 // @param [string] $string: error message
@@ -973,20 +973,36 @@
 // JSON.stringify a value and pass it as a font-family of head element
 // --------------------------------------------------------------------------------
 // @param $value: value to be stringified
+// @parem $flag: output driver
 
-@mixin json-encode($value) {
-  // All browsers except IE8- 
-  body::before {
-    content: json-encode($value);
+@mixin json-encode($value, $flag: all) {
+  $flag: if(not index(all regular media comment, $flag), all, $flag);
+  $json: json-encode($value);
+
+  @if $flag == comment or $flag == all {
+    /*! json-encode: #{$json} */
+  }
+  
+  @if $flag == regular or $flag == all {
+    // All browsers except IE8- 
+    body::before {
+      content: json-encode($value);
+    }
+
+    // All browsers except Opera (Presto based)
+    head {
+      font-family: json-encode($value);
+    }
   }
 
-  // All browsers except Opera (Presto based)
-  head {
-    font-family: json-encode($value);
+  @if $flag == media or $flag == all {
+    @media -json-encode {
+      json {
+        json: $json;
+      }
+    }
   }
-
 }
-
 // Delay the encoding of ta literal to JSON
 // to a type-specific method
 // --------------------------------------------------------------------------------
