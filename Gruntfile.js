@@ -66,7 +66,7 @@ module.exports = function(grunt) {
       options: {
         style: 'expanded',
         quiet: 'true',
-        loadPath: ['./node_modules/bootcamp/dist', '<%= dir.src %>']
+        loadPath: ['./node_modules/bootcamp/dist', './<%= dir.src %>']
       },
       all: {
         files: {
