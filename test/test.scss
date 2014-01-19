@@ -1,12 +1,12 @@
 @import "bootcamp";
-@import "SassyJSON";
+@import "../src/SassyJSON";
 
 @include runner-start;
 
 // Encoder
-@import "encode/_index";
+@import "encode/index";
 
 // Decoder
-@import "decode/_index";
+@import "decode/index";
 
 @include runner-end;
