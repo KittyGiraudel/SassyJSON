@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/HugoGiraudel/SassyJSON/"
 
   # README file
-  #s.files = ["readme.md"]
+  s.files = ["README.md"]
 
   # CHANGELOG
   s.files += ["CHANGELOG.md"]

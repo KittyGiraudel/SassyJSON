@@ -18,6 +18,12 @@ git clone https://github.com/HugoGiraudel/SassyJSON.git && cd SassyJSON
 npm install sassyjson --save-dev
 ```
 
+### Compass extension
+
+1. `gem install SassyJSON`
+2. Add `require 'SassyJSON'` to your `config.rb`
+3. Import it in your stylesheets with `@import 'SassyJSON'`
+
 ### Sass
 
 If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/HugoGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/HugoGiraudel/SassyJSON/tree/master/dist) folder. You can copy its content directly into [Sassmeister](http://sassmeister.com/) to play with the code.
