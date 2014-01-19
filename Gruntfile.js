@@ -8,6 +8,10 @@ module.exports = function(grunt) {
 
   // Grunt Tasks
   grunt.initConfig({
+    dir : {
+      src : 'src',
+      dist : 'dist'
+    },
     pkg: grunt.file.readJSON('package.json'),
 
     concat: {
@@ -17,43 +21,43 @@ module.exports = function(grunt) {
       dist: {
         src: [
           // Decoder
-          'src/decode/helpers/all/_throw.scss',
-          'src/decode/helpers/all/_value.scss',
-          'src/decode/helpers/map/_consume.scss',
-          'src/decode/helpers/string/_find-ending-quote.scss',
-          'src/decode/helpers/string/_strip-token.scss',
-          'src/decode/helpers/string/_length.scss',
-          'src/decode/helpers/color/_color.scss',
-          'src/decode/helpers/color/_get-color-value.scss',
-          'src/decode/helpers/color/_hsl.scss',
-          'src/decode/helpers/color/_rgb.scss',
-          'src/decode/helpers/color/_hex.scss',
-          'src/decode/helpers/color/_hex-to-dec.scss',
-          'src/decode/helpers/number/_pow.scss',
-          'src/decode/helpers/number/_find-integer.scss',
-          'src/decode/helpers/number/_find-digits.scss',
-          'src/decode/helpers/number/_find-exponent.scss',
-          'src/decode/types/_string.scss',
-          'src/decode/types/_bool.scss',
-          'src/decode/types/_null.scss',
-          'src/decode/types/_number.scss',
-          'src/decode/types/_list.scss',
-          'src/decode/types/_map.scss',
-          'src/decode/api/_json.scss',
+          '<%= dir.src %>/decode/helpers/all/_throw.scss',
+          '<%= dir.src %>/decode/helpers/all/_value.scss',
+          '<%= dir.src %>/decode/helpers/map/_consume.scss',
+          '<%= dir.src %>/decode/helpers/string/_find-ending-quote.scss',
+          '<%= dir.src %>/decode/helpers/string/_strip-token.scss',
+          '<%= dir.src %>/decode/helpers/string/_length.scss',
+          '<%= dir.src %>/decode/helpers/color/_color.scss',
+          '<%= dir.src %>/decode/helpers/color/_get-color-value.scss',
+          '<%= dir.src %>/decode/helpers/color/_hsl.scss',
+          '<%= dir.src %>/decode/helpers/color/_rgb.scss',
+          '<%= dir.src %>/decode/helpers/color/_hex.scss',
+          '<%= dir.src %>/decode/helpers/color/_hex-to-dec.scss',
+          '<%= dir.src %>/decode/helpers/number/_pow.scss',
+          '<%= dir.src %>/decode/helpers/number/_find-integer.scss',
+          '<%= dir.src %>/decode/helpers/number/_find-digits.scss',
+          '<%= dir.src %>/decode/helpers/number/_find-exponent.scss',
+          '<%= dir.src %>/decode/types/_string.scss',
+          '<%= dir.src %>/decode/types/_bool.scss',
+          '<%= dir.src %>/decode/types/_null.scss',
+          '<%= dir.src %>/decode/types/_number.scss',
+          '<%= dir.src %>/decode/types/_list.scss',
+          '<%= dir.src %>/decode/types/_map.scss',
+          '<%= dir.src %>/decode/api/_json.scss',
 
           // Encoder
-          'src/encode/helpers/_quote.scss',
-          'src/encode/types/_bool.scss',
-          'src/encode/types/_color.scss',
-          'src/encode/types/_list.scss',
-          'src/encode/types/_map.scss',
-          'src/encode/types/_number.scss',
-          'src/encode/types/_string.scss',
-          'src/encode/types/_null.scss',
-          'src/encode/mixins/_json.scss',
-          'src/encode/api/_json.scss'
+          '<%= dir.src %>/encode/helpers/_quote.scss',
+          '<%= dir.src %>/encode/types/_bool.scss',
+          '<%= dir.src %>/encode/types/_color.scss',
+          '<%= dir.src %>/encode/types/_list.scss',
+          '<%= dir.src %>/encode/types/_map.scss',
+          '<%= dir.src %>/encode/types/_number.scss',
+          '<%= dir.src %>/encode/types/_string.scss',
+          '<%= dir.src %>/encode/types/_null.scss',
+          '<%= dir.src %>/encode/mixins/_json.scss',
+          '<%= dir.src %>/encode/api/_json.scss'
         ],
-        dest: 'dist/_<%= pkg.name %>.scss',
+        dest: '<%= dir.dist %>/_<%= pkg.name %>.scss',
       },
     },
 
@@ -105,21 +109,21 @@ module.exports = function(grunt) {
       all: {
         files: [
                 './test/**/*.scss',
-                './src/**/*.scss'
+                './<%= dir.src %>/**/*.scss'
                 ],
         tasks: ['test']
       },
       decoder: {
         files: [
                 './test/decode/**/*.scss',
-                './src/**/*.scss'
+                './<%= dir.src %>/**/*.scss'
                 ],
         tasks: ['test:decoder']
       },
       encoder: {
         files: [
                 './test/encode/**/*.scss',
-                './src/**/*.scss'
+                './<%= dir.src %>/**/*.scss'
                 ],
         tasks: ['test:encode']
       }
