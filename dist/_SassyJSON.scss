@@ -979,10 +979,12 @@
   $flag: if(not index(all regular media comment, $flag), all, $flag);
   $json: json-encode($value);
 
+  // Persistent comment
   @if $flag == comment or $flag == all {
     /*! json-encode: #{$json} */
   }
   
+  // Regular property value pair
   @if $flag == regular or $flag == all {
     // All browsers except IE8- 
     body::before {
@@ -996,6 +998,7 @@
     }
   }
 
+  // Falsy media query
   @if $flag == media or $flag == all {
     @media -json-encode {
       json {

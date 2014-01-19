@@ -29,8 +29,4 @@ Gem::Specification.new do |s|
   # Gem Bookkeeping
   s.required_rubygems_version = ">= 1.3.6"
   s.rubygems_version = %q{1.3.6}
-
-  # Gems Dependencies
-  s.add_dependency("sass",      [">=3.3.0"])
-  s.add_dependency("compass",   [">= 1.0"])
 end
