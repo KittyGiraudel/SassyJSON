@@ -1,0 +1,33 @@
+@include describe("The json-decode should handle any json input") {
+
+  @include it("should work for valid json"){
+    @include should(expect(json-decode('{"a":[1,2,3],"b":"#000000"}')), to(equal((a:(1 2 3), b: black))));
+    @include should(expect(json-decode('{"a":"green","b":"blue"}')), to(equal((a:green, b: blue))));
+    @include should(expect(json-decode('[1,2,3,4]')), to(equal((1 2 3 4))));
+  }
+
+  @include it("should return false for invalid json"){
+
+    $broken-json: (
+      '{"a":{"b":"c"},}'
+      '[1,2,3,'
+      '{"a":"green""b":"blue"}'
+      '{"a":[1,2,3],"b""#000000"}'
+      '{"a": invalid  {"b":"c"}}'
+      '{'
+      '@@@'
+      '[]]'
+      '{[""}'
+      '[{]}'
+      '{[}]'
+      '{[1...]}'
+      '[9..1]}'
+      '[.5,,,]'
+      '{1}'
+    );
+
+    @each $json in $broken-json{
+      @include should(expect(json-decode($json)), to(equal(false)));
+    }
+  }
+}
