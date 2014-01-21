@@ -1,0 +1,37 @@
+@include describe("The _get-color-value function") {
+  @include it("should convert stringified number into an actual number") {
+    @include should(expect(_get-color-value('0')), to(equal(0)));
+    @include should(expect(_get-color-value('100')), to(equal(100)));
+    @include should(expect(_get-color-value('255')), to(equal(255)));
+    @include should(expect(_get-color-value('0.5')), to(equal(0.5)));
+    @include should(expect(_get-color-value('.5')), to(equal(0.5)));
+  }
+
+  @include it("should convert stringified percentage into an actual number") {
+    @include should(expect(_get-color-value('0%')), to(equal(0)));
+    @include should(expect(_get-color-value('100%')), to(equal(100)));
+    @include should(expect(_get-color-value('255%')), to(equal(255)));
+    @include should(expect(_get-color-value('0.5%')), to(equal(0.5)));
+    @include should(expect(_get-color-value('.5%')), to(equal(0.5)));
+  }
+
+  @include it("should always convert to number type") {
+    @include should(expect(type-of(_get-color-value('0'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('100'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('255'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('0.5'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('.5'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('0%'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('100%'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('255%'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('0.5%'))), to(equal('number')));
+    @include should(expect(type-of(_get-color-value('.5%'))), to(equal('number')));
+  }
+
+  @include it("should return false whenever the value is not castable to number") {
+    @include should(expect(_get-color-value('a')), to(equal(false)));
+    @include should(expect(_get-color-value('false')), to(equal(false)));
+    @include should(expect(_get-color-value('true')), to(equal(false)));
+    @include should(expect(_get-color-value('[a, b, c]')), to(equal(false)));
+  }
+}

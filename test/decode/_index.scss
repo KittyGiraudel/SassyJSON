@@ -3,9 +3,13 @@
 @import "helpers/all/value";
 @import "helpers/all/throw";
 @import "helpers/number/pow";
+@import "helpers/number/find-integer";
+@import "helpers/number/find-exponent";
+@import "helpers/number/find-digits";
 @import "helpers/string/length";
 @import "helpers/string/strip-token";
 @import "helpers/string/find-ending-quote";
+@import "helpers/color/get-color-value";
 @import "helpers/color/color";
 @import "helpers/color/hex";
 @import "helpers/color/rgb";

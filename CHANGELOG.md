@@ -1,5 +1,6 @@
 # Changelog
 
+* `1.0.9`: fixing a bug in `_find-exponent`
 * `1.0.8`: fixing a major issue in Ruby Gem
 * `1.0.7`: minor fixes and stable Ruby Gem
 * `1.0.6`: released a Ruby Gem

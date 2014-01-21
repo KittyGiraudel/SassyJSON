@@ -1,4 +1,4 @@
-/*! sassyjson - v1.0.6 - 2014-01-19 */
+/*! sassyjson - v1.0.9 - 2014-01-21 */
 // Logs an error at `$pointer` with `$string` message
 // --------------------------------------------------------------------------------
 // @param [string] $string: error message
@@ -541,7 +541,7 @@
       $result: if($result == null, $number, $result * 10 + $number);
     }
     @else {
-      @if not index(" ", ", ", "]", "}", $token) {
+      @if not index(" " " " "]" "}", $token) {
         @return _throw("Unexpected token `" + $token + "`.", $pointer);
       }
 
