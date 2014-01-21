@@ -9,7 +9,7 @@ module.exports = function(grunt) {
   // Grunt Tasks
   grunt.initConfig({
     dir : {
-      src : 'src',
+      src : 'stylesheets',
       dist : 'dist'
     },
     pkg: grunt.file.readJSON('package.json'),

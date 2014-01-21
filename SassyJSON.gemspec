@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.files += Dir.glob("lib/**/*.*")
 
   # Sass Files
-  s.files += Dir.glob("src/**/*.*")
+  s.files += Dir.glob("stylesheets/**/*.*")
 
   # Gem Bookkeeping
   s.required_rubygems_version = ">= 1.3.6"
