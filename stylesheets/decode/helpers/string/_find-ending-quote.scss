@@ -5,32 +5,45 @@
 // @return [number] position of the last non escaped quote
 
 @function _find-ending-quote($string){
-  $backslash: str-slice("\\", 1, 1); // Dirty hack to have a single backslash
-  $search: $string;
+  $backslash: str-slice('\\', 1, 1); // Dirty hack to have a single backslash
+  $escaped-chars: $backslash '"' '/' 'b' 'f' 'n' 'r' 't' 'u';
 
-  $end-quote-found: false;
-  $position: 0;
+  $pos: 1;
+  $length: str-length($string);
+  $backslash-found: false;
 
+  @while $pos <= $length {
+    $char: str-slice($string, $pos, $pos);
 
-  @while not $end-quote-found {
-    $index: str-index($search, '"');
+    // Previous char was a backslash
+    @if $backslash-found {
 
-    @if not $index or $index == 0 { // No end of string found
-      @return $index;
+      // Special case, the 'u' character
+      @if $char == 'u' {
+        // Skip the next 4 characters, assumed to be hexadecimal
+        $pos: $pos + 4;
+      }
+
+      // Invalid character escaped
+      @else if not index($escaped-chars, $char) {
+        @return 0;
+      }
+
+      $backslash-found: false;
     }
 
-    @else {
-      $position: $position + $index;
+    @else if $char == $backslash {
+      $backslash-found: true;
     }
 
-    $char-before-quote: str-slice($search, $index - 1, $index - 1);
-
-    @if $char-before-quote != $backslash {
-      $end-quote-found: true;
+    // Unescaped quote found
+    @else if $char == '"' {
+      @return $pos;
     }
 
-    $search: str-slice($search, $index + 1);
+    $pos: $pos + 1;
   }
 
-  @return $position;
+  // No end of string found
+  @return 0;
 }
