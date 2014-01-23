@@ -8,13 +8,14 @@
 // @return [list|false] (new pointer, parsed number)
 
 @function _find-digits($source, $pointer) {
+  $source: to-lower-case($source);
   $length: str-length($source);
   $numbers: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
   $result: null;
   $runs: 1;
 
   @while $pointer <= $length {
-    $token: to-lower-case(str-slice($source, $pointer, $pointer));
+    $token: str-slice($source, $pointer, $pointer);
     $index: index($numbers, $token);
 
     @if $token == '.' {

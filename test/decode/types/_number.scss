@@ -116,4 +116,10 @@
     @include should(expect(type-of($test-27)), to(equal('number')));
     @include should(expect(type-of($test-28)), to(equal('number')));
   }
+
+  @include it("should return false when syntax is invalid JSON") {
+    @include should(expect(nth(_json-decode--number('1e+-1', 2), 2)), to(equal(false)));
+    @include should(expect(nth(_json-decode--number('1e-+1', 2), 2)), to(equal(false)));
+    @include should(expect(nth(_json-decode--number('1a-+1', 2), 2)), to(equal(false)));
+  }
 }

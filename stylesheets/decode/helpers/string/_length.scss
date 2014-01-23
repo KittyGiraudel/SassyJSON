@@ -5,6 +5,10 @@
 // @return [number|string] string or number, depending on the match
 
 @function _length($string) {
+  @if type-of($string) == number {
+    @return $string;
+  }
+
   $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
   $units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
   $number: "";

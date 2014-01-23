@@ -6,12 +6,13 @@
 
 @function _from-hsl($string) {
   $frags: ();
-  $is-alpha: str-slice($string, 4, 4) == 'a';
-  $start: str-index($string, "(");
+  $string-lower: to-lower-case($string);
+  $is-alpha: str-slice($string-lower, 4, 4) == 'a';
   $length: str-length($string);
+  $start: str-index($string, "(");
 
   @for $i from $start through $length {
-    $token: str-slice($string, $i, $i);
+    $token: str-slice($string-lower, $i, $i);
     @if $token == ' ' {
       // @continue;
     }

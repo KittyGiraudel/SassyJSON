@@ -5,13 +5,14 @@
 // @return [color|string] string or rgb(a) color depending on the match
 
 @function _from-rgb($string) {
+  $string-lower: to-lower-case($string);
   $frags: ();
-  $is-alpha: str-slice($string, 4, 4) == 'a';
+  $is-alpha: str-slice($string-lower, 4, 4) == 'a';
   $start: str-index($string, "(");
   $length: str-length($string);
 
   @for $i from $start through $length {
-    $token: str-slice($string, $i, $i);
+    $token: str-slice($string-lower, $i, $i);
     @if $token == ' ' {
       // @continue;
     }

@@ -1,5 +1,7 @@
 # Changelog
 
+* `1.0.11`: fixing an issue with scientific number parsing
+* `1.0.10`: improving number and string helpers
 * `1.0.9`: fixing a bug in `_find-exponent`
 * `1.0.8`: fixing a major issue in Ruby Gem
 * `1.0.7`: minor fixes and stable Ruby Gem
