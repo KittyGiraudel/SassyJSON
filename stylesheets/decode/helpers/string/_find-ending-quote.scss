@@ -7,7 +7,7 @@
 @function _find-ending-quote($string){
   $backslash: str-slice('\\', 1, 1); // Dirty hack to have a single backslash
   $escaped-chars: '"\/bfnrtu'; // Characters that can be escaped in JSON
-  $hexadecimal-chars: '01234567890abcdef';
+  $hexadecimal-chars: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '0' 'a' 'b' 'c' 'd' 'e' 'f';
 
   $pos: 1;
   $length: str-length($string);
@@ -22,10 +22,10 @@
       // Special case, the 'u' character
       @if $char == 'u' {
         // Next 4 characters must be hexadecimal
-        @if not str-index($hexadecimal-chars, str-slice($string, $pos + 1, $pos + 1)) or
-            not str-index($hexadecimal-chars, str-slice($string, $pos + 2, $pos + 2)) or
-            not str-index($hexadecimal-chars, str-slice($string, $pos + 3, $pos + 3)) or
-            not str-index($hexadecimal-chars, str-slice($string, $pos + 4, $pos + 4)) {
+        @if not index($hexadecimal-chars, str-slice($string, $pos + 1, $pos + 1)) or
+            not index($hexadecimal-chars, str-slice($string, $pos + 2, $pos + 2)) or
+            not index($hexadecimal-chars, str-slice($string, $pos + 3, $pos + 3)) or
+            not index($hexadecimal-chars, str-slice($string, $pos + 4, $pos + 4)) {
             @return 0;
         }
 
@@ -33,7 +33,7 @@
       }
 
       // Invalid character escaped
-      @else if not tr-index($escaped-chars, $char) {
+      @else if not str-index($escaped-chars, $char) {
         @return 0;
       }
 

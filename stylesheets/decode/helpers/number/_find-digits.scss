@@ -9,25 +9,23 @@
 
 @function _find-digits($source, $pointer) {
   $length: str-length($source);
-  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
-  $numbers:  0   1   2   3   4   5   6   7   8   9;
+  $numbers: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
   $result: null;
   $runs: 1;
 
   @while $pointer <= $length {
     $token: to-lower-case(str-slice($source, $pointer, $pointer));
-    $index: index($strings, $token);
+    $index: index($numbers, $token);
 
     @if $token == '.' {
       // @continue;
     }
     @else if $index and $index > 0 {
-      $number: nth($numbers, $index);
       $runs: $runs * 10;
-      $result: if($result == null, $number, $result * 10 + $number);
+      $result: if($result == null, ($index - 1), $result * 10 + ($index - 1));
     }
     @else {
-      @if index('e' '.' ',' ']' '}' ' ', $token) {
+      @if index('e' '.' ' ' ',' ']' '}', $token) {
         @return $pointer, if($result != null, $result / $runs, $result);
       }
       @return _throw("Unexpected token `" + $token + "`.", $pointer);
