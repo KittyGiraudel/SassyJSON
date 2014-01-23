@@ -20,7 +20,7 @@
     @include should(expect(type-of(nth(_json-decode--string('"   test with outer spaces   "', 2), 2))), to(equal('string')));
   }
 
-  @include it("should work with escaped quotes in string"){
+  @include it("should work with escaped quotes in string") {
     @include should(expect(nth(_json-decode--string('"test\\"test"', 2), 2)), to(equal('test\\"test')));
   }
 }
