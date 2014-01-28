@@ -66,6 +66,7 @@ module.exports = function(grunt) {
       options: {
         style: 'expanded',
         quiet: 'true',
+        require : './lib/JsonImporter.rb',
         loadPath: ['./node_modules/bootcamp/dist', './<%= dir.src %>']
       },
       all: {
