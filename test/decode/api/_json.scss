@@ -1,3 +1,6 @@
+// Relative to test/test.scss
+@import "decode/fixtures/test.json?testvar";
+
 @include describe("The json-decode should handle any JSON input") {
 
   @include it("should work for valid JSON") {
@@ -30,5 +33,10 @@
     @each $json in $broken-json {
       @include should(expect(json-decode($json)), to(equal(false)));
     }
+  }
+
+  // See fixtures
+  @include it("should load json from files"){
+    @include should(expect($testvar), to(equal(("test": 1))));
   }
 }
