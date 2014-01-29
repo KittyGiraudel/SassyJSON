@@ -1,6 +1,5 @@
-
 // Relative to test/test.scss
-@import "JSON:decode/fixtures/test.json";
+@import "decode/fixtures/test.json?testvar";
 
 @include describe("The json-decode should handle any JSON input") {
 
@@ -38,6 +37,6 @@
 
   // See fixtures
   @include it("should load json from files"){
-    @include should(expect($test), to(equal(("test": 1))));
+    @include should(expect($testvar), to(equal(("test": 1))));
   }
 }

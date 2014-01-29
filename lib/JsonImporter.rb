@@ -56,6 +56,7 @@ module Sass
 
       # @see Base#mtime
       def mtime(name, options)
+        name = strip_varname(name);
         file, _ = Sass::Util.destructure(find_real_file(@root, name, options))
         File.mtime(file) if file
       rescue Errno::ENOENT
@@ -64,6 +65,7 @@ module Sass
 
       # @see Base#key
       def key(name, options)
+        name = strip_varname(name);
         [self.class.name + ":" + File.dirname(File.expand_path(name)),
           File.basename(name)]
       end
@@ -198,21 +200,30 @@ WARNING
 
       private
 
-      def _find(dir, name, options)
-        return unless name.start_with?("JSON:")
-
-        name = name[5..-1]
-
-        full_filename, syntax = Sass::Util.destructure(find_real_file(dir, name, options))
-        return unless full_filename && File.readable?(full_filename)
-
-        options[:syntax]   = syntax
-        options[:filename] = full_filename
-        options[:importer] = self
-
-
-        Sass::Engine.new("$#{File.basename(full_filename,'.*')} : json_decode('" + File.read(full_filename) + "');", options)
+      def strip_varname(name)
+        name.include?(".json?") ? name[0..name.rindex("?")-1] : name
       end
+
+
+      def _find(dir, name, options)
+        if name.include? ".json?"
+          quotePos = name.rindex("?");
+          path = name[0..quotePos-1]
+          varname = name[quotePos+1..-1]
+
+          full_filename, syntax = Sass::Util.destructure(find_real_file(dir, path, options))
+          return unless full_filename && File.readable?(full_filename)
+
+          options[:syntax]   = syntax
+          options[:filename] = full_filename
+          options[:importer] = self
+
+          Sass::Engine.new("$#{varname} : json_decode('" + File.read(full_filename) + "');", options)
+        else
+          Sass::Engine.new("$hello:'test';", options)
+        end
+      end
+
     end
   end
 end
