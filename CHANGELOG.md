@@ -1,5 +1,6 @@
 # Changelog
 
+* `1.1.0`: adding the ability to import a JSON file
 * `1.0.11`: fixing an issue with scientific number parsing
 * `1.0.10`: improving number and string helpers
 * `1.0.9`: fixing a bug in `_find-exponent`

@@ -13,21 +13,21 @@
 
   @include it("should return false for invalid JSON") {
     $broken-json: (
-      '{"a":{"b":"c"},}'
-      '[1,2,3,'
-      '{"a":"green""b":"blue"}'
       '{"a":[1,2,3],"b""#000000"}'
       '{"a": invalid  {"b":"c"}}'
-      '{'
-      '@@@'
-      '[]]'
+      '{"a":"green""b":"blue"}'
+      '{"a":{"b":"c"},}'
+      '{[1...]}'
+      '[.5,,,]'
+      '[9..1]}'
+      '[1,2,3,'
       '{[""}'
       '[{]}'
       '{[}]'
-      '{[1...]}'
-      '[9..1]}'
-      '[.5,,,]'
       '{1}'
+      '@@@'
+      '[]]'
+      '{'
     );
 
     @each $json in $broken-json {
@@ -36,7 +36,7 @@
   }
 
   // See fixtures
-  @include it("should load json from files"){
+  @include it("should load json from files") {
     @include should(expect($testvar), to(equal(("test": 1))));
   }
 }

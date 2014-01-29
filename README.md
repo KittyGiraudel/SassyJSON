@@ -26,7 +26,9 @@ npm install sassyjson --save-dev
 
 ### Sass
 
-If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/HugoGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/HugoGiraudel/SassyJSON/tree/master/dist) folder. You can copy its content directly into [Sassmeister](http://sassmeister.com/) to play with the code.
+If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/HugoGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/HugoGiraudel/SassyJSON/tree/master/dist) folder.
+
+Also, SassyJSON is available at [Sassmeister](http://sassmeister.com/).
 
 ## Example
 
@@ -68,6 +70,20 @@ If you want to restrict the output to only one of the three drivers (comment, me
 $json-decode: json-decode('{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}');
 // ("a": 1 2 ("b": 1), "b": #444444 false ("a": 1, "b": "test"), "c": 2 3 4 "string")
 ```
+
+## Importing and decoding a JSON file
+
+To importe and decode an external `.json` file directly into a Sass variable:
+
+``` scss
+@import 'relative/path/to/file.json?variable-name'
+// Do something with $variable-name
+```
+
+**Important:**
+
+* the path to the JSON file is relative to importing file
+* the get parameter is the variable name to use it in Sass
 
 ## Requirements
 
