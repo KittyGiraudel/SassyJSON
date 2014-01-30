@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   # Gem Bookkeeping
   s.required_rubygems_version = ">= 1.3.6"
   s.rubygems_version = %q{1.3.6}
+
   # Deps
-  s.add_runtime_dependency 'sass', '>= 3.3'
+  #s.add_runtime_dependency 'sass', '>= 3.3.0'
 end
