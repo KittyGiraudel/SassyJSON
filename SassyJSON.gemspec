@@ -26,7 +26,12 @@ Gem::Specification.new do |s|
   # Sass Files
   s.files += Dir.glob("stylesheets/**/*.*")
 
+  # Add to require
+  s.require_paths = ["lib", "stylesheets"]
+
   # Gem Bookkeeping
   s.required_rubygems_version = ">= 1.3.6"
   s.rubygems_version = %q{1.3.6}
+  # Deps
+  s.add_runtime_dependency 'sass', '>= 3.3'
 end
