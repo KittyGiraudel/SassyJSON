@@ -76,7 +76,8 @@ $json-decode: json-decode('{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a":
 To importe and decode an external `.json` file directly into a Sass variable:
 
 ``` scss
-@import 'relative/path/to/file.json?variable-name'
+@import 'SassyJSON'; // Import SassyJSON first!
+@import 'relative/path/to/file.json?variable-name';
 // Do something with $variable-name
 ```
 
