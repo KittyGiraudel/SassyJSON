@@ -1,5 +1,5 @@
 {
   "name": "SassyJSON",
   "description": "SassyJSON is a Sass-powered API for JSON. It provides you the classic json-encode and json-decode directly from your Sass files. We'll leave you the only judges of the point of this.",
-  "tags": ["json"]
+  "tags": ["json", "sass"]
 }
