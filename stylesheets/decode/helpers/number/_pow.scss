@@ -6,8 +6,8 @@
 // @return [number] $x ^ $n
 
 @function _pow($x, $n) {
+  @if $n == 0 { @return 1; }
   $ret: 1;
-
   @if $n >= 0 {
     @for $i from 1 through $n {
       $ret: $ret * $x;

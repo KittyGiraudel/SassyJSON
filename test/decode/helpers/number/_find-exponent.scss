@@ -8,6 +8,7 @@
 
   @include it("should return the exponent part of a stringified number as a second argument") {
     @include should(expect(nth(_find-exponent('e-1', 1), 2)), to(equal(-1)));
+    @include should(expect(nth(_find-exponent('e0', 1), 2)), to(equal(0)));
     @include should(expect(nth(_find-exponent('e2', 1), 2)), to(equal(2)));
     @include should(expect(nth(_find-exponent('e-3', 1), 2)), to(equal(-3)));
     @include should(expect(nth(_find-exponent('e4', 1), 2)), to(equal(4)));
