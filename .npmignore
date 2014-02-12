@@ -1,4 +1,6 @@
-.sass-cache
 node_modules
 tmp
 dist
+.*
+sache.json
+.gemspec
