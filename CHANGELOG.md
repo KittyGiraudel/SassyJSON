@@ -1,5 +1,7 @@
 # Changelog
 
+* `1.1.3`: fixed error in `_pow` introduced after updating to Sass 3.3.0.rc.3
+* `1.1.2`: Made it possible to import JSON files via `@import 'relative/path/to/file.json?variable-name'`
 * `1.1.1`: fixing a minor issue with the gem
 * `1.1.0`: adding the ability to import a JSON file
 * `1.0.11`: fixing an issue with scientific number parsing

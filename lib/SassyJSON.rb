@@ -7,6 +7,6 @@ Compass::Frameworks.register('SassyJSON', :path => extension_path)
 #  Version is a number. If a version contains alphas, it will be created as a prerelease version
 #  Date is in the form of YYYY-MM-DD
 module SassyJSON
-  VERSION = "1.1.2"
-  DATE = "2014-01-29"
+  VERSION = "1.1.3"
+  DATE = "2014-02-12"
 end
