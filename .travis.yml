@@ -1,7 +1,9 @@
 language: node_js
+branches:
+  only:
+    - master
 git:
   depth: 1
-  branch: master
 node_js:
   - '0.8'
   - '0.10'
