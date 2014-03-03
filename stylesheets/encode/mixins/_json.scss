@@ -11,12 +11,14 @@
   @if $flag == comment or $flag == all {
     /*! json-encode: #{$json} */
   }
-  
   // Regular property value pair
   @if $flag == regular or $flag == all {
-    // All browsers except IE8- 
+    // All browsers except IE8-
     body::before {
-      display: none !important;
+      // This element must be in the render tree to get it via getComputedStyle(document.body, ':before');
+      display:block;
+      width:0;height:0;
+      overflow:hidden;
       content: json-encode($value);
     }
 
