@@ -1,5 +1,7 @@
 # Changelog
 
+* `1.1.5`: Fixed `json-encode` mixin to keep `body::before` in the render tree. Making it possible to access via `getComputedStyle(document.body, ':before')`
+* `1.1.4`: Small fix for the `npm` release
 * `1.1.3`: fixed error in `_pow` introduced after updating to Sass 3.3.0.rc.3
 * `1.1.2`: Made it possible to import JSON files via `@import 'relative/path/to/file.json?variable-name'`
 * `1.1.1`: fixing a minor issue with the gem
