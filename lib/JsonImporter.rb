@@ -218,9 +218,7 @@ WARNING
           options[:filename] = full_filename
           options[:importer] = self
 
-          Sass::Engine.new("$#{varname} : json_decode('" + File.read(full_filename) + "');", options)
-        else
-          Sass::Engine.new("$hello:'test';", options)
+          Sass::Engine.new("$#{varname} : json_decode('" + File.read(full_filename).delete("\n|\r")  + "');", options)
         end
       end
 
