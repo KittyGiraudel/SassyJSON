@@ -1,5 +1,5 @@
 # Changelog
-
+* `1.1.6`: JSON files that are loaded via `@import "data.json?varname` can be pretty printed now.
 * `1.1.5`: Fixed `json-encode` mixin to keep `body::before` in the render tree. Making it possible to access via `getComputedStyle(document.body, ':before')`
 * `1.1.4`: Small fix for the `npm` release
 * `1.1.3`: fixed error in `_pow` introduced after updating to Sass 3.3.0.rc.3
