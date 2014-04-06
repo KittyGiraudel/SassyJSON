@@ -13,10 +13,10 @@
   }
 
   $last: str-slice($string, -1, -1);
-  
+
   @return if(
-    $last == '%', 
-    nth(_json-decode--number(str-slice($string, 1, -2), 2), 2) * 1%, 
+    $last == '%',
+    nth(_json-decode--number(str-slice($string, 1, -2), 2), 2) * 1%,
     nth(_json-decode--number($string, 2), 2)
   );
 }

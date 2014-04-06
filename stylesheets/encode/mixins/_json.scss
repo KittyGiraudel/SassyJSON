@@ -16,10 +16,11 @@
     // All browsers except IE8-
     body::before {
       // This element must be in the render tree to get it via getComputedStyle(document.body, ':before');
-      display:block;
-      width:0;height:0;
-      overflow:hidden;
       content: json-encode($value);
+      display: block;
+      height: 0;
+      overflow: hidden;
+      width: 0;
     }
 
     // All browsers except Opera (Presto based)
