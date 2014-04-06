@@ -26,6 +26,6 @@
     "bootcamp": "~1.1.4",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-scsslint": "0.0.8"
+    "grunt-scsslint": "0.1.0"
   }
 }
