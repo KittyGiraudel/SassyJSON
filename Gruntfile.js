@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-scsslint');
   grunt.loadNpmTasks('bootcamp');
 
   // Grunt Tasks
@@ -86,6 +87,29 @@ module.exports = function(grunt) {
       }
     },
 
+    scsslint : {
+      options : {
+        excludeLinter : [
+          'ColorKeyword',
+          'NameFormat',
+          'StringQuotes',
+          'SpaceBeforeBrace',
+          'SpaceAfterComma',
+          'Comment',
+          'PropertySpelling'
+        ]
+      },
+      all: {
+        src : ['<%= dir.src %>/**/*']
+      },
+      decoder: {
+        src : ['<%= dir.src %>/decoder/**/*']
+      },
+      encoder: {
+        src : ['<%= dir.src %>/encoder/**/*']
+      }
+    },
+
     // Bootcamp
     bootcamp: {
       all: {
@@ -135,9 +159,10 @@ module.exports = function(grunt) {
   grunt.registerTask('test', function (arg){
     arg = arg || "all";
 
-    var tasks = ['sass', 'bootcamp'].map(function (item){
+    var tasks = ['scsslint', 'sass', 'bootcamp'].map(function (item){
       return item + ":" + arg;
     });
+
 
     grunt.task.run(tasks);
   });
