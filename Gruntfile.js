@@ -93,7 +93,6 @@ module.exports = function(grunt) {
           'ColorKeyword',
           'NameFormat',
           'StringQuotes',
-          'SpaceBeforeBrace',
           'SpaceAfterComma',
           'Comment',
           'PropertySpelling'

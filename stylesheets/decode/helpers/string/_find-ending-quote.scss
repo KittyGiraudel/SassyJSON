@@ -4,7 +4,7 @@
 // --------------------------------------------------------------------------------
 // @return [number] position of the first non escaped quote
 
-@function _find-ending-quote($string){
+@function _find-ending-quote($string) {
   $backslash: str-slice('\\', 1, 1); // Dirty hack to have a single backslash
   $escaped-chars: '"\/bfnrtu'; // Characters that can be escaped in JSON
   $hexadecimal-chars: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '0' 'a' 'b' 'c' 'd' 'e' 'f';
