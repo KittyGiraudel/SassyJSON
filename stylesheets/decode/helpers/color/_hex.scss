@@ -29,12 +29,12 @@
     @else if str-length($g) < $max { $g: $g + $c }
     @else if str-length($b) < $max { $b: $b + $c }
   }
-  
+
   @if $length == 4 {
     $r: $r + $r;
     $g: $g + $g;
     $b: $b + $b;
   }
-  
+
   @return rgb(_hex-to-dec($r), _hex-to-dec($g), _hex-to-dec($b));
 }

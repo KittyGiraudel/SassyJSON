@@ -41,7 +41,7 @@
     @else {
       $frags: set-nth($frags, length($frags), nth($frags, length($frags)) + $token);
     }
-  } 
+  }
 
   @return $string;
 }
