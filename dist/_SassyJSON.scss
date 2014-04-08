@@ -1,4 +1,4 @@
-/*! sassyjson - v1.1.6 - 2014-03-07 */
+/*! sassyjson - v1.1.7 - 2014-04-08 */
 // Logs an error at `$pointer` with `$string` message
 // --------------------------------------------------------------------------------
 // @param [string] $string: error message
@@ -101,7 +101,7 @@
 // --------------------------------------------------------------------------------
 // @return [number] position of the first non escaped quote
 
-@function _find-ending-quote($string){
+@function _find-ending-quote($string) {
   $backslash: str-slice('\\', 1, 1); // Dirty hack to have a single backslash
   $escaped-chars: '"\/bfnrtu'; // Characters that can be escaped in JSON
   $hexadecimal-chars: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '0' 'a' 'b' 'c' 'd' 'e' 'f';
@@ -123,7 +123,7 @@
             not index($hexadecimal-chars, str-slice($string, $pos + 2, $pos + 2)) or
             not index($hexadecimal-chars, str-slice($string, $pos + 3, $pos + 3)) or
             not index($hexadecimal-chars, str-slice($string, $pos + 4, $pos + 4)) {
-            @return 0;
+          @return 0;
         }
 
         $pos: $pos + 4;
@@ -185,7 +185,7 @@
   $units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
   $number: "";
   $unit: "";
-  
+
   @for $i from 1 through str-length($string) {
     $c: str-slice($string, $i, $i);
     @if $c == ' ' {
@@ -203,7 +203,7 @@
       $unit: $unit + $c;
     }
   }
-  
+
   $number: nth(_json-decode--number($number, 2), 2);
   $index: index($strings, to-lower-case($unit));
 
@@ -213,6 +213,7 @@
 
   @return $string;
 }
+
 // Parses a JSON encoded string to see if it's a CSS color
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
@@ -279,10 +280,10 @@
   }
 
   $last: str-slice($string, -1, -1);
-  
+
   @return if(
-    $last == '%', 
-    nth(_json-decode--number(str-slice($string, 1, -2), 2), 2) * 1%, 
+    $last == '%',
+    nth(_json-decode--number(str-slice($string, 1, -2), 2), 2) * 1%,
     nth(_json-decode--number($string, 2), 2)
   );
 }
@@ -330,10 +331,11 @@
     @else {
       $frags: set-nth($frags, length($frags), nth($frags, length($frags)) + $token);
     }
-  } 
+  }
 
   @return $string;
 }
+
 // Cast a JSON encoded string into a rgb(a) color
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
@@ -377,10 +379,11 @@
     @else {
       $frags: set-nth($frags, length($frags), nth($frags, length($frags)) + $token);
     }
-  } 
+  }
 
   @return $string;
 }
+
 // Cast a JSON encoded string into a hexadecimal color
 // --------------------------------------------------------------------------------
 // @param [string] $string: JSON string
@@ -412,35 +415,37 @@
     @else if str-length($g) < $max { $g: $g + $c }
     @else if str-length($b) < $max { $b: $b + $c }
   }
-  
+
   @if $length == 4 {
     $r: $r + $r;
     $g: $g + $g;
     $b: $b + $b;
   }
-  
+
   @return rgb(_hex-to-dec($r), _hex-to-dec($g), _hex-to-dec($b));
 }
+
 // Convert an hexadecimal number to a decimal number
 // --------------------------------------------------------------------------------
 // @param [string] $string: hexadecimal value
 // --------------------------------------------------------------------------------
 // @return [number] decimal number
 
-@function _hex-to-dec($string){
+@function _hex-to-dec($string) {
   $hex: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f";
   $string: to-lower-case($string);
   $length: str-length($string);
-  
+
   $dec: 0;
   @for $i from 1 through $length {
-    $factor: 1 + ( 15 * ( $length - $i ));
+    $factor: 1 + (15 * ($length - $i));
     $index: index($hex, str-slice($string, $i, $i));
     $dec: $dec + $factor * ($index - 1);
   }
-  
+
   @return $dec;
-} 
+}
+
 // Power function
 // --------------------------------------------------------------------------------
 // @param [number] $x: number
@@ -1028,10 +1033,11 @@
     // All browsers except IE8-
     body::before {
       // This element must be in the render tree to get it via getComputedStyle(document.body, ':before');
-      display:block;
-      width:0;height:0;
-      overflow:hidden;
       content: json-encode($value);
+      display: block;
+      height: 0;
+      overflow: hidden;
+      width: 0;
     }
 
     // All browsers except Opera (Presto based)
@@ -1049,12 +1055,13 @@
     }
   }
 }
+
 // Delay the encoding of ta literal to JSON
 // to a type-specific method
 // --------------------------------------------------------------------------------
 // @param $value: value to be stringified
 // --------------------------------------------------------------------------------
-// @throw "Unknown type for $value ({x})."
+// @throw "Unknown type for $value ( {x} )."
 // --------------------------------------------------------------------------------
 // @return [string|false] JSON encoded string
 
@@ -1062,7 +1069,7 @@
   $type: type-of($value);
   @if function_exists('_json-encode--#{$type}') {
     @return call('_json-encode--#{$type}', $value);
-  } 
+  }
   @warn "Unknown type for #{$value} (#{$type}).";
   @return false;
 }
