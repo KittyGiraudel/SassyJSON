@@ -13,7 +13,7 @@
 
   @for $i from $start through $length {
     $token: str-slice($string-lower, $i, $i);
-    @if $token == ' ' {
+    @if $token == ' ' or $token == "	" {
       // @continue;
     }
     @else if $token == '(' or $token == ',' {

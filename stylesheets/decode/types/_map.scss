@@ -32,7 +32,7 @@
       @return ($pointer, $map);
     }
 
-    @else if $token == " " {
+    @else if $token == " " or $token == "	" {
       // @continue;
     }
 
