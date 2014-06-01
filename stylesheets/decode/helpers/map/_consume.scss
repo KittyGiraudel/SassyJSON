@@ -20,7 +20,7 @@
       @return $pointer;
     }
 
-    @else if $char == " " {
+    @else if $char == " " or $char == "	" {
       // @continue;
     }
 

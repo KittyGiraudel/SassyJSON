@@ -16,7 +16,7 @@
 
   @for $i from 1 through str-length($string) {
     $c: str-slice($string, $i, $i);
-    @if $c == ' ' {
+    @if $c == ' ' or $c == "	" {
       @if $number != "" {
         @return $string;
       }
