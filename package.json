@@ -1,6 +1,6 @@
 {
   "name": "sassyjson",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A Sass API for JSON.",
   "scripts": {
     "test": "grunt test"
