@@ -1,5 +1,6 @@
 # Changelog
-* `1.1.7`: Include cosmetic changes made after linting with [scss-lint](https://github.com/causes/scss-lint)
+* `1.1.8`: Solved an issue with tabs
+* `1.1.7`: Included cosmetic changes made after linting with [scss-lint](https://github.com/causes/scss-lint)
 * `1.1.6`: JSON files that are loaded via `@import "data.json?varname` can be pretty printed now.
 * `1.1.5`: Fixed `json-encode` mixin to keep `body::before` in the render tree. Making it possible to access via `getComputedStyle(document.body, ':before')`
 * `1.1.4`: Small fix for the `npm` release
