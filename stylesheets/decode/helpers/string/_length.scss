@@ -1,11 +1,10 @@
-// Parses a JSON encoded string to see if it's a CSS length
-// --------------------------------------------------------------------------------
-// @param [string] $string: JSON string
-// --------------------------------------------------------------------------------
-// @return [number|string] string or number, depending on the match
-
+/// Parses a JSON encoded string to see if it's a CSS length
+/// @access private
+/// @param {String} $string - JSON string
+/// @return {Number | String} - string or number, depending on the match
+/// @require {function} _json-decode--number
 @function _length($string) {
-  @if type-of($string) == number {
+  @if type-of($string) == "number" {
     @return $string;
   }
 
@@ -20,11 +19,9 @@
       @if $number != "" {
         @return $string;
       }
-    }
-    @else if index('0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '-' '.', $c) {
+    } @else if index('0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '-' '.', $c) {
       $number: $number + $c;
-    }
-    @else {
+    } @else {
       @if $number == "" {
         @return $string;
       }

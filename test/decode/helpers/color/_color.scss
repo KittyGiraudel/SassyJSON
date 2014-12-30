@@ -1,5 +1,5 @@
 @include describe("The _color function") {
-  @include it("should decode CSS colors to color type") {   
+  @include it("should decode CSS colors to color type") {
     @include should(expect(type-of(_color('#ff0'))), to(equal('color')));
     @include should(expect(type-of(_color('#000000'))), to(equal('color')));
     @include should(expect(type-of(_color('#ffffff'))), to(equal('color')));
@@ -20,35 +20,16 @@
     }
   }
 
-  @include it("should decode CSS colors properly when caps are used") {   
+  @include it("should decode CSS colors properly when caps are used") {
     @include should(expect(type-of(_color('BLACK'))), to(equal('color')));
     @include should(expect(type-of(_color('transparent'))), to(equal('color')));
     @include should(expect(type-of(_color('#FFFFFF'))), to(equal('color')));
     @include should(expect(type-of(_color('RGB(100, 100, 100)'))), to(equal('color')));
   }
 
-  @include it("should decode properly when weird spaces are used") {   
+  @include it("should decode properly when weird spaces are used") {
     @include should(expect(type-of(_color('rgb( 100 , 100 , 100 )'))), to(equal('color')));
     @include should(expect(type-of(_color('hsl( 100 , 100 , 100 )'))), to(equal('color')));
   }
 
-  @include it("should return string type if mistyped color") {
-    @include should(expect(type-of(_color('rgb(100, 100, c)'))), to(equal('string')));
-    @include should(expect(type-of(_color('rgb(100, c, 100)'))), to(equal('string')));
-    @include should(expect(type-of(_color('rgb(c, 100, 100)'))), to(equal('string')));
-    @include should(expect(type-of(_color('rgba(100, 100, 100, c)'))), to(equal('string')));
-    @include should(expect(type-of(_color('rgba(100, c, 100, 0.5)'))), to(equal('string')));
-    @include should(expect(type-of(_color('rgba(c, 100, 100, 0.5)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsl(100, 100, c)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsl(100, c, 100)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsl(c, 100, 100)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsla(100, 100, 100, c)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsla(100, c, 100, 0.5)'))), to(equal('string')));
-    @include should(expect(type-of(_color('hsla(c, 100, 100, 0.5)'))), to(equal('string')));
-    @include should(expect(type-of(_color('#has'))), to(equal('string')));
-    @include should(expect(type-of(_color('#hashta'))), to(equal('string')));
-    @include should(expect(type-of(_color('bule'))), to(equal('string')));
-    @include should(expect(type-of(_color('rde'))), to(equal('string')));
-    @include should(expect(type-of(_color('yelowgren'))), to(equal('string')));
-  }
 }

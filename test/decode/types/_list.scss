@@ -22,15 +22,6 @@
     //@include should(expect(nth(_json-decode--list('[ ]', 2), 2)), to(equal(())));
   }
 
-  @include it("should return false when arrays are invalid") {
-    @include should(expect(nth(_json-decode--list('[0, 1, 2', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--list('0, 1, 2]', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--list('[0 1, 2]', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--list('[0 1,, 2]', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--list('[0 1, 2,]', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--list('[,0 1,, 2,]', 2), 2)), to(equal(false)));
-  }
-
   @include it("should decode to list type") {
     @include should(expect(type-of(nth(_json-decode--list('[0, 1, 2, 3]', 2), 2))), to(equal('list')));
     @include should(expect(type-of(nth(_json-decode--list('["a", "b", "c", "d"]', 2), 2))), to(equal('list')));

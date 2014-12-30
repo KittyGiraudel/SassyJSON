@@ -1,9 +1,7 @@
-// Convert an hexadecimal number to a decimal number
-// --------------------------------------------------------------------------------
-// @param [string] $string: hexadecimal value
-// --------------------------------------------------------------------------------
-// @return [number] decimal number
-
+/// Convert an hexadecimal number to a decimal number
+/// @access private
+/// @param {String} $string - hexadecimal value
+/// @return {Number} - decimal number
 @function _hex-to-dec($string) {
   $hex: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f";
   $string: to-lower-case($string);

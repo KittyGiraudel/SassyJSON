@@ -1,34 +1,31 @@
-// Parses a JSON encoded `true`
-// --------------------------------------------------------------------------------
-// @param [string] $source: JSON complete source
-// @param [number] $pointer: current pointer
-// --------------------------------------------------------------------------------
-// @throw "Unexpected token `t`."
-// --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, true)
-
+/// Parses a JSON encoded `true`
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @throw Unexpected token `t`.
+/// @return {List} - (new pointer, true)
+/// @require {function} _throw
 @function _json-decode--true($source, $pointer) {
   $length: str-length($source);
+
   @if $length - $pointer < 2
   or str-slice($source, $pointer, $pointer) != 'r'
   or str-slice($source, $pointer + 1, $pointer + 1) != 'u'
   or str-slice($source, $pointer + 2, $pointer + 2) != 'e' {
     @return _throw("Unexpected token: `t`.", $pointer);
   }
+
   @return ($pointer + 3, true);
 }
 
-// Parses a JSON encoded `false`
-// --------------------------------------------------------------------------------
-// @param $source: JSON complete source
-// @param $pointer: current pointer
-// --------------------------------------------------------------------------------
-// @throw "Unexpected token `f`."
-// --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, false)
-
+/// Parses a JSON encoded `false`
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @throw Unexpected token `f`.
+/// @return {List} - (new pointer, false)
+/// @require {function} _throw
 @function _json-decode--false($source, $pointer) {
   $length: str-length($source);
+
   @if $length - $pointer < 3
   or str-slice($source, $pointer, $pointer) != 'a'
   or str-slice($source, $pointer + 1, $pointer + 1) != 'l'
@@ -36,5 +33,6 @@
   or str-slice($source, $pointer + 3, $pointer + 3) != 'e' {
     @return _throw("Unexpected token: `f`.", $pointer);
   }
+
   @return ($pointer + 4, false);
 }

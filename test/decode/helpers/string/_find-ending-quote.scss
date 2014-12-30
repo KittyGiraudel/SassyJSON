@@ -5,7 +5,7 @@
     @include should(expect(_find-ending-quote('tes   t" "')), to(equal(8)));
     @include should(expect(_find-ending-quote('tes\"\\\"\"   t" "')), to(equal(4)));
   }
-  @include it("should return 0 if no quote was found") {
+  @include it("should return zero if no quote was found") {
     @include should(expect(_find-ending-quote('')), to(equal(0)));
     @include should(expect(_find-ending-quote('safasfdasdf')), to(equal(0)));
     @include should(expect(_find-ending-quote('safas\\"fdasdf')), to(equal(0)));

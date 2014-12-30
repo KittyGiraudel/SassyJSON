@@ -27,12 +27,6 @@
     $test-26: nth(_json-decode--number('1E-0', 2), 2);
     $test-27: nth(_json-decode--number('1E-1', 2), 2);
     $test-28: nth(_json-decode--number('1E-2', 2), 2);
-    $test-29: nth(_json-decode--number('  1  ', 2), 2);
-    $test-30: nth(_json-decode--number('1e', 2), 2);
-    $test-31: nth(_json-decode--number('1e+', 2), 2);
-    $test-32: nth(_json-decode--number('1e-', 2), 2);
-    $test-33: nth(_json-decode--number('.1', 2), 2);
-    $test-34: nth(_json-decode--number('1.', 2), 2);
 
   @include it("should properly decode integers") {
     @include should(expect($test-1), to(equal(0)));
@@ -77,15 +71,6 @@
     @include should(expect($test-28), to(equal(.01)));
   }
 
-  @include it("should return false whenever the value is not valid JSON") {
-    @include should(expect($test-29), to(equal(false)));
-    @include should(expect($test-30), to(equal(false)));
-    @include should(expect($test-31), to(equal(false)));
-    @include should(expect($test-32), to(equal(false)));
-    @include should(expect($test-33), to(equal(false)));
-    @include should(expect($test-34), to(equal(false)));
-  }
-
   @include it("should decode to number type") {
     @include should(expect(type-of($test-1 )), to(equal('number')));
     @include should(expect(type-of($test-2 )), to(equal('number')));
@@ -115,11 +100,5 @@
     @include should(expect(type-of($test-26)), to(equal('number')));
     @include should(expect(type-of($test-27)), to(equal('number')));
     @include should(expect(type-of($test-28)), to(equal('number')));
-  }
-
-  @include it("should return false when syntax is invalid JSON") {
-    @include should(expect(nth(_json-decode--number('1e+-1', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--number('1e-+1', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--number('1a-+1', 2), 2)), to(equal(false)));
   }
 }

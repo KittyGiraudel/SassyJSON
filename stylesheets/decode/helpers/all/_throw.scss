@@ -1,11 +1,7 @@
-// Logs an error at `$pointer` with `$string` message
-// --------------------------------------------------------------------------------
-// @param [string] $string: error message
-// @param [number] $pointer: pointer position
-// --------------------------------------------------------------------------------
-// @return [list] (pointer, false)
-
+/// Logs an error at `$pointer` with `$string` message
+/// @access private
+/// @param {String} $string - error message
+/// @param {Number} $pointer - pointer position
 @function _throw($string, $pointer) {
-  @warn "ERROR::#{$pointer}::#{$string}";
-  @return $pointer, false;
+  @error "ERROR::#{$pointer}::#{$string}";
 }

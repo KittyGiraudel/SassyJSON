@@ -16,21 +16,6 @@
     @include should(expect(nth(_json-decode--map('{"a":1,"b":2} ', 2), 2)), to(equal(("a": 1, "b": 2))));
   }
 
-  @include it("should properly decode empty objects") {
-    //@include should(expect(nth(_json-decode--map('{}', 2), 2)), to(equal(())));
-    //@include should(expect(nth(_json-decode--map('{ }', 2), 2)), to(equal(())));
-  }
-
-  @include it("should return false when objects are invalid") {
-    @include should(expect(nth(_json-decode--map('{"a": 0', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('"a": 0}', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('{"a":: 0}', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('{"a" 0}', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('{"a", 0}', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('{"a": 0,}', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--map('{,"a": 0}', 2), 2)), to(equal(false)));
-  }
-
   @include it("should decode to map type") {
     @include should(expect(type-of(nth(_json-decode--map('{"a": 1}', 2), 2))), to(equal('map')));
     @include should(expect(type-of(nth(_json-decode--map('{"a": 1, "b": "string", "c": true}', 2), 2))), to(equal('map')));

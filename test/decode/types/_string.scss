@@ -7,11 +7,6 @@
     @include should(expect(nth(_json-decode--string('"   test with outer spaces   "', 2), 2)), to(equal("   test with outer spaces   ")));
   }
 
-  @include it("should return false if no end of string is found") {
-    @include should(expect(nth(_json-decode--string('"test', 2), 2)), to(equal(false)));
-    @include should(expect(nth(_json-decode--string('"test\\"', 2), 2)), to(equal(false)));
-  }
-
   @include it("should decode to string type") {
     @include should(expect(type-of(nth(_json-decode--string('""', 2), 2))), to(equal('string')));
     @include should(expect(type-of(nth(_json-decode--string('"1 px"', 2), 2))), to(equal('string')));

@@ -1,9 +1,7 @@
-// Proof quote a value
-// --------------------------------------------------------------------------------
-// @param $value: value to be quoted
-// --------------------------------------------------------------------------------
-// @return [string] quoted value
-
+/// Proof quote a value
+/// @access private
+/// @param {*} $value - value to be quoted
+/// @return {String} - quoted value
 @function _proof-quote($value) {
   @return '"' + $value + '"';
 }

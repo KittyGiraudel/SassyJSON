@@ -27,11 +27,4 @@
     @include should(expect(type-of(_get-color-value('0.5%'))), to(equal('number')));
     @include should(expect(type-of(_get-color-value('.5%'))), to(equal('number')));
   }
-
-  @include it("should return false whenever the value is not castable to number") {
-    @include should(expect(_get-color-value('a')), to(equal(false)));
-    @include should(expect(_get-color-value('false')), to(equal(false)));
-    @include should(expect(_get-color-value('true')), to(equal(false)));
-    @include should(expect(_get-color-value('[a, b, c]')), to(equal(false)));
-  }
 }

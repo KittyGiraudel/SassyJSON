@@ -1,12 +1,10 @@
-// Parses a JSON encoded number to find the exponent part
-// --------------------------------------------------------------------------------
-// @param [string] $source: JSON complete source
-// @param [number] $pointer: current pointer
-// --------------------------------------------------------------------------------
-// @throw "Unexpected token $token."
-// --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, parsed number)
-
+/// Parses a JSON encoded number to find the exponent part
+/// @access private
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @throw Unexpected token $token.
+/// @return {List} - (new pointer, parsed number)
+/// @require {function} _throw
 @function _find-exponent($source, $pointer) {
   $source: to-lower-case($source);
   $length: str-length($source);
@@ -20,24 +18,20 @@
 
     @if $token == 'e' {
       // @continue;
-    }
-    @else if $token == '-' {
+    } @else if $token == '-' {
       @if $minus != null {
         @return _throw("Unexpected token `-`.", $pointer);
       }
       $minus: true;
-    }
-    @else if $token == '+' {
+    } @else if $token == '+' {
       @if $minus != null {
         @return _throw("Unexpected token `+`.", $pointer);
       }
       $minus: false;
-    }
-    @else if $index and $index > 0 {
+    } @else if $index and $index > 0 {
       $result: if($result == null, ($index - 1), $result * 10 + ($index - 1));
-    }
-    @else {
-      @if not index(' ' ',' ']' '}', $token) {
+    } @else {
+      @if index(' ' ',' ']' '}', $token) == null {
         @return _throw("Unexpected token `" + $token + "`.", $pointer);
       }
 

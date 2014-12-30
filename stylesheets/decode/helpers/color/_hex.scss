@@ -1,9 +1,8 @@
-// Cast a JSON encoded string into a hexadecimal color
-// --------------------------------------------------------------------------------
-// @param [string] $string: JSON string
-// --------------------------------------------------------------------------------
-// @return [color|string] string or hex color depending on the match
-
+/// Cast a JSON encoded string into a hexadecimal color
+/// @access private
+/// @param {String} $string - JSON string
+/// @return {Color | String} - string or hex color depending on the match
+/// @require {function} _hex-to-dec
 @function _from-hex($string) {
   $string-lower: to-lower-case($string);
   $r: "";  $g: ""; $b: "";
@@ -21,13 +20,17 @@
     $c: str-slice($string-lower, $i, $i);
 
     // If wrong character, return
-    @if not index($hex, $c) {
+    @if index($hex, $c) == null {
       @return $string;
     }
 
-    @if      str-length($r) < $max { $r: $r + $c }
-    @else if str-length($g) < $max { $g: $g + $c }
-    @else if str-length($b) < $max { $b: $b + $c }
+    @if      str-length($r) < $max {
+      $r: $r + $c;
+    } @else if str-length($g) < $max {
+      $g: $g + $c;
+    } @else if str-length($b) < $max {
+      $b: $b + $c;
+    }
   }
 
   @if $length == 4 {

@@ -1,14 +1,19 @@
-// Delay parsing to type-specific function
-// according to found character
-// --------------------------------------------------------------------------------
-// @param [string] $source: JSON complete source
-// @param [number] $pointer: current pointer
-// --------------------------------------------------------------------------------
-// @throw "Unexpected token $token."
-// @throw "Empty JSON string."
-// --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, parsed value)
-
+/// Delay parsing to type-specific function
+/// @access private
+/// according to found character
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @throw Unexpected token $token.
+/// @throw Empty JSON string.
+/// @return {List} - (new pointer, parsed value)
+/// @require {function} _throw
+/// @require {function} _json-decode--map
+/// @require {function} _json-decode--list
+/// @require {function} _json-decode--true
+/// @require {function} _json-decode--false
+/// @require {function} _json-decode--string
+/// @require {function} _json-decode--null
+/// @require {function} _json-decode--number
 @function _json-decode--value($source, $pointer) {
   $length: str-length($source);
 
@@ -18,30 +23,22 @@
 
     @if $token == '{' {
       @return _json-decode--map($source, $pointer);
-    }
-    @else if $token == '[' {
+    } @else if $token == '[' {
       @return _json-decode--list($source, $pointer);
-    }
-    @else if $token == 't' {
+    } @else if $token == 't' {
       @return _json-decode--true($source, $pointer);
-    }
-    @else if $token == 'f' {
+    } @else if $token == 'f' {
       @return _json-decode--false($source, $pointer);
-    }
-    @else if $token == '"' {
+    } @else if $token == '"' {
       @return _json-decode--string($source, $pointer);
-    }
-    @else if $token == 'n' {
+    } @else if $token == 'n' {
       @return _json-decode--null($source, $pointer);
-    }
-    @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $token) {
+    } @else if index('1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '.', $token) {
       @return _json-decode--number($source, $pointer);
-    }
-    @else if $token == ' ' or $token == "	" {
+    } @else if $token == ' ' or $token == "	" {
       // @continue;
-    }
-    @else {
-      @return _throw("Unexpected token `" + $token + "`.", $pointer);
+    } @else {
+      @return _throw("Unexpected token `#{$token}`.", $pointer);
     }
   }
 

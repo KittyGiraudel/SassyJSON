@@ -1,14 +1,12 @@
-// Move pointer to position of token
-// --------------------------------------------------------------------------------
-// @param [string] $source: JSON complete source
-// @param [number] $pointer: current pointer
-// @param [string] $token: token to reach
-// --------------------------------------------------------------------------------
-// @throw "Expected $token; found {x}."
-// @throw "Expected $token but reached end of stream."
-// --------------------------------------------------------------------------------
-// @return [number|false] new pointer
-
+/// Move pointer to position of token
+/// @access private
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @param {String} $token - token to reach
+/// @throw Expected $token; found $char.
+/// @throw Expected $token but reached end of stream.
+/// @return {Number} - new pointer
+/// @require {function} _throw
 @function _consume($source, $pointer, $token) {
   $length: str-length($source);
 
@@ -18,16 +16,12 @@
 
     @if $char == $token {
       @return $pointer;
-    }
-
-    @else if $char == " " or $char == "	" {
+    } @else if $char == " " or $char == "	" {
       // @continue;
-    }
-
-    @else {
-      @return _throw("Expected `" + $token + "; ` found `" + $char + "`.", $pointer);
+    } @else {
+      @return _throw("Expected `#{$token}`; found `#{$char}`.", $pointer);
     }
   }
 
-  @return _throw("Expected `" + $token + "` but reached end of stream.", $pointer);
+  @return _throw("Expected `#{$token}` but reached end of stream.", $pointer);
 }

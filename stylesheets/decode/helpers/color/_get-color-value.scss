@@ -1,9 +1,8 @@
-// Cast a stringified number / stringified percentage into number type
-// --------------------------------------------------------------------------------
-// @param [string] $string: JSON string
-// --------------------------------------------------------------------------------
-// @return [number] unitless number or percentage
-
+/// Cast a stringified number / stringified percentage into number type
+/// @access private
+/// @param {String} $string - JSON string
+/// @return {Number} - unitless number or percentage
+/// @require {function} _json-decode--number
 @function _get-color-value($string) {
   $first: str-slice($string, 1, 1);
 

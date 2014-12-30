@@ -6,7 +6,7 @@
     @include should(expect(json-encode("test")), to(equal(_json-encode--string("test"))));
   }
   @include it("should return the same as json-encode--color for a color") {
-    @include should(expect(json-encode(#000)), to(equal(_json-encode--color("black"))));
+    @include should(expect(json-encode(#000)), to(equal(_json-encode--color("#000"))));
   }
   @include it("should return the same as json-encode--number for a number") {
     @include should(expect(json-encode(1)), to(equal(_json-encode--number(1))));

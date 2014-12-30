@@ -1,13 +1,14 @@
-// Parses a JSON encoded number
-// --------------------------------------------------------------------------------
-// @param [string] $source: JSON complete source
-// @param [number] $pointer: current pointer
-// --------------------------------------------------------------------------------
-// @throw "Unexpected token $token."
-// @throw "Unexpected end of stream."
-// --------------------------------------------------------------------------------
-// @return [list|false] (new pointer, parsed number)
-
+/// Parses a JSON encoded number
+/// @param {String} $source - JSON complete source
+/// @param {Number} $pointer - current pointer
+/// @throw "Unexpected token $token."
+/// @throw "Unexpected end of stream."
+/// @return {List} (new pointer, parsed number)
+/// @require {function} _throw
+/// @require {function} _find-integer
+/// @require {function} _find-digits
+/// @require {function} _find-exponent
+/// @require {function} _pow
 @function _json-decode--number($source, $pointer) {
   $pointer: $pointer - 1; // Move back pointer to begininng of number
   $allowed: '-' '0' '1' '2' '3' '4' '5' '6' '7' '8' '9'; // Allowed characted to start with
@@ -35,8 +36,7 @@
 
     @if $digits == null { // Empty digits, throw error
       @return _throw("Unexpected end of stream.", $pointer);
-    }
-    @else if $digits == false { // Error occured, return it
+    } @else if $digits == false { // Error occured, return it
       @return $find-digits;
     }
 
@@ -51,8 +51,7 @@
 
     @if $exponent == null { // Empty exponent, throw error
       @return _throw("Unexpected end of stream.", $pointer);
-    }
-    @else if $exponent == false { // Error occured, return it
+    } @else if $exponent == false { // Error occured, return it
       @return $find-exponent;
     }
 
