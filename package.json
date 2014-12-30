@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/HugoGiraudel/SassyJSON",
   "devDependencies": {
-    "grunt-contrib-sass": "~0.7.2",
+    "grunt-contrib-sass": "~0.8.0",
     "grunt": "~0.4.2",
     "bootcamp": "~1.1.4",
     "grunt-contrib-watch": "~0.5.3",
