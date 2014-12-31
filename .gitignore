@@ -3,3 +3,5 @@ tmp
 .sass-cache
 *.gem
 npm-debug.log
+.sassdoc
+sassdocify
