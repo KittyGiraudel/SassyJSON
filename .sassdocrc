@@ -1,0 +1,10 @@
+basePath: "https://github.com/HugoGiraudel/SassyJSON/tree/master/stylesheets"
+display:
+    access: ["public"]
+    alias: false
+    watermark: true
+
+package: "./package.json"
+theme: "default"
+groups:
+    undefined: "General"
