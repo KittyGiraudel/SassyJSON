@@ -623,8 +623,7 @@
   @else if $end > 1 {
     $string: str-slice($temp, 1, $end - 1);
 
-    $cr: "
-    ";
+    $cr: "\a";
     $string: _strip-token($string, "\r", $cr);
     $string: _strip-token($string, "\n", $cr);
     $string: _strip-token($string, '\\\"', '"');
