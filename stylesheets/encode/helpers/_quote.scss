@@ -3,10 +3,7 @@
 /// @param {*} $value - value to be quoted
 /// @return {String} - quoted value
 
-// [1] if $value is 'null', Sass returns 'Invalid null operation: "'"' plus null"',
-// so we convert the value to a string
-
 @function _proof-quote($value) {
-	$value: to-string($value); //[1]
+	$value: to-string($value);
 	@return '"' + $value + '"';
 }
