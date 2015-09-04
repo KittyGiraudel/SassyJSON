@@ -1,6 +1,6 @@
 // Joins all elements of `$list` with `$glue`
 // @access private
-// param {List} $list - list to cast
+// @param {List} $list - list to cast
 // @param {String} $glue ('') - value to use as a join string
 
 @function to-string($list, $glue: '', $is-nested: false, $recursive: false) {
