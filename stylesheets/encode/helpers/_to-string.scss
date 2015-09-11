@@ -4,7 +4,7 @@
 // @param {String} $glue ('') - value to use as a join string
 
 @function to-string($list, $glue: '', $is-nested: false, $recursive: false) {
-  $result: null;
+  $result: '';
   
   @for $i from 1 through length($list) {
     $e: nth($list, $i);
@@ -13,7 +13,7 @@
     } @else {
       $result: if(
         $i != length($list) or $is-nested, 
-        $result + #{$e} + #{$glue}, $result#{$e}
+        $result + $e + $glue, $result + $e
       );
     }
   }
