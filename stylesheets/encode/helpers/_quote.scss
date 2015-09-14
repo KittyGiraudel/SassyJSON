@@ -4,6 +4,5 @@
 /// @return {String} - quoted value
 
 @function _proof-quote($value) {
-  $value: to-string($value);
   @return '"' + $value + '"';
 }
