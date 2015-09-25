@@ -1,4 +1,4 @@
-/*! sassyjson - v1.1.8 - 2015-09-24 */
+/*! sassyjson - v1.1.8 - 2015-09-25 */
 /// Logs an error at `$pointer` with `$string` message
 /// @access private
 /// @param {String} $string - error message
@@ -995,6 +995,13 @@
   $type: type-of($value);
 
   @if function_exists('_json-encode--#{$type}') {
+
+    // temporary workaround for
+    // https://github.com/HugoGiraudel/SassyJSON/issues/88
+    @if ($type == "list") {
+      @return _json-encode--list($value);
+    }
+
     @return call('_json-encode--#{$type}', $value);
   }
 

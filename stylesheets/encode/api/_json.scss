@@ -14,6 +14,13 @@
   $type: type-of($value);
 
   @if function_exists('_json-encode--#{$type}') {
+
+    // temporary workaround for
+    // https://github.com/HugoGiraudel/SassyJSON/issues/88
+    @if ($type == "list") {
+      @return _json-encode--list($value);
+    }
+
     @return call('_json-encode--#{$type}', $value);
   }
 
