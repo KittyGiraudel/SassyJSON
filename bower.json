@@ -1,0 +1,24 @@
+{
+	"name":"Modular-SassyJSON",
+	"description":"A fork of SassyJSON for Modular.",
+	"version":"1.0.0",
+	"main":[
+		"stylesheets/_SassyJSON.scss"
+	],
+	"keywords":[
+		"css",
+		"sass",
+		"scss",
+		"module",
+		"modular",
+        "components",
+		"scalable"
+	],
+	"homepage":"https://github.com/esr360/SassyJSON",
+	"ignore":[
+		".gitattributes",
+		".gitignore",
+		"bower.json",
+		"prepros.cfg"
+	]
+}
