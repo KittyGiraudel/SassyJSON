@@ -1,7 +1,0 @@
-/// Logs an error at `$pointer` with `$string` message
-/// @access private
-/// @param {String} $string - error message
-/// @param {Number} $pointer - pointer position
-@function _throw($string, $pointer) {
-  @error "ERROR::#{$pointer}::#{$string}";
-}

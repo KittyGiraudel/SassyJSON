@@ -1,8 +1,0 @@
-@include describe("The _json-encode--null function") {
-  @include it("should return a string null for every input") {
-    @include should(expect(_json-encode--null(true)), to(equal("null")));
-    @include should(expect(_json-encode--null(false)), to(equal("null")));
-    @include should(expect(_json-encode--null(1)), to(equal("null")));
-    @include should(expect(_json-encode--null(null)), to(equal("null")));
-  }
-}

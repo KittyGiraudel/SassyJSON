@@ -1,9 +1,0 @@
-@include describe("The json-decode--null function") {
-  @include it("should properly decode null to null") {
-    @include should(expect(nth(_json-decode--null('null', 2), 2)), to(equal(null)));
-  }
-
-  @include it("should decode to null type") {
-    @include should(expect(type-of(nth(_json-decode--null('null', 2), 2))), to(equal('null')));
-  }
-}
