@@ -3,7 +3,7 @@
 /// @param {*} $value - value to be stringified
 /// @param {String} $flag (all) - output driver
 /// @require {function} json-encode
-@mixin json-encode($value, $flag: "pseudo", $selector: "#stylesConfigJSON") {
+@mixin json-encode($value, $flag: "pseudo", $selector: "#modulesConfigJSON") {
 	
   $json: json-encode($value);
 
