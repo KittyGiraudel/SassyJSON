@@ -1,5 +1,6 @@
 /// Encode a map to JSON
 /// @access private
+/// @group SassyJSON
 /// @param {Map} $map - map to be encoded
 /// @return {String} - encoded map
 /// @require {function} _proof-quote

@@ -1,5 +1,6 @@
 /// Encode `null` to JSON
 /// @access private
+/// @group SassyJSON
 /// @param {Null} $null - `null`
 /// @return {String}
 @function _json-encode--null($null) {

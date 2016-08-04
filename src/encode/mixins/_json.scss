@@ -1,5 +1,6 @@
 /// JSON.stringify a value and pass it as a font-family of head element
 /// @access public
+/// @group SassyJSON
 /// @param {*} $value - value to be stringified
 /// @param {String} $flag (all) - output driver
 /// @require {function} json-encode
