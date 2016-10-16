@@ -13,4 +13,4 @@ So you can access information about your Sass modules from your JavaScript.
 
 ## How?
 
-All this library does is outputs a CSS selector with with the `content` property populated with stringified JSON data converted from Sass maps. Once the data is in the stylesheet as JSON, it can be read from JavaScript using the [`Window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) method.
+All this library does is outputs a CSS selector with the `content` property populated with stringified JSON data converted from Sass maps. Once the data is in the stylesheet as JSON, it can be read from JavaScript using the [`Window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) method.
