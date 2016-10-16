@@ -5,6 +5,12 @@
 
 # Sass-JSON
 
-This fork of SassyJSON has a few modifications from the original repo to make it compatible with [Synergy](https://github.com/esr360/Synergy). 
+> Output information about your Sass modules as JSON data
 
-If you are looking to use SassyJSON in your own project it is recommended to use [@HugoGiraudel](https://github.com/HugoGiraudel/SassyJSON)'s original repo.
+## Why?
+
+So you can access information about your Sass modules from your JavaScript.
+
+## How?
+
+All this library does is outputs a CSS selector with with the `content` property populated with stringified JSON data converted from Sass maps. Once the data is in the stylesheet as JSON, it can be read from JavaScript using the [`Window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) method.
