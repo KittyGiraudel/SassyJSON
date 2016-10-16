@@ -1,0 +1,26 @@
+{
+  "name": "Sass-JSON",
+  "version": "1.0.0",
+  "description": "Output information about your Sass modules as JSON data.",
+  "keywords": [
+    "sass",
+    "scss",
+    "json",
+    "api"
+  ],
+  "author": "Edmund Reed (http://twitter.com/esr360)",
+  "homepage": "https://github.com/esr360/Sass-JSON",
+  "bugs": {
+    "url": "https://github.com/esr360/Sass-JSON/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-cli": "^2.1.0",
+    "grunt-notify": "^0.4.1",
+    "grunt-sassdoc": "^2.0.2",
+    "grunt-scss-lint": "^0.3.8",
+    "sass-true": "^2.1.2"
+  }
+}

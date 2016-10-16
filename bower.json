@@ -1,0 +1,22 @@
+{
+  "name": "Sass-JSON",
+  "version": "1.0.0",
+  "description": "Output information about your Sass modules as JSON data.",
+  "keywords": [
+    "sass",
+    "scss",
+    "json",
+    "api"
+  ],
+  "authors": [
+    "Hugo Giraudel",
+    "Edmund Reed (http://twitter.com/esr360)"
+  ],
+  "homepage": "https://github.com/esr360/Sass-JSON",
+  "main": "src/_sass-json.scss",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ]
+}

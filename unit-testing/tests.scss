@@ -1,0 +1,18 @@
+// Import testing framework
+@import '../node_modules/sass-true/sass/true';
+
+// Import the project
+@import '../src/sass-json';
+
+// Import the test files
+@import 'api/json';
+@import 'helpers/quote';
+@import 'helpers/to-string';
+@import 'types/bool';
+@import 'types/color';
+@import 'types/list';
+@import 'types/map';
+@import 'types/null';
+@import 'types/number';
+@import 'types/color';
+@import 'types/string';
