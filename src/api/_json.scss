@@ -1,6 +1,5 @@
 /// Delay the encoding of ta literal to JSON to a type-specific method
 /// @access public
-/// @group SassyJSON
 /// @param {*} $value - value to be stringified
 /// @throw Unknown type for #{$value} (#{$type}).
 /// @return {String} - JSON encoded string
@@ -18,5 +17,5 @@
     @return call('_json-encode--#{$type}', $value);
   }
 
-  @error "Unknown type for #{$value} (#{$type}).";
+  @error 'Unknown type for #{$value} (#{$type}).';
 }
