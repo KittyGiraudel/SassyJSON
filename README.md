@@ -7,7 +7,7 @@
 
 > Output information about your Sass modules as JSON data
 
-[View Documentation (via SassDoc)](https://esr360.github.io/Sass-Boost/)
+[View Documentation (via SassDoc)](https://esr360.github.io/Sass-JSON/)
 
 ### Why?
 
