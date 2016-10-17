@@ -4,5 +4,5 @@
 /// @return {String} - encoded number
 /// @require {function} _proof-quote
 @function _json-encode--number($number) {
-  @return if(unitless($number), $number, _proof-quote($number));
+    @return if(unitless($number), $number, _proof-quote($number));
 }

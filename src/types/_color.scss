@@ -4,5 +4,5 @@
 /// @return {String} - encoded color
 /// @require {function} _proof-quote
 @function _json-encode--color($color) {
-  @return _proof-quote($color);
+    @return _proof-quote($color);
 }

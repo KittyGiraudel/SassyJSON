@@ -3,5 +3,5 @@
 /// @param {Bool} $bool - bool to be encoded
 /// @return {Bool} - encoded bool
 @function _json-encode--bool($boolean) {
-  @return $boolean;
+    @return $boolean;
 }

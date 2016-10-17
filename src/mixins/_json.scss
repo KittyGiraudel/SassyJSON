@@ -4,7 +4,7 @@
 /// @param {string} $selector ['#modulesConfigJSON'] - DOM selector to hold config
 /// @require {function} json-encode
 @mixin json-encode($value, $selector: '#modulesConfigJSON') {
-  
+
     #{$selector}::before {
         content: json-encode($value);
         display: block;
@@ -12,5 +12,5 @@
         overflow: hidden;
         width: 0;
     }
-  
+
 }
