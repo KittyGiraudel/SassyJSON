@@ -54,16 +54,16 @@ src/_sass-json.scss
 To encode any Sass data to JSON, pass it through the `json-encode()` mixin:
 
 ```scss
-@include json-encode($value: $your_data, $selector: '#modulesConfigJSON');
+@include json-encode($value: $your_data, $selector: '#sassData');
 ```
 
 As long as the element which matches your `$selector` value exists in the DOM, you will be able to access the data from your JavaScript:
 
 ```html
-<div id="modulesConfigJSON"></div>
+<div id="sassData"></div>
 
 <script>
-    var modularSelector = document.getElementById('modulesConfigJSON');
-    console.log(window.getComputedStyle(modularSelector, '::before');)
+    var sassData = document.getElementById('sassData');
+    console.log(window.getComputedStyle(sassData, '::before');)
 </script>
 ```
