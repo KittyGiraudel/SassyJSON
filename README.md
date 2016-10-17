@@ -67,3 +67,25 @@ As long as the element which matches your `$selector` value exists in the DOM, y
     console.log(window.getComputedStyle(sassData, '::before');)
 </script>
 ```
+
+### Development
+
+> The Sass unit test framework is [Sass True](https://github.com/oddbird/true)
+
+#### Further Requirements
+
+* Node.js (+ npm)
+* Grunt (`npm install -g grunt-cli`)
+* Scss Lint (`gem install scss-lint`)
+
+Install Node modules:
+
+```
+npm install
+```
+
+To run unit tests, generate documentation and lint the source files, run the following command:
+
+```
+grunt compile
+```
