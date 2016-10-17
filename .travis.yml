@@ -4,7 +4,7 @@ node_js:
 before_install:
     - rvm install 2.2.2
     - gem install sass
-    - gem install scss_lint
+    - gem install scss-lint
     - npm install -g grunt-cli 
 install: npm install
 before_script: 

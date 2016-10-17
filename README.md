@@ -7,10 +7,63 @@
 
 > Output information about your Sass modules as JSON data
 
-## Why?
+[View Documentation (via SassDoc)](https://esr360.github.io/Sass-Boost/)
+
+### Why?
 
 So you can access information about your Sass modules from your JavaScript.
 
-## How?
+### How?
 
 All this library does is outputs a CSS selector with the `content` property populated with stringified JSON data converted from Sass maps. Once the data is in the stylesheet as JSON, it can be read from JavaScript using the [`Window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) method.
+
+### Requirements
+
+* Sass 3.3+
+
+### Installation
+
+#### Via Bower
+
+```
+bower install Sass-JSON
+```
+
+#### Via NPM
+
+```
+npm install Sass-JSON
+```
+
+#### As Git-Submodule
+
+> Ensure you change the PATH/TO/SUBMODULES part to your desired location
+
+```
+git submodule add https://github.com/esr360/Sass-JSON.git PATH/TO/SUBMODULES
+```
+
+---
+
+After you have installed Sass-JSON, import the following file into your project's main .scss file:
+
+```
+src/_sass-json.scss
+```
+
+To encode any Sass data to JSON, pass it through the `json-encode()` mixin:
+
+```scss
+@include json-encode($value: $your_data, $selector: '#modulesConfigJSON');
+```
+
+As long as the element which matches your `$selector` value exists in the DOM, you will be able to access the data from your JavaScript:
+
+```html
+<div id="modulesConfigJSON"></div>
+
+<script>
+    var modularSelector = document.getElementById('modulesConfigJSON');
+    console.log(window.getComputedStyle(modularSelector, '::before');)
+</script>
+```
