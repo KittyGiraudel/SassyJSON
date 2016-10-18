@@ -54,6 +54,14 @@ src/_sass-json.scss
 To encode any Sass data to JSON, pass it through the `json-encode()` mixin:
 
 ```scss
+$your_data:(
+    'foo' : 'alpha',
+    'bar' : (
+        'baz' : 2,
+        'qux' : #000000
+    )
+);
+
 @include json-encode($value: $your_data, $selector: '#sassData');
 ```
 
@@ -63,9 +71,17 @@ As long as the element which matches your `$selector` value exists in the DOM, y
 <div id="sassData"></div>
 
 <script>
-    var sassData = document.getElementById('sassData');
-    console.log(window.getComputedStyle(sassData, '::before');)
+    var data = window.getComputedStyle(
+        document.getElementById('sassData'), '::before'
+    ).content;
+    console.log(JSON.parse(data));
 </script>
+```
+
+The above should log the following to your console:
+
+```js
+{"foo": "alpha", "bar": {"baz": 2, "qux": "#000000"}}
 ```
 
 ### Development
