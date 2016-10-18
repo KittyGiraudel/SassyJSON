@@ -1,9 +1,14 @@
 /// Encode a map to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {Map} $map - map to be encoded
-/// @return {String} - encoded map
+///
 /// @require {function} _proof-quote
 /// @require {function} json-encode
+///
+/// @param {map} $map - map to be encoded
+///
+/// @return {string} - encoded map
 @function _json-encode--map($map) {
     $str: '';
 

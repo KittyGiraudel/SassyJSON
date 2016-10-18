@@ -1,8 +1,13 @@
 /// Encode a list to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {List} $list - list to be encoded
-/// @return {String} - encoded list
+///
 /// @require {function} json-encore
+///
+/// @param {list} $list - list to be encoded
+///
+/// @return {string} - encoded list
 @function _json-encode--list($list) {
     $str: '';
 

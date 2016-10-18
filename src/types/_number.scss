@@ -1,8 +1,13 @@
 /// Encode a number to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {Number} $number - number to be encoded
-/// @return {String} - encoded number
+///
 /// @require {function} _proof-quote
+///
+/// @param {number} $number - number to be encoded
+///
+/// @return {string} - encoded number
 @function _json-encode--number($number) {
     @return if(unitless($number), $number, _proof-quote($number));
 }

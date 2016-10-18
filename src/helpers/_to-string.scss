@@ -1,7 +1,12 @@
 /// Joins all elements of `$list` with `$glue`
-/// @access private
+///
+/// @author Hugo Giraudel
+/// @access public
+///
 /// @param {List} $list - list to cast
 /// @param {String} $glue ('') - value to use as a join string
+///
+/// @return {String} - quoted value
 @function to-string($list, $glue: '', $is-nested: false, $recursive: false) {
     $result: '';
 

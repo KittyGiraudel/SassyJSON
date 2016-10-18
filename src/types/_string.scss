@@ -1,8 +1,13 @@
 /// Encode a string to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {String} $string - string to be encoded
-/// @return {String} - encoded string
+///
 /// @require {function} _proof-quote
+///
+/// @param {string} $string - string to be encoded
+///
+/// @return {string} - encoded string
 @function _json-encode--string($string) {
     @return _proof-quote($string);
 }

@@ -1,7 +1,11 @@
 /// Encode `null` to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {Null} $null - `null`
-/// @return {String}
+///
+/// @param {null} $null - `null`
+///
+/// @return {string}
 @function _json-encode--null($null) {
     @return 'null';
 }

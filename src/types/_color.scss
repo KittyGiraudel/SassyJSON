@@ -1,8 +1,13 @@
 /// Encode a color to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {Color} $color - color to be encoded
-/// @return {String} - encoded color
+///
 /// @require {function} _proof-quote
+///
+/// @param {color} $color - color to be encoded
+///
+/// @return {string} - encoded color
 @function _json-encode--color($color) {
     @return _proof-quote($color);
 }

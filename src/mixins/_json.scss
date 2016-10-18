@@ -1,8 +1,12 @@
 /// JSON.stringify a value and pass it as a font-family of head element
+///
+/// @author Hugo Giraudel
 /// @access public
+///
+/// @require {function} json-encode
+///
 /// @param {*} $value - value to be stringified
 /// @param {string} $selector ['#modulesConfigJSON'] - DOM selector to hold config
-/// @require {function} json-encode
 @mixin json-encode($value, $selector: '#modulesConfigJSON') {
 
     #{$selector}::before {

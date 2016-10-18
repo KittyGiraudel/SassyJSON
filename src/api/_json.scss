@@ -1,11 +1,7 @@
 /// Delay the encoding of ta literal to JSON to a type-specific method
 ///
+/// @author Hugo Giraudel
 /// @access public
-///
-/// @param {*} $value - value to be stringified
-///
-/// @throw Unknown type for #{$value} (#{$type}).
-/// @return {String} - JSON encoded string
 ///
 /// @require {function} _json-encode--string
 /// @require {function} _json-encode--number
@@ -14,6 +10,11 @@
 /// @require {function} _json-encode--null
 /// @require {function} _json-encode--color
 /// @require {function} _json-encode--bool
+///
+/// @param {*} $value - value to be stringified
+///
+/// @throw Unknown type for #{$value} (#{$type}).
+/// @return {string} - JSON encoded string
 @function json-encode($value) {
     $type: type-of($value);
 

@@ -1,7 +1,11 @@
 /// Proof quote a value
-/// @access private
+///
+/// @author Hugo Giraudel
+/// @access public
+///
 /// @param {*} $value - value to be quoted
-/// @return {String} - quoted value
+///
+/// @return {string} - quoted value
 @function _proof-quote($value) {
     $value: to-string($value);
     @return '"' + $value + '"';

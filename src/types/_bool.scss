@@ -1,7 +1,11 @@
 /// Encode a bool to JSON
+///
+/// @author Hugo Giraudel
 /// @access private
-/// @param {Bool} $bool - bool to be encoded
-/// @return {Bool} - encoded bool
+///
+/// @param {bool} $bool - bool to be encoded
+///
+/// @return {bool} - encoded bool
 @function _json-encode--bool($boolean) {
     @return $boolean;
 }
