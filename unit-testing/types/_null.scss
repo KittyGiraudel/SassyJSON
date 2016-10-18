@@ -1,0 +1,8 @@
+@include test-module('_json-encode--null') {
+    @include test('should return a null string for every input') {
+        @include assert-equal(_json-encode--null(true), 'null');
+        @include assert-equal(_json-encode--null(false), 'null');
+        @include assert-equal(_json-encode--null(1), 'null');
+        @include assert-equal(_json-encode--null(null), 'null');
+    }
+}

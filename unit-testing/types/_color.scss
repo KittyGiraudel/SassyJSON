@@ -1,0 +1,7 @@
+@include test-module('_json-encode--color') {
+    @include test('should return a sass interpreted color wrapped in quotes') {
+        @include assert-equal(_json-encode--color(#ff0000), '#ff0000');
+        @include assert-equal(_json-encode--color(rgba(255, 255, 225, 1)), '#ffffe1');
+        @include assert-equal(_json-encode--color(rgba(255, 255, 225, 0.5)), 'rgba(255, 255, 225, 0.5)');
+    }
+}

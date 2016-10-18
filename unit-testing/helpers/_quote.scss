@@ -1,0 +1,6 @@
+@include test-module('_proof-quote') {
+    @include test('should return a quoted string') {
+        @include assert-equal(_proof-quote('test'), 'test');
+        @include assert-equal(_proof-quote(1), '1');
+    }
+}

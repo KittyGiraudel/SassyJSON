@@ -1,0 +1,6 @@
+@include test-module('to-string') {
+    @include test('should return a quoted string') {
+        @include assert-equal(to-string('test'), 'test');
+        @include assert-equal(to-string(1), '1');
+    }
+}

@@ -1,0 +1,6 @@
+@include test-module('_json-encode--string') {
+    @include test('should return a quoted string') {
+        @include assert-equal(_json-encode--string('lorem ipsum dolor sit amet'), 'lorem ipsum dolor sit amet');
+        @include assert-equal(_json-encode--string(test), 'test');
+    }
+}

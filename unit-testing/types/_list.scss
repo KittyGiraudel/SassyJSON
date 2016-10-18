@@ -1,0 +1,21 @@
+@include test-module('_json-encode--list') {
+    @include test('should return a JSON like array string') {
+        @include assert-equal(_json-encode--list((1 2 3)), '[1, 2, 3]');
+        @include assert-equal(_json-encode--list((foo bar baz)), '["foo", "bar", "baz"]');
+        @include assert-equal(_json-encode--list(('foo' 'bar' 'baz')), '["foo", "bar", "baz"]');
+        @include assert-equal(_json-encode--list((true true false)), '[true, true, false]');
+    }
+    
+    @include test('should encode sass datatypes to strings') {
+        @include assert-equal(_json-encode--list((#000 green blue)), '["#000", "green", "blue"]');
+    }
+    
+    @include test('should properly encode nested lists to JSON') {
+        @include assert-equal(_json-encode--list((1 2 (3 4 5 (6 7) 8) 9)), '[1, 2, [3, 4, 5, [6, 7], 8], 9]');
+        @include assert-equal(_json-encode--list((a b (c d e (f g) h) i)), '["a", "b", ["c", "d", "e", ["f", "g"], "h"], "i"]');
+        @include assert-equal(
+            _json-encode--list((#333 (#444 #555 #666) (#555 (#444 #333)))),
+            '["#333", ["#444", "#555", "#666"], ["#555", ["#444", "#333"]]]'
+        );
+    }
+}

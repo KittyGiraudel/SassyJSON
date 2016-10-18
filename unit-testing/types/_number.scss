@@ -1,0 +1,13 @@
+@include test-module('_json-encode--number') {
+    @include test('should return a number if input is unitless') {
+        @include assert-equal(_json-encode--number(42), 42);
+        @include assert-equal(_json-encode--number(-42), -42);
+        @include assert-equal(_json-encode--number(0.42), 0.42);
+    }
+
+    @include test('should return a string if input has a unit') {
+        @include assert-equal(_json-encode--number(1%), '1%');
+        @include assert-equal(_json-encode--number(5px), '5px');
+        @include assert-equal(_json-encode--number(1rem), '1rem');
+    }
+}

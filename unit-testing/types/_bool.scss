@@ -1,0 +1,6 @@
+@include test-module('_json-encode--bool') {
+    @include test('should return the unchanged boolean') {
+        @include assert-equal(_json-encode--bool(true), true);
+        @include assert-equal(_json-encode--bool(false), false);
+    }
+}

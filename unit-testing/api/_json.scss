@@ -1,0 +1,38 @@
+@include test-module('json-encode') {
+    @include test('should correctly encode a bool') {
+        @include assert-equal(json-encode(true), true);
+        @include assert-equal(json-encode(false), false);
+    }
+
+    @include test('should correctly encode a color') {
+        @include assert-equal(json-encode(#ff0000), '#ff0000');
+        @include assert-equal(json-encode(rgba(255, 255, 225, 1)), '#ffffe1');
+        @include assert-equal(json-encode(rgba(255, 255, 225, 0.5)), 'rgba(255, 255, 225, 0.5)');
+    }
+
+    @include test('should correctly encode a list') {
+        @include assert-equal(json-encode((1 2 3)), '[1, 2, 3]');
+        @include assert-equal(json-encode((1 2 (3 4 5 (6 7) 8) 9)), '[1, 2, [3, 4, 5, [6, 7], 8], 9]');
+    }
+
+    @include test('should correctly encode a map') {
+        $map: (a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string));
+        @include assert-equal(
+            json-encode($map), '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}'
+        );
+    }
+
+    @include test('should correctly encode a null value') {
+        @include assert-equal(json-encode(null), 'null');
+    }
+
+    @include test('should correctly encode a number') {
+        @include assert-equal(json-encode(42), 42);
+        @include assert-equal(json-encode(42px), '42px');
+    }
+
+    @include test('should correctly encode a string') {
+        @include assert-equal(json-encode('lorem ipsum'), 'lorem ipsum');
+        @include assert-equal(json-encode(test), 'test');
+    }
+}

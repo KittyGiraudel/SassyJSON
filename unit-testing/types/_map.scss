@@ -1,0 +1,20 @@
+@include test-module('_json-encode--map') {
+    $map: (a: 1, b: 2, c: 3);
+    $map-nested: (a: (b: 1 2 (c: test)));
+    $map-full: (a: (1 2 ( b : 1 )), b: ( #444444, false, ( a: 1, b: test ) ), c: (2 3 4 string));
+
+    @include test('should return a JSON object string') {
+        @include assert-equal(_json-encode--map($map), '{"a": 1, "b": 2, "c": 3}');
+    }
+
+    @include test('should return a JSON object string for nested maps') {
+        @include assert-equal(_json-encode--map($map-nested), '{"a": {"b": [1, 2, {"c": "test"}]}}');
+    }
+
+    @include test('should interpolate sass datatypes') {
+        @include assert-equal(
+            _json-encode--map($map-full),
+            '{"a": [1, 2, {"b": 1}], "b": ["#444444", false, {"a": 1, "b": "test"}], "c": [2, 3, 4, "string"]}'
+        );
+    }
+}
