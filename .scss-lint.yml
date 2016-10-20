@@ -16,10 +16,10 @@ linters:
     enabled: false
 
   ColorKeyword:
-    enabled: true
+    enabled: false
 
   ColorVariable:
-    enabled: true
+    enabled: false
 
   Comment:
     enabled: true
@@ -56,7 +56,7 @@ linters:
     present: false
 
   HexLength:
-    enabled: true
+    enabled: false
     style: long # or 'long'
 
   HexNotation:
@@ -185,7 +185,7 @@ linters:
     allow_single_line_padding: false
 
   SpaceBetweenParens:
-    enabled: true
+    enabled: false
     spaces: 0
 
   StringQuotes:
