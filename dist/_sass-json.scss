@@ -1,0 +1,182 @@
+/// Delay the encoding of a literal to JSON to a type-specific method
+///
+/// @author Hugo Giraudel
+/// @access public
+///
+/// @require {function} _json-encode--string
+/// @require {function} _json-encode--number
+/// @require {function} _json-encode--list
+/// @require {function} _json-encode--map
+/// @require {function} _json-encode--null
+/// @require {function} _json-encode--color
+/// @require {function} _json-encode--bool
+///
+/// @param {*} $value - value to be stringified
+///
+/// @throw Unknown type for #{$value} (#{$type}).
+/// @return {string} - JSON encoded string
+@function json-encode($value) {
+    $type: type-of($value);
+
+    @if function-exists('_json-encode--#{$type}') {
+        @return call('_json-encode--#{$type}', $value);
+    }
+
+    @error 'Unknown type for #{$value} (#{$type}).';
+}
+/// Proof quote a value
+///
+/// @author Hugo Giraudel
+/// @access public
+///
+/// @param {*} $value - value to be quoted
+///
+/// @return {string} - quoted value
+@function _proof-quote($value) {
+    $value: to-string($value);
+    @return '"' + $value + '"';
+}
+/// Joins all elements of `$list` with `$glue`
+///
+/// @author Hugo Giraudel
+/// @access public
+///
+/// @param {List} $list - list to cast
+/// @param {String} $glue ('') - value to use as a join string
+///
+/// @return {String} - quoted value
+@function to-string($list, $glue: '', $is-nested: false, $recursive: false) {
+    $result: '';
+
+    @for $i from 1 through length($list) {
+        $e: nth($list, $i);
+        @if type-of($e) == 'list' and $recursive {
+            $result: $result + to-string($e, $glue, $is-nested: true, $recursive: true);
+        } @else {
+            $result: if(
+                $i != length($list) or $is-nested,
+                $result + $e + $glue, $result + $e
+            );
+        }
+    }
+
+    @return $result;
+}
+/// JSON.stringify a value and pass it to the content property of a specified selector
+///
+/// @author Hugo Giraudel
+/// @access public
+///
+/// @require {function} json-encode
+///
+/// @param {*} $value - value to be stringified
+/// @param {string} $selector ['#modulesConfigJSON'] - DOM selector to hold config
+@mixin json-encode($value, $selector: '#modulesConfigJSON') {
+    #{$selector}::before {
+        content: json-encode($value);
+        display: block;
+        height: 0;
+        overflow: hidden;
+        width: 0;
+    }
+}
+/// Encode a bool to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @param {bool} $bool - bool to be encoded
+///
+/// @return {bool} - encoded bool
+@function _json-encode--bool($boolean) {
+    @return $boolean;
+}
+/// Encode a color to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @require {function} _proof-quote
+///
+/// @param {color} $color - color to be encoded
+///
+/// @return {string} - encoded color
+@function _json-encode--color($color) {
+    @return _proof-quote($color);
+}
+/// Encode a list to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @require {function} json-encore
+///
+/// @param {list} $list - list to be encoded
+///
+/// @return {string} - encoded list
+@function _json-encode--list($list) {
+    $str: '';
+
+    @each $item in $list {
+        $str: $str + ', ' + json-encode($item);
+    }
+
+    @return '[' + str-slice($str, 3) + ']';
+}
+/// Encode a map to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @require {function} _proof-quote
+/// @require {function} json-encode
+///
+/// @param {map} $map - map to be encoded
+///
+/// @return {string} - encoded map
+@function _json-encode--map($map) {
+    $str: '';
+
+    @each $key, $value in $map {
+        $str: $str + ', ' + _proof-quote($key) + ': ' + json-encode($value);
+    }
+
+    @return '{' + str-slice($str, 3) + '}';
+}
+/// Encode `null` to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @param {null} $null - `null`
+///
+/// @return {string}
+@function _json-encode--null($null) {
+    @return 'null';
+}
+/// Encode a number to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @require {function} _proof-quote
+///
+/// @param {number} $number - number to be encoded
+///
+/// @return {string} - encoded number
+@function _json-encode--number($number) {
+    @return if(unitless($number), $number, _proof-quote($number));
+}
+/// Encode a string to JSON
+///
+/// @author Hugo Giraudel
+/// @access private
+///
+/// @require {function} _proof-quote
+///
+/// @param {string} $string - string to be encoded
+///
+/// @return {string} - encoded string
+@function _json-encode--string($string) {
+    @return _proof-quote($string);
+}

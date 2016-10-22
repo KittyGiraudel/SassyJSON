@@ -9,6 +9,32 @@ module.exports = function(grunt) {
     grunt.initConfig({
 		
         pkg: grunt.file.readJSON('package.json'),
+        
+        /**
+         * Clean
+         * @see https://github.com/gruntjs/grunt-contrib-clean
+         */
+        clean: {
+            dist: {
+                src: 'dist'
+            }
+        },
+             
+        /**
+         * Concat
+         * @see https://github.com/gruntjs/grunt-contrib-concat
+         */   
+        concat: {
+            scss: {
+                src: [
+                    'src/api/*.scss',
+                    'src/helpers/*.scss',
+                    'src/mixins/*.scss',
+                    'src/types/*.scss'
+                ],
+                dest: 'dist/_sass-json.scss',
+            }
+        },
 
         /**
          * Scss Lint
@@ -85,6 +111,8 @@ module.exports = function(grunt) {
      * Load NPM Tasks
      *************************************************************/
     
+    grunt.loadNpmTasks('grunt-contrib-clean')
+    grunt.loadNpmTasks('grunt-contrib-concat')
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha-cli');
     grunt.loadNpmTasks('grunt-notify');
@@ -105,6 +133,8 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', [
         'scsslint',
         'mochacli',
+        'clean',
+        'concat',
         'sassdoc'
     ]);
 
