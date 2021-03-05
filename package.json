@@ -8,19 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HugoGiraudel/SassyJSON"
+    "url": "https://github.com/KittyGiraudel/SassyJSON"
   },
   "keywords": [
     "sass",
     "scss",
     "json"
   ],
-  "author": "Hugo Giraudel, Fabrice Weinberg",
+  "author": "Kitty Giraudel, Fabrice Weinberg",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HugoGiraudel/SassyJSON/issues"
+    "url": "https://github.com/KittyGiraudel/SassyJSON/issues"
   },
-  "homepage": "https://github.com/HugoGiraudel/SassyJSON",
+  "homepage": "https://github.com/KittyGiraudel/SassyJSON",
   "devDependencies": {
     "grunt-contrib-sass": "~0.8.0",
     "grunt": "~0.4.2",
