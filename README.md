@@ -1,8 +1,8 @@
-# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson) [![Gem Version](https://badge.fury.io/rb/SassyJSON.png)](http://badge.fury.io/rb/SassyJSON) [![Build Status](https://travis-ci.org/HugoGiraudel/SassyJSON.png?branch=master)](https://travis-ci.org/HugoGiraudel/SassyJSON)
+# SassyJSON [![NPM version](https://badge.fury.io/js/sassyjson.png)](http://badge.fury.io/js/sassyjson) [![Gem Version](https://badge.fury.io/rb/SassyJSON.png)](http://badge.fury.io/rb/SassyJSON)
 
 **⚠️ SassyJSON was an experimental project. It is not meant to be used in production. If you need to transit JSON data from and to your Sass layer, have a look into [Eyeglass](https://github.com/sass-eyeglass/eyeglass) and [Sassport](https://github.com/davidkpiano/sassport).**
 
-SassyJSON is a Sass-powered API for JSON. It provides you the classic `json-encode` and `json-decode` directly from your Sass files. We'll leave you the only judges of the point of this. Read [API documentation](http://hugogiraudel.com/SassyJSON).
+SassyJSON is a Sass-powered API for JSON. It provides you the classic `json-encode` and `json-decode` directly from your Sass files. We'll leave you the only judges of the point of this.
 
 ## Install
 
@@ -11,7 +11,7 @@ SassyJSON is available on [npm](https://npmjs.org/) or as a [Ruby Gem](http://ru
 ### Git
 
 ``` git
-git clone https://github.com/HugoGiraudel/SassyJSON.git && cd SassyJSON
+git clone https://github.com/KittyGiraudel/SassyJSON.git && cd SassyJSON
 ```
 
 ### npm
@@ -28,7 +28,7 @@ npm install sassyjson --save-dev
 
 ### Sass
 
-If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/HugoGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/HugoGiraudel/SassyJSON/tree/master/dist) folder.
+If you only want to play around the code without cloning the repo or using npm, you can find a [single file](https://github.com/KittyGiraudel/SassyJSON/blob/master/dist/_SassyJSON.scss) containing the whole API in the [dist](https://github.com/KittyGiraudel/SassyJSON/tree/master/dist) folder.
 
 Also, SassyJSON is available at [Sassmeister](http://sassmeister.com/).
 
@@ -115,4 +115,4 @@ All you need is a clean version of Sass 3.3. Otherwise it's just pure Sass madne
 ## Credits
 
 * [Fabrice Weinberg](http://twitter.com/fweinb)
-* [Hugo Giraudel](http://twitter.com/hugogiraudel)
+* [Kitty Giraudel](http://twitter.com/KittyGiraudel)
