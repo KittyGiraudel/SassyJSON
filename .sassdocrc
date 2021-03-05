@@ -1,4 +1,4 @@
-basePath: "https://github.com/HugoGiraudel/SassyJSON/tree/master/stylesheets"
+basePath: "https://github.com/KittyGiraudel/SassyJSON/tree/master/stylesheets"
 display:
     access: ["public"]
     alias: false
